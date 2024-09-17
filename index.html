@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Nike</title>
+</head>
+<body style="background-color: black;">
+
+    <!----------------------Navbar---------------------------------------->
+
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
+                <div class="container-fluid">
+                    <!-- Brand Logo -->
+                    <a class="navbar-brand" href="#">
+                        <img src="Assets/image/Nike logo.png" alt="Nike Logo" style="height: 48px; width: 100px;">
+                    </a>
+    
+                    <!-- Toggler for mobile -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+    
+                    <!-- Centered Search bar -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="d-flex mx-auto" style="width: 200px; ">
+                            <form class="d-flex w-100">
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" 
+                                style="border-bottom: 2px solid white; border-top: none; border-left: none; border-right: none;
+                                 color: white; background-color: transparent; ">
+                                
+                                <button class="btn btn-outline" type="submit" style="border: none; font-size: 1.2rem; background-color: transparent; color: white;">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </form>
+                        </div>
+    
+                        <!-- Right Side Navbar Icons -->
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <!-- Profile Dropdown -->
+                            <li class="nav-item dropdown" style="margin-left: 20px;">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person" style="font-size: 1.3rem; color: white;"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+                                    <li><a class="dropdown-item" href="#">Login</a></li>
+                                    <li><a class="dropdown-item" href="#">My Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">Orders</a></li>
+                                </ul>
+                            </li>
+    
+                            <!-- Categories Dropdown -->
+                            <li class="nav-item dropdown" style="margin-left: 20px;">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownCategories" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa-solid fa-list" style="color: white; font-size: 1.1rem; margin-top: 8px;"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownCategories">
+                                    <li><a class="dropdown-item" href="#">Sneakers</a></li>
+                                    <li><a class="dropdown-item" href="#">Sport Shoes</a></li>
+                                    <li><a class="dropdown-item" href="#">Football Shoes</a></li>
+                                </ul>
+                            </li>
+    
+                            <!-- Wishlist Icon -->
+                            <li class="nav-item d-flex align-items-center" style="margin-left: 20px;">
+                                <a class="nav-link" href="#">
+                                     <i class="bi bi-heart" style="font-size: 1.3rem; color: white;"></i>
+                                </a>
+                            </li>
+
+                            <!-- Cart Icon -->
+                            <li class="nav-item d-flex align-items-center" style="margin-left: 20px;">
+                                <a class="nav-link" href="#">
+                                    <i class="bi bi-cart3" style="font-size: 1.3rem; color: white;"></i>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+
+<!---------------------------------------Banner------------------------------------------------>
+<div class="container-fluid" style="background-image: url(Assets/image/GRAY.jpg); height: 600px; background-repeat: no-repeat; background-size: cover;">
+<div class="row">
+<div class="col-md-12">   
+    <div class="banner">
+        <div class="list" style="display: grid; grid-template-columns: repeat(5,1fr); grid-template-rows: 450px; gap: 5px; 
+        justify-content: center; align-items: center; margin-top: 60px; ">
+            <div class="item"><img src="Assets/image/De bruyne.jpg" alt="" style="height: 400px; "></div>
+            <div class="item"><img src="Assets/image/Neymar.jpg" alt="" style="height: 400px;"></div>
+            <div class="item"><img src="Assets/image/Young ronaldo.jpg" alt="" style="height: 400px;"></div>
+            <div class="item"><img src="Assets/image/England Nike Campaign Phil Foden.jpeg" alt="" style="height: 400px;"></div>
+            <div class="item"><img src="Assets/image/Halland.jpg" alt="" style="height: 400px;"></div>
+            
+        </div>
+    </div>
+</div> 
+</div> 
+</div> 
+
+<div style="background-color: grey; margin-top: 20px; height: 200px;">
+    <h1 style="color: black; font-family: 'Times New Roman', Times, serif; 
+    text-align: center; padding-top: 50px;"> 
+    JUST DO IT THEN DO IT AGAIN </h1>
+
+    <button style="margin-left: 700px;">Explore Now</button>
+</div>
+<!---------------------------------------Banner------------------------------------------------------------->
+
+
+<!-----------------------------------------Poster------------------------------------------------------------>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="Assets/image/Vapour.jpg" alt="" style="height: 400px; width: 700px;">
+        </div>
+        <div class="col-md-6">
+        <img src="Assets/image/LIMITED_TIME_ONLY-removebg-preview.png" alt="">
+        </div>
+    </div>
+</div>  
+<!-----------------------------------------Poster------------------------------------------------------------>
+
+
+
+<!-----------------------------------------Cards------------------------------------------------------------>
+<div class="content">
+    <div class="card-container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                    <div class="img">
+                        <img src="1.png" alt="">
+                    </div>
+                    <h3>NIKE</h3>
+                    <div class="details">
+                        <h4>NIKE SHOE</h4>
+                        <div class="button">
+                            <select name="" id="size">
+                                <option value="size">size</option>
+                                <option value="7">7</option>
+                                <option value="7.5">7.5</option>
+                                <option value="8">8</option>
+                                <option value="8.5">8.5</option>
+                                <option value="9">9</option>
+                            </select>
+                            <button>Add TO Cart</button>
+                        </div>
+                        <p>Loream ipusm dolor sit amet consecutor  adipidicing elit. Beatae laborum ut minus corrupti dolorum assumend aiste voluptate  dolorem pariatur</p>
+                    </div>
+                
+            </div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+            <div class="col-md-3"></div>
+        </div>
+      
+    </div>
+  </div>
+
+
+<!-----------------------------------------Cards------------------------------------------------------------>
+
+
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>  

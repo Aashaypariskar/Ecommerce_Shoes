@@ -1,0 +1,34 @@
+/* Apply smooth transition to all items for both filter and transform effects */
+.item {
+    transition: transform 0.5s ease, filter 0.5s ease;
+    z-index: 1;
+    position: relative; /* Ensure z-index works properly */
+}
+
+/* When hovering over .list, non-hovered items will be blurred and grayscale */
+.list:hover .item:not(:hover) {
+    filter: grayscale(1) blur(8px); /* Slightly reduce the blur for better aesthetics */
+    transform: scale(0.9); /* Add a slight shrink effect to non-hovered items for focus */
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+/* Hover effect on the active .item */
+.item:hover {
+    transform: scale(1.3);
+    z-index: 2; /* Bring hovered item to the front */
+    filter: none; /* Remove blur and grayscale */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
+}
+
+/* Optional: Add more shadow effect for the transition */
+.item:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Adds a shadow beneath the image */
+    z-index: -1;
+    transition: box-shadow 0.5s ease;
+}
