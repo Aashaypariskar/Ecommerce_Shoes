@@ -32,3 +32,45 @@
     z-index: -1;
     transition: box-shadow 0.5s ease;
 }
+
+
+
+
+
+
+
+
+
+
+.btn-nike {
+    background-color: #ff3b30; /* Nike's accent red color */
+    color: white;
+    border: none;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-nike:hover {
+    background-color: #e52a20; /* Darker red on hover */
+    transform: scale(1.05); /* Slight scaling effect on hover for emphasis */
+}
+
+.btn-nike:active {
+    transform: scale(1); /* Removes scale effect on click */
+    background-color: #c7201a; /* Even darker red when clicked */
+}
+
+
+
+.card:hover .card-side.front{
+    transform: rotateY('180deg');
+}
+
+.card:hover .card-side.back{
+    transform: rotateY('0deg');
+
+}
+

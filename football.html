@@ -13,11 +13,12 @@
     <!----------------------Navbar---------------------------------------->
     <div class="row">
         <div class="col-md-12">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="#">
-                    <img src="Assets/image/Nike%20logo.png" alt="Nike Logo" style="height: 48px; width: 100px;">
-                  </a>
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="z-index: 10;">
+                <a class="navbar-brand" href="#">
+                    <img src="Assets/Nike logo.png" alt="" style="height: 48px; width: 100px;">
+                </a>
+                <!-- Remaining navbar code -->
+            
 
                   <div class="d-flex" style="flex-grow: 1; justify-content: center;">
                     <form class="d-flex">
@@ -71,28 +72,44 @@
     </div>
 
     <!---------------------------------------Banner------------------------------------------------>
-    <div class="container-fluid" style="background-image: url('Assets/image/golden.jpeg');
-     height: 600px; background-size: cover;">
+    <div class="container-fluid" style="
+    background-image: url('Assets/image/golden.jpeg');
+    height: 100vh; 
+    background-size: cover; 
+    background-position: center; 
+    background-attachment: fixed; 
+    display: flex;
+    justify-content: center;
+    align-items: center;">
+    <!-- Add your content here -->
+
+
         <div class="row h-100">
             <div class="col-md-12 d-flex justify-content-center align-items-center">
                 <div class="banner" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
-                    <div class="item"><img src="Assets/image/De%20bruyne.jpg" alt="" style="height: 400px;"></div>
-                    <div class="item"><img src="Assets/image/Neymar.jpg" alt="" style="height: 400px;"></div>
-                    <div class="item"><img src="Assets/image/Young%20ronaldo.jpg" alt="" style="height: 400px;"></div>
-                    <div class="item"><img src="Assets/image/England%20Nike%20Campaign%20Phil%20Foden.jpeg" alt="" style="height: 400px;"></div>
-                    <div class="item"><img src="Assets/image/Halland.jpg" alt="" style="height: 400px;"></div>
+                    <div class="list" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
+                        <div class="item"><img src="Assets/image/De%20bruyne.jpg" alt="" style="height: 400px;"></div>
+                        <div class="item"><img src="Assets/image/Neymar.jpg" alt="" style="height: 400px;"></div>
+                        <div class="item"><img src="Assets/image/Young%20ronaldo.jpg" alt="" style="height: 400px;"></div>
+                        <div class="item"><img src="Assets/image/England%20Nike%20Campaign%20Phil%20Foden.jpeg" alt="" style="height: 400px;"></div>
+                        <div class="item"><img src="Assets/image/Halland.jpg" alt="" style="height: 400px;"></div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 
-    <div style="background-color: grey; margin-top: 20px; height: 200px;">
-        <h1 style="color: black; font-family: 'Times New Roman', Times, serif; text-align: center; padding-top: 50px;"> 
-        JUST DO IT THEN DO IT AGAIN </h1>
-        <div class="text-center">
-            <button class="btn btn-primary">Explore Now</button>
-        </div>
+    
+
+    <div style="background-color: #222; margin-top: 20px; height: 200px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <h1 style="color: #fff; font-family: 'Impact', sans-serif; text-align: center; font-size: 36px; letter-spacing: 2px; padding-bottom: 20px;"> 
+            JUST DO IT THEN DO IT AGAIN
+        </h1>
+        <button class="btn btn-lg btn-nike rounded-pill px-5 py-2">Explore Now</button>
     </div>
+    
+    
 
     <!-----------------------------------------Poster------------------------------------------------------------>
     <div class="container mt-5">
@@ -107,28 +124,12 @@
     </div>  
 
     <!-----------------------------------------Cards------------------------------------------------------------>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <img class="card-img-top" src="Assets/image/1.png" alt="NIKE SHOE">
-                    <div class="card-body">
-                        <h3 class="card-title">NIKE</h3>
-                        <h4 class="card-subtitle mb-2">NIKE SHOE</h4>
-                        <select class="form-control mb-2" name="size" id="size">
-                            <option value="size">Size</option>
-                            <option value="7">7</option>
-                            <option value="7.5">7.5</option>
-                            <option value="8">8</option>
-                            <option value="8.5">8.5</option>
-                            <option value="9">9</option>
-                        </select>
-                        <button class="btn btn-primary btn-block">Add to Cart</button>
-                        <p class="mt-2">Lorem ipsum dolor sit amet consectetuer adipisicing elit. Beatae laborum ut minus corrupti dolorum.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Add more cards as needed -->
+    <div class="card">
+        <div class="card-side front">
+            <div>Front Side</div>
+        </div>
+        <div class="card-side back">
+            <div>Back Side</div>
         </div>
     </div>
 
