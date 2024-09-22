@@ -1,3 +1,4 @@
+/*football front */ 
 /* Apply smooth transition to all items for both filter and transform effects */
 .item {
     transition: transform 0.5s ease, filter 0.5s ease;
@@ -32,15 +33,11 @@
     z-index: -1;
     transition: box-shadow 0.5s ease;
 }
+/*football front */ 
 
 
 
-
-
-
-
-
-
+/*Speed */ 
 
 .btn-nike {
     background-color: #ff3b30; /* Nike's accent red color */
@@ -62,8 +59,10 @@
     transform: scale(1); /* Removes scale effect on click */
     background-color: #c7201a; /* Even darker red when clicked */
 }
+/*Speed */ 
 
 
+/*cards*/ 
 
 .card:hover .card-side.front{
     transform: rotateY('180deg');
@@ -73,4 +72,4 @@
     transform: rotateY('0deg');
 
 }
-
+/*cards*/ 
