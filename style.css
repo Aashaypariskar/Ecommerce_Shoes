@@ -64,12 +64,125 @@
 
 /*cards*/ 
 
-.card:hover .card-side.front{
-    transform: rotateY('180deg');
+/* General card style */
+.card {
+    position: relative;
+    width: 18rem;
+    height: 350px; /* Set a fixed height for consistency */
+    border: none;
+    background-color: transparent;
+    overflow: hidden; /* Hide content overflow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px; /* Adjust for spacing between cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
-.card:hover .card-side.back{
-    transform: rotateY('0deg');
-
+/* Container for cards */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+  
 }
+
+/* Image container styling */
+.card-img-container {
+    position: relative;
+    width: 100%;
+    height: 230px; /* Adjust image height */
+    overflow: hidden;
+}
+
+/* Image styling, slightly visible before hover */
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1; /* Image is slightly visible before hover */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Initially hide the card body */
+.card-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(154, 146, 146, 0.95); /* Semi-transparent white background */
+    padding: 10px;
+    height: 0; /* Hidden by default */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: height 0.5s ease, opacity 0.5s ease, visibility 0.5s ease, transform 0.5s ease;
+}
+
+/* Hover effect to reveal the card details */
+.card:hover .card-body {
+    height: 120px; /* Set visible height */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Card hover effect: grow slightly and add shadow */
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Image zoom effect */
+.card:hover .card-img-top {
+    opacity: 0.7;
+    transform: scale(1.05);
+}
+
+/* Styling for Add to Cart button */
+.mosttrending {
+    padding: 5px 10px;
+    background-color: #ff4d4d;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+}
+
+.mosttrending:hover {
+    background-color: #ff6666;
+}
+
+/* Style for card title */
+.card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Style for card text */
+.card-text {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+}
+
+/* Style for price */
+.price {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Adjust Add to Cart button size */
+.card-body a {
+    display: block;
+    text-align: center;
+}
+
+/* Ensure all cards are aligned */
+.card-body {
+    text-align: center;
+}
+
 /*cards*/ 
