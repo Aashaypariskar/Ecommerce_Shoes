@@ -9,71 +9,81 @@
     <link rel="stylesheet" href="style.css">
     <title>Nike</title>
 </head>
-<body style="background-color: black;">
+<body style="background-color: rgb(249, 247, 247);">
 
     <!----------------------Navbar---------------------------------------->
     <div class="row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="z-index: 10;">
-                <a class="navbar-brand" href="#">
-                    <img src="Assets/image/Nike logo.png" alt="" style="height: 48px; width: 100px;">
-                </a>
-            
-
+      <div class="col-md-12">
+          <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="z-index: 10;">
+              <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                      <img src="Assets/image/Nike logo.png" alt="Nike Logo" style="height: 48px; width: 100px;">
+                  </a>
+  
                   <div class="d-flex" style="flex-grow: 1; justify-content: center;">
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="border-radius: 20px; color: white;">
-                      <button class="btn btn-outline" type="submit" style="border: none; font-size: 1.2rem; background-color: transparent; color: white;"><i class="fas fa-search"></i></button>
-                    </form>
+                      <form class="d-flex">
+                          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="border-radius: 20px; color: black;">
+                          <button class="btn btn-outline" type="submit" style="border: none; font-size: 1.2rem; background-color: transparent; color: black;">
+                              <i class="fas fa-search"></i>
+                          </button>
+                      </form>
                   </div>
-
+  
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                      <span class="navbar-toggler-icon">
+                          <i class="fas fa-bars" style="color: black;"></i>
+                      </span>
                   </button>
-
+  
                   <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user" style="font-size: 1.3rem; color: white;"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Login</a></li>
-                                <li><a class="dropdown-item" href="#">My profile</a></li>
-                                <li><a class="dropdown-item" href="#">Orders</a></li>
-                                <li><a class="dropdown-item" href="#">Wishlist</a></li>
-                                <li><a class="dropdown-item" href="#">Rewards</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-list" style="font-size: 1.2rem; color: white;"></i>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Sneakers</a></li>
-                                <li><a class="dropdown-item" href="#">Sport Shoes</a></li>
-                                <li><a class="dropdown-item" href="#">Football Shoes</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-heart" style="font-size: 1.3rem; color: white;"></i></a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-shopping-cart" style="font-size: 1.2rem; color: white;"></i></a>
-                        </li>
-                    </ul>
+                      <ul class="navbar-nav ms-auto">
+                          <!-- User Dropdown -->
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <i class="fas fa-user" style="font-size: 1.3rem; color: black;"></i>
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="#">Login</a></li>
+                                  <li><a class="dropdown-item" href="#">My profile</a></li>
+                                  <li><a class="dropdown-item" href="#">Orders</a></li>
+                                  <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                                  <li><a class="dropdown-item" href="#">Rewards</a></li>
+                              </ul>
+                          </li>
+  
+                          <!-- Categories Dropdown -->
+                          <li class="nav-item dropdown">
+                              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  <i class="fas fa-list" style="font-size: 1.2rem; color: black;"></i>
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                  <li><a class="dropdown-item" href="#">Sneakers</a></li>
+                                  <li><a class="dropdown-item" href="#">Sport Shoes</a></li>
+                                  <li><a class="dropdown-item" href="#">Football Shoes</a></li>
+                              </ul>
+                          </li>
+  
+                          <!-- Wishlist Icon -->
+                          <li class="nav-item">
+                              <a class="nav-link" href="#"><i class="fas fa-heart" style="font-size: 1.3rem; color: black;"></i></a>
+                          </li>
+  
+                          <!-- Cart Icon -->
+                          <li class="nav-item">
+                              <a class="nav-link" href="#"><i class="fas fa-shopping-cart" style="font-size: 1.2rem; color: black;"></i></a>
+                          </li>
+                      </ul>
                   </div>
-                </div>
-            </nav>
-        </div>
-    </div>
+              </div>
+          </nav>
+      </div>
+  </div>
+  
+    
 
     <!---------------------------------------Banner------------------------------------------------>
     <div class="container-fluid" style="
-    background-image: url('Assets/image/GRAY.jpg');
+    background-image: url('Assets/image/just\ do\ it.jpg');
     height: 100vh; 
     background-size: cover; 
     background-position: center; 
@@ -124,65 +134,27 @@
     </div>  
 
     <!-----------------------------------------Cards------------------------------------------------------------>
-    <div class="row">
-      <div class="col-md-2">
-        <div class="card" style="width: 18rem; margin-left: 10px; margin-top: 30px; ">
-          <img src="Assets/image/phantom gx.jpg" class="card-img-top" alt="..." style="">
-          <div class="card-body" >
-            <h5 class="card-title">NIKE Phantom GX</h5>
-            <p class="card-text">Mens Regular Fit Self Design Casual Shirt</p>
-            <p> <del>7,799</del> &#8377 5,499</p>
-            <i class="bi bi-cart3 add-to-cart-icon"></i>
-
-          </div>
-        </div>
+    <section>
+      <div class="container-fluid">
+      <div class="drag">
+    <main class="slider"> 
+      <h5 class="heading">Top Trending movies</h5>
+      <div class="slider-track">
+        <img src="Assets/image/superfly 8.jpg" class="card-image">
+        <img src="Assets/image/superfly 8 elite.jpg" class="card-image">
+        <img src="Assets/image/phantom gx.jpg" class="card-image">
+        <img src="Assets/image/superfly 8 mbappe.jpg" class="card-image">
+        <img src="image/drag image/evil dead rise.webp" class="card-image">
+        <img src="image/drag image/la la land.jpg" class="card-image">
+        <img src="image/drag image/The-Kashmir-Files.jpeg" class="card-image">
+        <img src="image/drag image/us.jpg" class="card-image">
+        <img src="image/drag image/bulbbul.jpg" class="card-image">
+        <img src="image/drag image/get out.jpg" class="card-image">
       </div>
-      <div class="col-md-2">
-        <div class="card" style="width: 18rem; margin-left: 55px; margin-top: 30px;">
-          <img src="Assets/image/mercurial black.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">NIKE Mercurial</h5>
-            <p class="card-text">Mens Regular Fit Stripped Design Casual Shirt</p>
-            <p> <del>8,999</del> &#8377 7,499</p>
-            <i class="bi bi-cart3 add-to-cart-icon"></i>
-          </div>
-        </div>
+    </main>
       </div>
-      <div class="col-md-2">
-        <div class="card" style="width: 18rem; margin-left: 100px; margin-top: 30px;" >
-          <img src="Assets/image/superfly 8 mbappe.jpg" class="card-img-top" alt="..." >
-          <div class="card-body">
-            <h5 class="card-title">NIKE Superfly 8</h5>
-            <p class="card-text">Mbappe edition</p>
-            <p> <del>23,998</del> &#8377 20,499</p>
-            <i class="bi bi-cart3 add-to-cart-icon"></i>          
-          </div>
-        </div>
       </div>
-      <div class="col-md-2">
-        <div class="card" style="width: 18rem; margin-left: 145px; margin-top: 30px; ">
-          <img src="Assets/image/superfly 8.jpg" class="card-img-top" alt="..." style="height: 400px;">
-          <div class="card-body">
-            <h5 class="card-title">NIKE Superfly 8</h5>
-            <p class="card-text">NIKE Superfly 8</p>
-            <p> <del>11,398</del> &#8377 9,199</p>
-            <i class="bi bi-cart3 add-to-cart-icon"></i> 
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="card" style="width: 18rem; margin-top: 30px; margin-left: 190px;">
-          <img src="Assets/image/superfly 8 elite.jpg" class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">NIKE Superfly 8 Elite</h5>
-            <p class="card-text">Snitch Hugo Brown Plain Polo T-shirts</p>
-            <p> <del>14,598</del> &#8377 12,169</p>
-            <i class="bi bi-cart3 add-to-cart-icon"></i>        
-          </div>
-        </div>
-      </div>
-    </div>
-
+    </section>
     <!-----------------------------------------Cards------------------------------------------------------------>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
