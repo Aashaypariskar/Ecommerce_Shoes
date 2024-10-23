@@ -308,83 +308,54 @@
 /*Speed */ 
 
 
-/*cards*/ 
-
-.drag {
-    height: 70vh;
-    display: grid;
-    place-items: center;
+/* Optional: If you want to restrict the height of the card body as well */
+.card-category-body {
+    max-height: 200px; /* Adjust as needed */
+    overflow: hidden; /* Hide overflow content */
 }
 
-.slider {
-    width: 97vw;
-    height: 60vh;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    cursor: grab;
+.category-title {
+    font-size: 1.25rem; /* Increase font size for titles */
+    font-weight: bold; /* Make titles bold */
+    color: #333; /* Title color */
 }
 
-.slider::-webkit-scrollbar {
-    display: none;
-}
- 
-
-.slider-track {
-    width: max-content;
-    height: inherit;
-    display: flex;
-    gap: 1.5rem;
+.category-description {
+    font-size: 1rem; /* Set font size for description */
+    color: #666; /* Description color */
+    margin-bottom: 1rem; /* Add bottom margin for spacing */
 }
 
-
-.card-image {
-    height: 60vh;
-    width: 20vw;
-    object-fit: cover;
-    transition: transform 0.2s ease-in-out;
-    aspect-ratio: 3/2;
+.category-cards-left {
+    /* Adjust these values to change the size */
+    max-width: 280px; /* Set maximum width for each card */
+    margin: auto; /* Center align the cards */
 }
 
-@media (max-width:768px) {
-    .card-image{
-        height: auto;
-        width: 300px;
-    }
+/* Existing styles */
+.category-cards-item {
+    height: auto; /* Allow height to adjust based on content */
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card-image:hover {
-    box-shadow:  2px 2px 3px 2px white;
-    transform: scale(1.1);
+.category-cards-left img {
+    width: 100%; /* Maintain responsiveness */
+    height: auto; /* Maintain aspect ratio */
 }
 
-.slider.active {
-    cursor: grabbing;
+.category-cards-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-/*cards*/ 
-
-
-
-
-
-.card-img-top {
-    max-height: 200px; /* Adjust this value as needed */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
+.index-card-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
 }
 
-.right-card{
-    height: 900px;
+/* Optional: Add a hover effect for the button */
+.index-card-button:hover {
+    background-color: #0056b3;
+    color: white;
 }
 
-.card-large {
-    height: 2000px; /* Adjust this value to your desired height */
-    margin-bottom: 0;
-}
-
-.card-large img {
-    height: 160%; /* Increase this value to adjust the image height */
-    width: 100%; /* Ensure the image takes the full width of the card */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    display: block; /* Ensures there is no extra space below the image */
-    margin: 0 auto; /* Center the image horizontally */
-}
