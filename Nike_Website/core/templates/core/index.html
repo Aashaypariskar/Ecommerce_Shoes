@@ -1,17 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Dynamic URL</h1>
-  <a href="{% url "product" 1 %}">product1</a>
-  <a href="{% url "product" 2 %}">product2</a>
-  <a href="{% url "product" 3 %}">product3</a>
-  <a href="{% url "product" 4 %}">product4</a>
+{% extends "core/base.html" %}
 
-
-</body>
-</html>
+{% block content %}
+<h1>Nike Website</h1>
+{% endblock content %}
