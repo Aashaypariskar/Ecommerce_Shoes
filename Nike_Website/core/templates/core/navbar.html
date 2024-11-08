@@ -1,0 +1,68 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="z-index: 10;">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" href="#">
+                    <img src="{% static "core/images/Nike logo.png" %}" alt="Nike Logo" style="height: 48px; width: 100px;">
+                </a>
+
+                <!-- Centered Search Bar -->
+                <div class="d-flex justify-content-center flex-grow-1">
+                    <form class="d-flex" style="width: 50%;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="border-radius: 20px; color: black;">
+                        <button class="btn btn-outline" type="submit" style="border: none; font-size: 1.2rem; background-color: transparent; color: black;">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Side Icons -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars" style="color: black;"></i></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <!-- User Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user" style="font-size: 1.3rem; color: black;"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Login</a></li>
+                                <li><a class="dropdown-item" href="#">My profile</a></li>
+                                <li><a class="dropdown-item" href="#">Orders</a></li>
+                                <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                                <li><a class="dropdown-item" href="#">Rewards</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Categories Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-list" style="font-size: 1.2rem; color: black;"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="#">Sneakers</a></li>
+                                <li><a class="dropdown-item" href="#">Sport Shoes</a></li>
+                                <li><a class="dropdown-item" href="football.html">Football Shoes</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Wishlist Icon -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-heart" style="font-size: 1.3rem; color: black;"></i></a>
+                        </li>
+
+                        <!-- Cart Icon -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-shopping-cart" style="font-size: 1.2rem; color: black;"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
