@@ -1,10 +1,138 @@
 {% load static %}
 
+<style>
+    /*index page cards */ 
+
+    .index-cards-container {
+        height: 700px;
+    }
+    
+    .index-card {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        transition: transform 0.3s ease;
+        border-radius: 10px; /* Rounded corners for the card */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        margin-bottom: 20px; /* Space between cards */
+    }
+    
+    .index-card:hover {
+        transform: scale(1.05); /* Slightly enlarge the card on hover */
+    }
+    
+    .index-card-img {
+        width: 100%;
+        transition: opacity 0.3s ease;
+    }
+    
+    .index-card-body {
+        position: absolute;
+        bottom: 0; /* Position the body at the bottom */
+        left: 0;
+        right: 0;
+        background-color: white;
+        padding: 20px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        display: flex; /* Use flexbox for alignment */
+        flex-direction: column; /* Arrange children vertically */
+        justify-content: space-between; /* Equal space between elements */
+    }
+    
+    .index-card:hover .index-card-body {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .index-card-title {
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        font-size: 1.5rem; /* Adjust font size */
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .index-card-button {
+        margin: 10px auto; /* Center the button with equal margin on top and bottom */
+        padding: 0; /* Remove padding to allow flex centering */
+        width: 200px;
+        height: 40px;
+        color: #fff;
+        border: 3px solid red;
+        background-image: -webkit-linear-gradient(30deg, #e20e0e 50%, transparent 50%);
+        background-image: linear-gradient(30deg, #e90d61 50%, transparent 50%);
+        background-size: 451px;
+        background-repeat: no-repeat;
+        background-position: 0%;
+        transition: background 300ms ease-in-out;
+        border-radius: 20px;
+    
+        /* Center the text */
+        display: flex; /* Use flexbox to center text */
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+    }
+    
+    .index-card-button:hover {
+        background-position: 100%;
+        color: #000000; /* Change text color on hover */
+        animation: shake 0.5s; /* Add shake animation on hover */
+    }
+    
+    /* Keyframes for the shake animation */
+    @keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-3px);
+        }
+        50% {
+            transform: translateX(3px);
+        }
+        75% {
+            transform: translateX(-3px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+    
+    /* Keyframes for the slide-in effect */
+    @keyframes slideIn {
+        to {
+            opacity: 1; /* Fade in */
+            transform: translateY(0); /* Move to original position */
+        }
+    }
+    
+    .index-card-title {
+        justify-content: center;
+        align-items: center;
+        opacity: 0; /* Initially hidden */
+        transform: translateY(-20px); /* Start higher for the animation effect */
+        animation: slideIn 0.5s forwards; /* Animation on body reveal */
+    }
+    
+    .index-card:hover .index-card-title {
+        color: #007bff; /* Change color on hover */
+        transform: translateY(-5px); /* Slight lift effect */
+    }
+    
+    
+    
+    
+    /*index page cards */ 
+
+</style>
+
 <div class="index-cards-container" style="height: 700px; margin: 20px;">
     <div class="row">
         <div class="col-md-4">
             <div class="index-card">
-                <img class="index-card-img" src=" " alt="Card image cap">
+                <img class="index-card-img" src="{% static "core/images/index category1.jpg" %} " alt="Card image cap">
                 <div class="index-card-body">
                     <h5 class="index-card-title" style="margin-left: 160px;">Card Title 1</h5>
                     <a href="#" class="index-card-button">Explore Category 1</a> <!-- Updated button class -->
@@ -13,7 +141,7 @@
         </div>
         <div class="col-md-4" style="height: 700px;">
             <div class="index-card" style="height: 600px;">
-                <img class="index-card-img" src="Assets/image/index category2.jpg" alt="Card image cap" style="height: 610px;">
+                <img class="index-card-img" src="{% static "core/images/index category2.jpg" %}" alt="Card image cap" style="height: 610px;">
                 <div class="index-card-body">
                     <h5 class="index-card-title" style="margin-left: 160px;">Card Title 2</h5>
                     <a href="#" class="index-card-button">Discover Category 2</a> <!-- Updated button class -->
@@ -22,7 +150,7 @@
         </div>
         <div class="col-md-4">
             <div class="index-card">
-                <img class="index-card-img" src="Assets/image/index category3.jpg" alt="Card image cap">
+                <img class="index-card-img" src="{% static "core/images/index category3.jpg" %}" alt="Card image cap">
                 <div class="index-card-body">
                     <h5 class="index-card-title" style="margin-left: 160px;"    >Card Title 3</h5>
                     <a href="#" class="index-card-button">Join Category 3</a> <!-- Updated button class -->
