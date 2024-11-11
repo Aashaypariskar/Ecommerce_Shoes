@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from . forms import RegistrationForm,AuthenticateForm,ChangePasswordForm,UserProfileForm,AdminProfileForm
+from . forms import RegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,PasswordChangeForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 # Create your views here.
@@ -12,18 +12,15 @@ def index(request):
 
 
 def registration(request):
-    if not request.user.is_authenticated:
-        if request.method == 'POST':
-            mf = RegistrationForm(request.POST)
-            if mf.is_valid():
-                mf.save()
+    if request.method == 'POST':
+            regf = RegistrationForm(request.POST)
+            if regf.is_valid():
+                regf.save()
                 messages.success(request,'Registration Successfull !!')
                 return redirect('registration')    
-        else:
-            mf  = RegistrationForm()
-        return render(request,'core/registration.html',{'mf':mf})
     else:
-        return redirect('profile')
+        regf  = RegistrationForm()
+    return render(request,'core/register.html',{'regf':regf})
 
 def log_in(request):
     if not request.user.is_authenticated:  # check whether user is not login ,if so it will show login option
@@ -63,19 +60,19 @@ def profile(request):
 
 def log_out(request):
     logout(request)
-    return redirect('home')
+    return redirect('index')
 
 
 def changepassword(request):                                       # Password Change Form               
     if request.user.is_authenticated:                              # Include old password 
         if request.method == 'POST':                               
-            mf =ChangePasswordForm(request.user,request.POST)
-            if mf.is_valid():
-                mf.save()
-                update_session_auth_hash(request,mf.user)
+            cpf =PasswordChangeForm(request.user,request.POST)
+            if cpf.is_valid():
+                cpf.save()
+                update_session_auth_hash(request,cpf.user)
                 return redirect('profile')
         else:
-            mf = ChangePasswordForm(request.user)
-        return render(request,'core/changepassword.html',{'mf':mf})
+            cpf = PasswordChangeForm(request.user)
+            return render(request,'core/changepassword.html',{'cpf':cpf})
     else:
         return redirect('login')
