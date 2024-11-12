@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from . forms import RegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,PasswordChangeForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
+from . models import Shoes
 # Create your views here.
 
 
@@ -76,3 +77,19 @@ def changepassword(request):                                       # Password Ch
             return render(request,'core/changepassword.html',{'cpf':cpf})
     else:
         return redirect('login')
+    
+
+def sneakers(request):
+    cs = Shoes.objects.filter(category='SNEAKERS')
+    return render(request,'core/sneakers.html',{'cs':cs})
+
+
+def football_shoes(request):
+    fs = Shoes.objects.filter(category='FOOTBALL SHOES')
+    return render(request,'core/football_shoes.html',{'fs':fs})
+
+def running_shoes(request):
+    rs = Shoes.objects.filter(category='RUNNING SHOES')
+    return render(request,'core/running_shoes.html',{'rs':rs})
+
+
