@@ -4,7 +4,7 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('registration/',views.registration,name='registration'),
     path('sneakers',views.sneakers,name='sneakers'),
-    path('football_shoes',views.football_shoes,name='footballshoes'),
+    path('football_shoes',views.football_shoes,name='football_shoes'),
     path('running_shoes',views.running_shoes,name='runningshoes'),
 
 

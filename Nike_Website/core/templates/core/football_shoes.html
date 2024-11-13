@@ -1,0 +1,114 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+ 
+<style>
+    /*football front */ 
+    /* Apply smooth transition to all items for both filter and transform effects */
+    .item {
+        transition: transform 0.5s ease, filter 0.5s ease;
+        z-index: 1;
+        position: relative; /* Ensure z-index works properly */
+    }
+    
+    /* When hovering over .list, non-hovered items will be blurred and grayscale */
+    .list:hover .item:not(:hover) {
+        filter: grayscale(1) blur(8px); /* Slightly reduce the blur for better aesthetics */
+        transform: scale(0.9); /* Add a slight shrink effect to non-hovered items for focus */
+        transition: transform 0.5s ease, filter 0.5s ease;
+    }
+    
+    /* Hover effect on the active .item */
+    .item:hover {
+        transform: scale(1.3);
+        z-index: 2; /* Bring hovered item to the front */
+        filter: none; /* Remove blur and grayscale */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
+    }
+    
+    /* Optional: Add more shadow effect for the transition */
+    .item:hover::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Adds a shadow beneath the image */
+        z-index: -1;
+        transition: box-shadow 0.5s ease;
+    }
+    /*football front */ 
+
+    .football_container{
+        background-image:url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYFKmvT_7t3cAMQSSa_mCpl3Pq4u3yj5df7c1Ss3pI0bhy6sU4');
+        height: 100vh; 
+        background-size: cover; 
+        background-position: center; 
+        background-attachment: fixed; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+ <div class="container-fluid football_container"
+>
+ <!-- Add your content here -->
+
+
+     <div class="row h-100">
+         <div class="col-md-12 d-flex justify-content-center align-items-center">
+             <div class="banner" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
+                 <div class="list" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
+                     <div class="item"><img src="{% static "core/images/De%20bruyne.jpg" %}" alt="" style="height: 400px;"></div>
+                     <div class="item"><img src="{% static "core/images/Neymar.jpg" %}" alt="" style="height: 400px;"></div>
+                     <div class="item"><img src="{% static "core/images/Young%20ronaldo.jpg" %}" alt="" style="height: 400px;"></div>
+                     <div class="item"><img src="{% static "core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg" %}" alt="" style="height: 400px;"></div>
+                     <div class="item"><img src="{% static "core/images/Halland.jpg" %}" alt="" style="height: 400px;"></div>
+                 </div>
+                 
+             </div>
+         </div>
+     </div>
+ </div>
+
+ 
+
+ <div style="background-color: #222; margin-top: 20px; height: 200px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+     <h1 style="color: #fff; font-family: 'Impact', sans-serif; text-align: center; font-size: 36px; letter-spacing: 2px; padding-bottom: 20px;"> 
+         JUST DO IT THEN DO IT AGAIN
+     </h1>
+     <button class="btn btn-lg btn-nike rounded-pill px-5 py-2">Explore Now</button>
+ </div>
+ 
+ 
+
+
+ <div class="container mt-5">
+     <div class="row">
+         <div class="col-md-6">
+             <img src="{% static "core/images/Vapour.jpg" %}" alt="" style="height: 400px; width: 100%;">
+         </div>
+         <div class="col-md-6 d-flex justify-content-center align-items-center">
+             <img src="{% static "core/images/LIMITED_TIME_ONLY-removebg-preview.png" %}" alt="">
+         </div>
+     </div>
+ </div>  
+
+ <div class="card" style="width: 18rem;">
+     {% for f in fs %}
+        <img src="{{f.pets_image.url}}" alt="" class="card-img-top" height="480px">
+      </a>
+      <div class="card-body product-info">
+        <p class="product-title">{{f.small_description}}</p>
+        <p class="product-price">INR &#8377 {{f.discounted_price}}   <s style="color:red;">{{f.original_price}}</s></p>
+      </div>
+      
+      <pre>  S     M     XL     XXL       <i class="bi bi-heart-fill" style="color: red;"></i> </pre>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock content %}
+
