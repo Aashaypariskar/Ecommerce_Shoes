@@ -85,30 +85,32 @@
  
  
 
+ <style>
+    .card-row {
+        gap: 3px;
+    }
+</style>
 
- <div class="container mt-5">
-     <div class="row">
-         <div class="col-md-6">
-             <img src="{% static "core/images/Vapour.jpg" %}" alt="" style="height: 400px; width: 100%;">
-         </div>
-         <div class="col-md-6 d-flex justify-content-center align-items-center">
-             <img src="{% static "core/images/LIMITED_TIME_ONLY-removebg-preview.png" %}" alt="">
-         </div>
-     </div>
- </div>  
+<div class="container mt-5">
+    <div class="row g-0 justify-content-start">
+      {% for f in fs  %}
+        <div class="col-md-3 mb-4" style="padding-left: 20px;">
+          <div class="card product-card">
+        
+              <img src="{{f.pets_image.url}}" alt="" class="card-img-top" height="280px" width="100px">
+            </a>
+            <div class="card-body product-info">
+              <p class="product-title">{{f.small_description}}</p>
+              <p class="product-price">INR &#8377 {{f.discounted_price}}   <s style="color:red;">{{f.original_price}}</s></p>
+              <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i>  </button>
+            </div>
+          
+            
+          </div>
+        </div>
+        {% endfor %}
 
- <div class="card" style="width: 18rem;">
-     {% for f in fs %}
-        <img src="{{f.pets_image.url}}" alt="" class="card-img-top" height="480px">
-      </a>
-      <div class="card-body product-info">
-        <p class="product-title">{{f.small_description}}</p>
-        <p class="product-price">INR &#8377 {{f.discounted_price}}   <s style="color:red;">{{f.original_price}}</s></p>
-      </div>
-      
-      <pre>  S     M     XL     XXL       <i class="bi bi-heart-fill" style="color: red;"></i> </pre>
-    </div>
-    {% endfor %}
-  </div>
+
+
 {% endblock content %}
 
