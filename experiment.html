@@ -42,98 +42,139 @@
     } */
 
 
-/* Center container on the page */
-.product-container {
+/* Container */
+.container {
+  padding: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  padding: 40px;
   max-width: 1200px;
   margin: auto;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Image Gallery (Left Side) */
+/* Product Container */
+.product-container {
+  display: flex;
+  gap: 50px;
+}
+
+/* Image Gallery */
 .image-gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
-  flex: 3;  /* Larger than the right container */
+  width: 60%;
 }
 
 .image-gallery img {
   width: 100%;
-  height: auto;
   border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Product Details (Right Side) */
+/* Product Details */
 .product-details {
-  flex: 2;  /* Smaller than the left container */
-  padding: 20px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
 }
 
-.product-details h2 {
-  font-size: 26px;
-  margin-bottom: 15px;
+.product-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.description {
+.product-subtitle {
   font-size: 16px;
-  color: #555;
+  color: #666;
   margin-bottom: 20px;
-  line-height: 1.5;
 }
 
 .price {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  margin-bottom: 20px;
   color: #333;
+  margin-bottom: 20px;
 }
 
-select {
-  padding: 8px;
-  margin-bottom: 25px;
-  font-size: 16px;
-  border-radius: 5px;
+.size-label {
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-/* Buttons */
-.buttons {
+.size-options {
   display: flex;
-  gap: 15px;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.buy-now, .add-to-cart {
-  padding: 12px 25px;
-  font-size: 16px;
-  border: none;
+.size-option {
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 4px;
   transition: background-color 0.3s ease;
 }
 
-.buy-now {
-  background-color: #ff6600;
-  color: white;
+.size-option:hover {
+  background-color: #f0f0f0;
 }
 
-.buy-now:hover {
-  background-color: #ff8533;
+/* Button Section */
+.button-section {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-.add-to-cart {
-  background-color: #0073e6;
-  color: white;
+.add-to-bag {
+  flex: 1;
+  padding: 15px;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.add-to-cart:hover {
-  background-color: #3399ff;
+.add-to-bag:hover {
+  background-color: #333;
+}
+
+.favourite {
+  flex: 1;
+  padding: 15px;
+  background-color: #fff;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.favourite:hover {
+  background-color: #f0f0f0;
+}
+
+/* About Product */
+.about-product {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6
 }
 
 
@@ -151,31 +192,51 @@ select {
     <div class="row gx-4">
       Left Side Cart with Full-Height Image -->
       
-      <div class="product-container mt-5">
-        <!-- Left Side: Product Images -->
-        <div class="image-gallery">
-          <img src="image1.jpg" alt="Product Image 1">
-          <img src="image2.jpg" alt="Product Image 2">
-          <img src="image3.jpg" alt="Product Image 3">
-          <img src="image4.jpg" alt="Product Image 4">
-        </div>
+      <div class="container">
+        <div class="product-container">
+          <!-- Left Side: Product Images -->
+          <div class="image-gallery">
+            <img src="Assets/image/ZOOM+VAPOR+15+ACAD+CR7+FG_MG.png" alt="Product Image 1">
+            <img src="Assets/image/ZOOM+VAPOR+15+ACAD+CR7+FG_MG.png" alt="Product Image 2">
+            <img src="Assets/image/ZOOM+VAPOR+15+ACAD+CR7+FG_MG.png" alt="Product Image 3">
+            <img src="Assets/image/ZOOM+VAPOR+15+ACAD+CR7+FG_MG.png" alt="Product Image 4">
+          </div>
       
-        <!-- Right Side: Product Details -->
-        <div class="product-details">
-          <h2>Product Title</h2>
-          <p class="description">A brief description of the product goes here. Highlight features and benefits.</p>
-          <p class="price">$99.99</p>
+          <!-- Right Side: Product Details -->
+          <div class="product-details">
+            <h1 class="product-title">AIR JORDAN 1 LOW</h1>
+            <p class="product-subtitle">WHITE/SKY GREY-FOOTBALL GREY</p>
+            <p class="price">₹ 10,795.00</p>
+      
+            <label for="size" class="size-label">Shoe Size (UK)</label>
+            <div class="size-options">
+              <button class="size-option">7</button>
+              <button class="size-option">8</button>
+              <button class="size-option">9</button>
+              <button class="size-option">10</button>
+              <button class="size-option">11</button>
+            </div>
+      
+            <!-- Buttons for Add to Bag and Wishlist -->
+            <div class="button-section">
+              <button class="add-to-bag">Add to Bag</button>
+              <button class="favourite">
+                <span>&#9825;</span> Favourite
+              </button>
+            </div>
+      
+            <h3 class="about-product">About Product</h3>
+            <p class="description">
+              Inspired by the original that debuted in 1985, the Air Jordan 1 Low offers a classic look designed with premium materials like leather and suede, creating a look curated for the City of Light. 
+            </p>
+      
+            <!-- Additional Product Details -->
+            <ul class="product-details-list">
+              <li>Colour Shown: Barely Green/Crimson Pulse/Metallic Gold Coin</li>
+              <li>Style: FZ1380-300</li>
+              <li>Country/Region of Origin: China</li>
+            </ul>
           
-          <label for="size">Size:</label>
-          <select id="size">
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-          </select>
-          
-          <div class="buttons">
-            <button class="buy-now">Buy Now</button>
-            <button class="add-to-cart">Add to Cart</button>
           </div>
         </div>
       </div>
