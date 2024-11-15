@@ -96,7 +96,7 @@
       {% for f in fs  %}
         <div class="col-md-3 mb-4" style="padding-left: 20px;">
           <div class="card product-card">
-        
+            <a href="{% url "card_info" f.id %}">
               <img src="{{f.pets_image.url}}" alt="" class="card-img-top" height="280px" width="100px">
             </a>
             <div class="card-body product-info">

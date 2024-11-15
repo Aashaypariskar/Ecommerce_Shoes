@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from . forms import RegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,PasswordChangeForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
-from . models import Shoes
+from . models import Shoes,Shoes_cart
 # Create your views here.
 
 
@@ -92,4 +92,19 @@ def running_shoes(request):
     rs = Shoes.objects.filter(category='RUNNING SHOES')
     return render(request,'core/running_shoes.html',{'rs':rs})
 
+def card_info(request,id):
+    fs = Shoes.objects.get(pk=id)
+    return render(request,'core/card_info.html',{'fs':fs})
 
+
+def add_to_cart(request,id):
+   fs = Shoes.objects.get(pk=id)
+   user=request.user
+   Shoes_cart  (user=user,product=fs).save()
+   messages.success(request,"Added to cart successfully")
+   return redirect('card_info',id)
+
+
+def show_cart(request):
+    fs= Shoes_cart.objects.filter(user=request.user)
+    return render(request,'core/show_cart.html',{'fs':fs})

@@ -9,7 +9,9 @@ urlpatterns = [
     path('sneakers',views.sneakers,name='sneakers'),
     path('football_shoes',views.football_shoes,name='football_shoes'),
     path('running_shoes',views.running_shoes,name='runningshoes'),
-
+    path('card_info/<int:id>',views.card_info,name='card_info'),
+    path('add_to_cart/<int:id>',views.add_to_cart,name='add_to_cart'),
+    path('show_cart/',views.show_cart,name='show_cart'),
 
     path('login/',views.log_in,name='login'),
     path('profile/',views.profile,name='profile'),
