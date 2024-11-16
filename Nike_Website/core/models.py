@@ -24,7 +24,10 @@ class Shoes_cart(models.Model):
     quantity= models.PositiveBigIntegerField(default=1)
     
     
-    
+    @property
+    def price_and_quantity_total(self):
+        return self.product.discounted_price*self.quantity
+
     
     
 

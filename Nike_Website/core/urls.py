@@ -16,7 +16,10 @@ urlpatterns = [
     path('login/',views.log_in,name='login'),
     path('profile/',views.profile,name='profile'),
     path('logout/',views.log_out, name="logout"),
-    path('changepassword/',views.changepassword, name="changepassword")
+    path('changepassword/',views.changepassword, name="changepassword"),
+    path('add_quantity/<int:id>',views.add_quantity, name="add_quantity"),
+    path('delete_quantity/<int:id>',views.delete_quantity, name="delete_quantity"),
+    path('delete_cart/<int:id>',views.delete_cart, name="deletecart"),
        
 ]
 

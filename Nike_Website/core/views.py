@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from . forms import RegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,PasswordChangeForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
@@ -108,3 +108,28 @@ def add_to_cart(request,id):
 def show_cart(request):
     fs= Shoes_cart.objects.filter(user=request.user)
     return render(request,'core/show_cart.html',{'fs':fs})
+
+
+def add_quantity(request,id):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Shoes_cart,pk=id)
+        product.quantity+=1
+        product.save()
+        return redirect('viewcart')
+    else:
+        return redirect('login')
+
+def delete_quantity(request,id):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Shoes_cart,pk=id)
+        if product.quantity>1:
+            product.quantity-=1
+            product.save()
+        return redirect('viewcart')
+    else:
+        return redirect('login')
+    
+def delete_cart(request,id):
+    pet_cart =Shoes_cart.objects.get(pk=id)
+    pet_cart.delete()
+    return redirect('viewcart')

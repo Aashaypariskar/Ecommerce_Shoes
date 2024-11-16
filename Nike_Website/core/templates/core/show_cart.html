@@ -4,57 +4,102 @@
 {% block content %}
 <section class="h-100 h-custom">
     <div class="container h-100 py-5">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col">
-  
-          <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col" class="h5">Shopping Bag</th>
-                        <th scope="col">Format</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        {% for f in fs  %}
-                        <th scope="row">
-                            <div class="d-flex align-items-center">
-                                
-                                <img src="" class="img-fluid rounded-3"
-                                style="width: 120px;" alt="Book">
-                                <div class="flex-column ms-4">
-                                    {{f.product.small_description}}
-                                </div>
-                            </div>
-                        </th>
-                        <td class="align-middle">
-                            <p class="mb-0" style="font-weight: 500;">Digital</p>
-                        </td>
-                        <td class="align-middle">
-                            <div class="d-flex flex-row">
-                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            
-                            <input id="form1" min="0" name="quantity" value="2" type="number"
-                            class="form-control form-control-sm" style="width: 50px;" />
-                            
-                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                    
-                </td>
-                <td class="align-middle">
-                    <p class="mb-0" style="font-weight: 500;">$9.99</p>
-                </td>
-            </tr>
-            {% endfor %}
-    
-{% endblock content %}
+        <div class="row">
+            <!-- Shopping Bag Section -->
+            <div class="col-lg-8">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="h5">Shopping Bag</th>
+                                <th scope="col">Format</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for f in fs %}
+                            <tr>
+                                <th scope="row">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ f.product.pets_image.url }}" class="img-fluid rounded-3"
+                                            style="width: 120px;" alt="Product Image">
+                                        <div class="flex-column ms-4">
+                                            <p class="mb-0" style="font-weight: 500;">{{ f.product.small_description }}</p>
+                                        </div>
+                                    </div>
+                                </th>
+                                <td class="align-middle">
+                                    <p class="mb-0" style="font-weight: 500;">Digital</p>
+                                </td>
+                                <td class="align-middle">
+                                    <div class="d-flex flex-row">
+                                        <button class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input id="form1" min="0" name="quantity" value="{{ f.quantity }}" type="number"
+                                            class="form-control form-control-sm" style="width: 50px;" />
+                                        <button class="btn btn-link px-2"
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <p class="mb-0" style="font-weight: 500;">₹{{ f.product.discounted_price }}</p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
+            <!-- Order Summary Section -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0 text-center">Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <td><strong>Product Name</strong></td>
+                                    <td class="text-center"><strong>Price</strong></td>
+                                    <td class="text-center"><strong>Quantity</strong></td>
+                                    <td class="text-end"><strong>Total</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in cart_items %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td class="text-center">₹{{ item.product.discounted_price }}</td>
+                                    <td class="text-center">{{ item.quantity }}</td>
+                                    <td class="text-end">₹{{ item.price_and_quantity_total }}</td>
+                                </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                                    <td class="text-end">₹{{ total }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Shipping</strong></td>
+                                    <td class="text-end">₹2000</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Total</strong></td>
+                                    <td class="text-end">₹<b>{{ final_price }}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn btn-success btn-block btn-lg mt-3">Proceed to Pay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
