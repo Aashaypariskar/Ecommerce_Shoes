@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Container Design</title>
+  
+  <!-- Bootstrap CSS CDN -->
+  <link 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+    rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+    }
+
+    .custom-container {
+      display: flex;
+      width: 70%; /* Adjust container width */
+      gap: 20px;
+    }
+
+    .custom-left-section {
+      flex: 2;
+      background-color: #ddefff;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-video-container {
+      width: 90%; /* Adjust video size */
+      height: auto;
+    }
+
+    .custom-right-section {
+      flex: 3;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .custom-card {
+      background-color: #fff;
+      text-align: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .custom-card img {
+      width: 100%;
+      height: 200px; /* Adjust image size */
+      object-fit: cover;
+    }
+
+    .custom-card p {
+      margin: 5px 0; /* Adjust card body */
+      font-weight: bold;
+      font-size: 0.9rem; /* Adjust font size */
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-container">
+    <!-- Left Section -->
+    <div class="custom-left-section">
+      <video class="custom-video-container" autoplay muted loop controls>
+        <source src="Assets/videos/f5d1b78ba8977a0d20b4d6a972d18397.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- Right Section -->
+    <div class="custom-right-section">
+      <div class="custom-card">
+        <img src="Assets/image/ZM+SUPERFLY+10+ACAD+FG_MG.png" alt="Image 1">
+        <p>Custom Card 1</p>
+      </div>
+      <div class="custom-card">
+        <img src="Assets/image/ZM+SUPERFLY+10+ACAD+FG_MG.png" alt="Image 2">
+        <p>Custom Card 2</p>
+      </div>
+      <div class="custom-card">
+        <img src="Assets/image/ZM+SUPERFLY+10+ACAD+FG_MG.png" alt="Image 3">
+        <p>Custom Card 3</p>
+      </div>
+      <div class="custom-card">
+        <img src="Assets/image/ZM+SUPERFLY+10+ACAD+FG_MG.png" alt="Image 4">
+        <p>Custom Card 4</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and Popper.js CDN -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
