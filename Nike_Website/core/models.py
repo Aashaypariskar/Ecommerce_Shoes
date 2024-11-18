@@ -26,6 +26,8 @@ class Shoes_cart(models.Model):
     
     @property
     def price_and_quantity_total(self):
+        
+
         return self.product.discounted_price*self.quantity
 
     

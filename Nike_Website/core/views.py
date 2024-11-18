@@ -107,7 +107,15 @@ def add_to_cart(request,id):
 
 def show_cart(request):
     fs= Shoes_cart.objects.filter(user=request.user)
-    return render(request,'core/show_cart.html',{'fs':fs})
+    total = 0
+    delivery_charge = 500
+    for f in fs:
+        total += f.product.discounted_price*f.quantity
+        final_price= total+ delivery_charge
+
+    return render(request,'core/show_cart.html',{'fs':fs,'total':total,'final_price':final_price})
+
+
 
 
 def add_quantity(request,id):
@@ -115,7 +123,7 @@ def add_quantity(request,id):
         product = get_object_or_404(Shoes_cart,pk=id)
         product.quantity+=1
         product.save()
-        return redirect('viewcart')
+        return redirect('show_cart')
     else:
         return redirect('login')
 
@@ -125,11 +133,11 @@ def delete_quantity(request,id):
         if product.quantity>1:
             product.quantity-=1
             product.save()
-        return redirect('viewcart')
+        return redirect('show_cart')
     else:
         return redirect('login')
     
 def delete_cart(request,id):
-    pet_cart =Shoes_cart.objects.get(pk=id)
-    pet_cart.delete()
-    return redirect('viewcart')
+    sc =Shoes_cart.objects.get(pk=id)
+    sc.delete()
+    return redirect('show_cart')

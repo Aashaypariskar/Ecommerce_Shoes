@@ -15,6 +15,7 @@
                                 <th scope="col">Format</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Price</th>
+                                <th scope="col" class="text-end">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,8 +23,8 @@
                             <tr>
                                 <th scope="row">
                                     <div class="d-flex align-items-center">
-                                        <img src="{{ f.product.pets_image.url }}" class="img-fluid rounded-3"
-                                            style="width: 120px;" alt="Product Image">
+                                        <img src="{{ f.product.pets_image.url }}" class="img-fluid rounded-3" 
+                                             style="width: 120px;" alt="Product Image">
                                         <div class="flex-column ms-4">
                                             <p class="mb-0" style="font-weight: 500;">{{ f.product.small_description }}</p>
                                         </div>
@@ -33,21 +34,25 @@
                                     <p class="mb-0" style="font-weight: 500;">Digital</p>
                                 </td>
                                 <td class="align-middle">
-                                    <div class="d-flex flex-row">
-                                        <button class="btn btn-link px-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                            <i class="fas fa-minus"></i>
-                                        </button>
-                                        <input id="form1" min="0" name="quantity" value="{{ f.quantity }}" type="number"
-                                            class="form-control form-control-sm" style="width: 50px;" />
-                                        <button class="btn btn-link px-2"
-                                            onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                            <i class="fas fa-plus"></i>
-                                        </button>
+                                    <div class="d-flex">
+                                        <a href="{% url 'delete_quantity' f.id %}" class="btn btn-link px-2">
+                                            <i class="bi bi-dash-lg"></i>
+                                        </a>
+                                        <input id="form1" min="0" name="quantity" value="{{ f.quantity }}" readonly 
+                                               class="form-control form-control-sm text-center" 
+                                               style="width: 50px; background-color:white;" />
+                                        <a href="{% url 'add_quantity' f.id %}" class="btn btn-link px-2">
+                                            <i class="bi bi-plus-lg"></i>
+                                        </a>
                                     </div>
                                 </td>
-                                <td class="align-middle">
-                                    <p class="mb-0" style="font-weight: 500;">₹{{ f.product.discounted_price }}</p>
+                                <td class="align-middle">₹{{ f.price_and_quantity_total }}</td>
+                                <td class="align-middle text-end">
+                                    <a href="{% url 'delete_cart' f.id %}" class="text-danger">
+                                        <i class="bi bi-trash3-fill"></i>
+                                    </a>
+                                    
+                                    
                                 </td>
                             </tr>
                             {% endfor %}
@@ -66,17 +71,17 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <td><strong>Product Name</strong></td>
-                                    <td class="text-center"><strong>Price</strong></td>
-                                    <td class="text-center"><strong>Quantity</strong></td>
-                                    <td class="text-end"><strong>Total</strong></td>
+                                    <th>Product Name</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Quantity</th>
+                                    <th class="text-end">Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for item in cart_items %}
                                 <tr>
                                     <td>{{ item.product.name }}</td>
-                                    <td class="text-center">₹{{ item.product.discounted_price }}</td>
+                                    <td class="text-center">₹{{ item.discounted_price }}</td>
                                     <td class="text-center">{{ item.quantity }}</td>
                                     <td class="text-end">₹{{ item.price_and_quantity_total }}</td>
                                 </tr>
