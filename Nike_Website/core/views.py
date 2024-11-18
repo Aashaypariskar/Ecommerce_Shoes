@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from . forms import RegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,PasswordChangeForm
+from . forms import RegistrationForm,AuthenticateForm,UserProfileForm,AdminProfileForm,PasswordChangeForm,CustomerForm
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
-from . models import Shoes,Shoes_cart
+from . models import Shoes,Shoes_cart,UserDetails
 # Create your views here.
 
 
@@ -74,7 +74,7 @@ def changepassword(request):                                       # Password Ch
                 return redirect('profile')
         else:
             cpf = PasswordChangeForm(request.user)
-            return render(request,'core/changepassword.html',{'cpf':cpf})
+        return render(request,'core/changepassword.html',{'cpf':cpf})
     else:
         return redirect('login')
     
@@ -112,9 +112,19 @@ def show_cart(request):
     for f in fs:
         total += f.product.discounted_price*f.quantity
         final_price= total+ delivery_charge
-
     return render(request,'core/show_cart.html',{'fs':fs,'total':total,'final_price':final_price})
 
+# ============================== Checkout Page ==============================
+
+# def checkout(request):
+#     cart_items =Shoes_cart.objects.filter(user=request.user)
+#     total=0
+#     delhivery_charge=2000
+#     for item in cart_items:
+#         total+=(item.product.discounted_price*item.quantity)
+#         final_price =total+delhivery_charge
+#     address = CustomerDetail.objects.filter(user=request.user)
+#     return render(request,'core/checkout.html',{'total':total,'final_price':final_price,'address':address})
 
 
 
@@ -141,3 +151,31 @@ def delete_cart(request,id):
     sc =Shoes_cart.objects.get(pk=id)
     sc.delete()
     return redirect('show_cart')
+
+# ================================ Address Page =========================
+def address(request):
+    if request.method == 'POST':
+            af =CustomerForm(request.POST)
+            if af.is_valid():
+                user=request.user                # user variable store the current user i.e steveroger
+                name= af.cleaned_data['name']
+                address= af.cleaned_data['address']
+                city= af.cleaned_data['city']
+                state= af.cleaned_data['state']
+                pincode= af.cleaned_data['pincode']  
+                UserDetails(user=user,name=name,address=address,city=city,state=state,pincode=pincode).save()
+                return redirect('address')           
+    else:
+        af = CustomerForm()
+        address = UserDetails.objects.filter(user=request.user)
+    return render(request,'core/address.html',{'af':af,'address':address})
+
+def show_address(request):
+    address = UserDetails.objects.filter(user=request.user)
+    return render(request,'core/show_address.html',{'address':address})
+
+def delete_address(request,id):
+    if request.method == 'POST':
+        de = UserDetails.objects.get(pk=id)
+        de.delete()
+    return redirect('show_address')

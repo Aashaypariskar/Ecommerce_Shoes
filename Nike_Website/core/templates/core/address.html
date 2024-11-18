@@ -1,4 +1,5 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container-fluid profile">
@@ -26,9 +27,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{% url "show_cart"  %}">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    Products
+                    Cart
                     </a>
                 </li>
                 <li class="nav-item">
@@ -42,36 +43,31 @@
             </nav>
         </div>    
         <div class="col-md-8">
-            <div class="container profile-form">
-                 <div class="reg ">
-                    <h3 class="text-primary">Profile</h3>
-                </div>
-                <form action="" method="POST" novalidate>
-        {% csrf_token %}
-
-        {% if mf.non_field_errors %}
-            {% for error in mf.non_field_errors %}
-                {{error}}
-            {% endfor %}
-        {% endif %}
-
-        {% for m in mf%}
-        <div class="form-group mr-4 ml-4 ">
-            {{m.label_tag}} {{m}} {{m.errors}}
-        </div> 
-        {% endfor %}
-        <div class="text-center">
-        <input type="submit" value="Save" class="btn btn-success register-button">
-        </div>
-    </form>
-    </div>
-        <br>
-            {% if messages %}
-                {% for message in messages %}
-                    <span {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}>{{message}}</span>
-                {% endfor %}
-            {% endif %}
-
+                <div class="container">
+                    <div class="row">
+                            <div class="col-sm-5">
+                    {% comment %} <section class="h-100" style="background-color: #eee;"> {% endcomment %}
+                        <div class="container profile-form">
+                            <div class="reg ">
+                                <h3 class="text-primary">Profile</h3>
+                            </div>
+                            <form action="" method="POST" novalidate>
+                                {% csrf_token %}
+                                {% for a in af %}
+                                <div class="form-group mr-4 ml-4 ">
+                                    {{a.label_tag}} {{a}} {{a.errors}}
+                                </div>
+                                {% endfor %}
+                                <div class="text-center">
+                                    <input type="submit" value="Save" class="btn btn-success register-button">
+                                    <!-- New Show Address Button -->
+                                    <a href="{% url "show_address" %}" class="btn btn-primary btn-sm mt-2">Show Address</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                      
+                </div>        
             </div>
         </div>
       </div>

@@ -12,7 +12,6 @@ urlpatterns = [
     path('card_info/<int:id>',views.card_info,name='card_info'),
     path('add_to_cart/<int:id>',views.add_to_cart,name='add_to_cart'),
     path('show_cart/',views.show_cart,name='show_cart'),
-
     path('login/',views.log_in,name='login'),
     path('profile/',views.profile,name='profile'),
     path('logout/',views.log_out, name="logout"),
@@ -20,6 +19,12 @@ urlpatterns = [
     path('add_quantity/<int:id>',views.add_quantity, name="add_quantity"),
     path('delete_quantity/<int:id>',views.delete_quantity, name="delete_quantity"),
     path('delete_cart/<int:id>',views.delete_cart, name="delete_cart"),
+    path('address/',views.address,name='address'),
+    path('delete_address/<int:id>',views.delete_address,name='deleteaddress'),
+    path('show_address/',views.show_address,name='show_address'),
+
+    # path('checkout/<int:id>',views.checkout, name="checkout"),
+
        
 ]
 

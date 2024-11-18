@@ -1,6 +1,62 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
+class UserDetails(models.Model):
+    STATE_CHOICES = [
+        ('AP', 'Andhra Pradesh'),
+        ('AR', 'Arunachal Pradesh'),
+        ('AS', 'Assam'),
+        ('BR', 'Bihar'),
+        ('CT', 'Chhattisgarh'),
+        ('GA', 'Goa'),
+        ('GJ', 'Gujarat'),
+        ('HR', 'Haryana'),
+        ('HP', 'Himachal Pradesh'),
+        ('JH', 'Jharkhand'),
+        ('KA', 'Karnataka'),
+        ('KL', 'Kerala'),
+        ('MP', 'Madhya Pradesh'),
+        ('MH', 'Maharashtra'),
+        ('MN', 'Manipur'),
+        ('ML', 'Meghalaya'),
+        ('MZ', 'Mizoram'),
+        ('NL', 'Nagaland'),
+        ('OR', 'Odisha'),
+        ('PB', 'Punjab'),
+        ('RJ', 'Rajasthan'),
+        ('SK', 'Sikkim'),
+        ('TN', 'Tamil Nadu'),
+        ('TG', 'Telangana'),
+        ('TR', 'Tripura'),
+        ('UP', 'Uttar Pradesh'),
+        ('UK', 'Uttarakhand'),
+        ('WB', 'West Bengal'),
+        ('AN', 'Andaman and Nicobar Islands'),
+        ('CH', 'Chandigarh'),
+        ('DN', 'Dadra and Nagar Haveli and Daman and Diu'),
+        ('DL', 'Delhi'),
+        ('JK', 'Jammu and Kashmir'),
+        ('LA', 'Ladakh'),
+        ('LD', 'Lakshadweep'),
+        ('PY', 'Puducherry'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # we have created Many-to-one relationship i.e multiple address can be done by one user
+    name = models.CharField(max_length=100)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=2, choices=STATE_CHOICES)
+    pincode = models.IntegerField(
+        default=0,
+        blank=True,
+        null=True,
+    )
+    
+    def __str__(self):
+        return str(self.id)
+
 class Shoes(models.Model):
     
     CATEGORY_CHOICES = [
@@ -26,8 +82,6 @@ class Shoes_cart(models.Model):
     
     @property
     def price_and_quantity_total(self):
-        
-
         return self.product.discounted_price*self.quantity
 
     
