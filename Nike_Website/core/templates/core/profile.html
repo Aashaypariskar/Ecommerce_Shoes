@@ -1,80 +1,188 @@
 {% extends "core/base.html" %}
 
 {% block content %}
-<div class="container-fluid profile">
-      <div class="row">
-        <div class="col-md-2 d-none d-md-block sidebar" >
-            <nav >
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{% url "profile" %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    Dashboard <span class="sr-only">(current)</span>
+<style>
+    /* General Styling */
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    /* Sidebar Styling */
+    .bg-dark {
+        background: linear-gradient(180deg, #222831, #1d2124);
+    }
+    .nav-link {
+        color: #ccc;
+        font-weight: 500;
+    }
+    .nav-link:hover, .nav-link.active {
+        background-color: #343a40;
+        color: #fff;
+        border-radius: 5px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Card Styling */
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    .card-header {
+        background: linear-gradient(90deg, #007bff, #0056d2);
+        color: white;
+        font-weight: bold;
+    }
+    .card-body {
+        background-color: #ffffff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form Field Styling */
+    .form-control {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .form-control:focus {
+        border-color: #007bff;
+        box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Icon Container */
+    .icon-container {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #eef2f5;
+    }
+    .icon-container i {
+        font-size: 1.5rem;
+        color: #007bff;
+    }
+
+    /* Button Styling */
+    .btn-gradient-primary {
+        background: linear-gradient(90deg, #0056d2, #007bff);
+        border: none;
+        color: white;
+        padding: 0.6rem 2rem;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+    .btn-gradient-primary:hover {
+        background: linear-gradient(90deg, #007bff, #0056d2);
+        transform: translateY(-2px);
+        box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Flash Message Styling */
+    .alert {
+        border-radius: 10px;
+        font-weight: 500;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>
+</head>
+<body>
+
+<div class="container-fluid profile py-5">
+<div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3 col-lg-2 d-none d-md-block bg-dark text-white vh-100 sticky-top shadow-sm">
+        <nav class="pt-5">
+            <div class="text-center mb-4">
+                <h5 class="text-uppercase fw-bold text-light">Menu</h5>
+            </div>
+            <ul class="nav flex-column px-3">
+                <li class="nav-item mb-3">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}" href="{% url 'profile' %}">
+                        <i class="bi bi-person-circle me-2"></i> Dashboard
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{% url "changepassword" %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    Change Password <span class="sr-only">(current)</span>
+                <li class="nav-item mb-3">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'changepassword' %}active{% endif %}" href="{% url 'changepassword' %}">
+                        <i class="bi bi-shield-lock-fill me-2"></i> Change Password
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link " href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                    Orders
-                    </a>
-                </li>
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                     <a class="nav-link" href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    Products
+                        <i class="bi bi-file-earmark-text me-2"></i> Orders
+                    </a>
+                </li>
+                <li class="nav-item mb-3">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-bag-fill me-2"></i> Products
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url "address" %}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                    Address
+                    <a class="nav-link {% if request.resolver_match.url_name == 'address' %}active{% endif %}" href="{% url 'address' %}">
+                        <i class="bi bi-geo-alt-fill me-2"></i> Address
                     </a>
                 </li>
-                </ul>            
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="col-md-9 col-lg-10 mx-auto py-4">
+        <div class="card border-0 shadow-lg">
+            <div class="card-header text-center py-4">
+                <h3 class="mb-0 fw-bold">Profile</h3>
             </div>
-            </nav>
-        </div>    
-        <div class="col-md-8">
-            <div class="container profile-form">
-                 <div class="reg ">
-                    <h3 class="text-primary">Profile</h3>
-                </div>
+            <div class="card-body px-5 py-4">
                 <form action="" method="POST" novalidate>
-        {% csrf_token %}
+                    {% csrf_token %}
 
-        {% if mf.non_field_errors %}
-            {% for error in mf.non_field_errors %}
-                {{error}}
-            {% endfor %}
-        {% endif %}
+                    <!-- Non-Field Errors -->
+                    {% if mf.non_field_errors %}
+                        {% for error in mf.non_field_errors %}
+                            <div class="alert alert-danger">{{ error }}</div>
+                        {% endfor %}
+                    {% endif %}
 
-        {% for m in mf%}
-        <div class="form-group mr-4 ml-4 ">
-            {{m.label_tag}} {{m}} {{m.errors}}
-        </div> 
-        {% endfor %}
-        <div class="text-center">
-        <input type="submit" value="Save" class="btn btn-success register-button">
-        </div>
-    </form>
-    </div>
-        <br>
-            {% if messages %}
-                {% for message in messages %}
-                    <span {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}>{{message}}</span>
-                {% endfor %}
-            {% endif %}
+                    <!-- Form Fields -->
+                    {% for m in mf %}
+                        <div class="form-group mb-4 d-flex align-items-center">
+                            <div class="icon-container me-3">
+                                <i class="bi bi-{{ m.widget.attrs.icon_class }}"></i>
+                            </div>
+                            <div class="w-100">
+                                <label for="{{ m.id_for_label }}" class="form-label text-dark fw-bold">{{ m.label }}</label>
+                                {{ m }}
+                                {% for error in m.errors %}
+                                    <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
 
+                    <!-- Submit Button -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-gradient-primary">
+                            <i class="bi bi-save me-2"></i> Save
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Flash Messages -->
+                {% if messages %}
+                    <div class="mt-4">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
-      </div>
     </div>
-
+</div>
+</div>
 {% endblock content %}
