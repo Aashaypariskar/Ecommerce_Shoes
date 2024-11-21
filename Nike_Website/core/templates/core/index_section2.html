@@ -18,25 +18,37 @@
     max-width: 1200px;
   }
 
-  /* Left Section (Video) */
+  /* Left Section (Video with Overlapping Text) */
   .custom-left-section {
     flex: 1.5;
+    position: relative; /* Make the section relative for positioning text */
     background-color: #f1f3f4;
-    padding: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .custom-video-container {
     width: 100%;
     height: auto;
-    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
+
+  .custom-text-overlay {
+  position: absolute;
+  bottom: 20px; /* Positioned slightly above the bottom */
+  left: 20px; /* Positioned slightly inward from the left edge */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  border-radius: 8px;
+}
+
 
   /* Right Section (Product Cards) */
   .custom-right-section {
@@ -49,7 +61,6 @@
   /* Product Card */
   .custom-card {
     background-color: #fff;
-    border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -67,7 +78,6 @@
     width: 100%;
     height: 220px;
     object-fit: cover;
-    border-radius: 8px;
   }
 
   .custom-card-body {
@@ -112,7 +122,6 @@
     color: white;
     border: none;
     padding: 12px 0;
-    border-radius: 8px;
     font-size: 1rem;
     cursor: pointer;
     text-transform: uppercase;
@@ -123,15 +132,6 @@
 
   .custom-card-button:hover {
     background-color: #2ecc71;
-  }
-
-  /* Price tag animation */
-  .custom-card-price::after {
-    font-size: 0.9rem;
-    color: #f39c12;
-    margin-left: 10px;
-    text-transform: uppercase;
-    font-weight: bold;
   }
 
   /* Responsive Adjustments */
@@ -147,19 +147,21 @@
 </style>
 
 <div class="custom-container">
-  <!-- Left Section (Video) -->
+  <!-- Left Section (Video with Overlapping Text) -->
   <div class="custom-left-section">
-    <a href=""> 
-    <video class="custom-video-container" autoplay muted loop controls>
-      <source src="{% static 'core/images/f5d1b78ba8977a0d20b4d6a972d18397.mp4' %}" type="video/mp4">
-    </video> Trending</a>
-  </div>
+    <a href="{% url "trending" %}">
+    <video class="custom-video-container" autoplay muted loop>
+      <source src="{% static "core/images/f5d1b78ba8977a0d20b4d6a972d18397.mp4" %}" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>    
+    <div class="custom-text-overlay">Trending</div></a>
+  </div>  
 
   <!-- Right Section (Product Cards) -->
   <div class="custom-right-section">
     <!-- Product Card 1 -->
     <div class="custom-card">
-      <img src="{% static 'core/images/Air-Max trending.webp' %}" alt="Product Image">
+      <img src="{% static 'core/images/VAPOR+16+CLUB+FG_MG.png' %}" alt="Product Image">
       <div class="custom-card-body">
         <h3 class="custom-card-title">Adidas Samba OG - White/Blue</h3>
         <div class="custom-card-price">
@@ -171,9 +173,9 @@
 
     <!-- Product Card 2 -->
     <div class="custom-card">
-      <img src="{% static 'core/images/jordan-spikz-low.webp' %}" alt="Product Image">
+      <img src="{% static 'core/images/VAPOR+16+CLUB+FG_MG.png' %}" alt="Product Image">
       <div class="custom-card-body">
-        <h3 class="custom-card-title">Jordan Spikz Low</h3>
+        <h3 class="custom-card-title">Adidas Samba OG - Green</h3>
         <div class="custom-card-price">
           ₹10,999.00
         </div>
@@ -183,9 +185,9 @@
 
     <!-- Product Card 3 -->
     <div class="custom-card">
-      <img src="{% static 'core/images/W+NIKE+ZOOM+VOMERO+ROAM.png' %}" alt="Product Image">
+      <img src="{% static 'core/images/NIKE+AIR+MAX+ISHOD.png' %}" alt="Product Image">
       <div class="custom-card-body">
-        <h3 class="custom-card-title">Air Jordan 14 Retro Black</h3>
+        <h3 class="custom-card-title">Adidas Samba OG - Black/White</h3>
         <div class="custom-card-price">
           ₹10,999.00
         </div>
@@ -195,9 +197,9 @@
 
     <!-- Product Card 4 -->
     <div class="custom-card">
-      <img src="{% static 'core/images/Air-jordan7.webp' %}" alt="Product Image">
+      <img src="{% static 'core/images/NIKE+AIR+MAX+1+%2786+OG.jpeg' %}" alt="Product Image">
       <div class="custom-card-body">
-        <h3 class="custom-card-title">Air Jordan retro 7 </h3>
+        <h3 class="custom-card-title">Adidas Samba OG - Black</h3>
         <div class="custom-card-price">
           ₹10,999.00
         </div>

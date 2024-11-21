@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Shoes,Shoes_cart,UserDetails
+from . models import Shoes,Shoes_cart,UserDetails,Order
 
 @admin.register(Shoes)
 class ShoesAdmin(admin.ModelAdmin):
@@ -13,3 +13,8 @@ class CartAdmin(admin.ModelAdmin):
 @admin.register(UserDetails)
 class CustomerAdmin(admin.ModelAdmin):
     list_display= ['id','user','name','address','city','state','pincode']
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display= ['id','user','customer','pet','quantity','order_at','status',]

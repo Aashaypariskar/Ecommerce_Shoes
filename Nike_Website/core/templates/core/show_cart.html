@@ -51,8 +51,6 @@
                                     <a href="{% url 'delete_cart' f.id %}" class="text-danger">
                                         <i class="bi bi-trash3-fill"></i>
                                     </a>
-                                    
-                                    
                                 </td>
                             </tr>
                             {% endfor %}
@@ -60,7 +58,16 @@
                     </table>
                 </div>
             </div>
-
-           
+            
+            <!-- Checkout Button -->
+            <div class="col-lg-4">
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">
+                        Proceed to Checkout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 {% endblock content %}
