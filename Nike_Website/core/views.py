@@ -10,7 +10,24 @@ def index(request):
     return render(request, 'core/index.html')
 # =======================================================================================
 
+#===============For Paypal =========================
+from paypal.standard.forms import PayPalPaymentsForm
+from django.conf import settings
+import uuid
+from django.urls import reverse
+#=========================================================
 
+
+#================ Forgot Password ======================
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.shortcuts import render, redirect
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.http import HttpResponse
+#=========================================================
 
 def registration(request):
     if request.method == 'POST':
@@ -122,15 +139,15 @@ def show_cart(request):
 
 # ============================== Checkout Page ==============================
 
-# def checkout(request):
-#     cart_items =Shoes_cart.objects.filter(user=request.user)
-#     total=0
-#     delhivery_charge=2000
-#     for item in cart_items:
-#         total+=(item.product.discounted_price*item.quantity)
-#         final_price =total+delhivery_charge
-#     address = CustomerDetail.objects.filter(user=request.user)
-#     return render(request,'core/checkout.html',{'total':total,'final_price':final_price,'address':address})
+def checkout(request):
+    cart_items =Shoes_cart.objects.filter(user=request.user)
+    total=0
+    delhivery_charge=2000
+    for item in cart_items:
+        total+=(item.product.discounted_price*item.quantity)
+        final_price =total+delhivery_charge
+    address = UserDetails.objects.filter(user=request.user)
+    return render(request,'core/checkout.html',{'total':total,'final_price':final_price,'address':address})
 
 
 
@@ -198,7 +215,7 @@ def checkout(request):
     for item in cart_items:
         item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
         total += item.product.price_and_quantity_total
-    final_price= delhivery_charge + total
+        final_price= delhivery_charge + total
     
     address = UserDetails.objects.filter(user=request.user)
 
@@ -215,7 +232,7 @@ def payment(request):
     for item in cart_items:
         item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
         total += item.product.price_and_quantity_total
-    final_price= delhivery_charge + total
+        final_price= delhivery_charge + total
     
     address = UserDetails.objects.filter(user=request.user)
 
@@ -231,7 +248,7 @@ def payment(request):
         'invoice': uuid.uuid4(),  #A unique identifier for the invoice. It uses uuid.uuid4() to generate a random UUID.
         'currency_code': 'USD',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",         #The URL where PayPal will send Instant Payment Notifications (IPN) to notify the merchant about payment-related events
-        'return_url': f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",     #The URL where the customer will be redirected after a successful payment. 
+        'return_url': f"http://{host}{reverse('paymentsuccess')}",     #The URL where the customer will be redirected after a successful payment. 
         'cancel_url': f"http://{host}{reverse('paymentfailed')}",      #The URL where the customer will be redirected if they choose to cancel the payment. 
     }
 
@@ -257,3 +274,49 @@ def payment_success(request,selected_address_id):
 def payment_failed(request):
     return render(request,'core/payment_failed.html')
 
+#================================== Forget Password ====================================================
+
+def forgot_password(request):          
+    if request.method == 'POST':
+        email = request.POST['email']
+        user = User.objects.filter().first()
+        if user:
+            token = default_token_generator.make_token(user)
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+            reset_url = request.build_absolute_uri(f'/reset_password/{uidb64}/{token}/')           
+            send_mail(
+                'Password Reset',
+                f'Click the following link to reset your password: {reset_url}',
+                'fordjangopproject@gmail.com',  # Use a verified email address
+                [email],
+                fail_silently=False,
+            )
+            return redirect('passwordresetdone')
+        else:
+            messages.success(request,'please enter valid email address')
+    return render(request, 'core/forgot_password.html')
+                                         
+    # return render(request,'core/forgot_password.html',)
+
+def reset_password(request, uidb64, token):
+    if request.method == 'POST':
+        password = request.POST['password']
+        password2 = request.POST['password2']
+        if password == password2:
+            try:
+                uid = force_str(urlsafe_base64_decode(uidb64))
+                user = User.objects.get(pk=uid)
+                if default_token_generator.check_token(user, token):
+                    user.set_password(password)
+                    user.save()
+                    return redirect('passwordresetdone')
+                else:
+                    return HttpResponse('Token is invalid', status=400)
+            except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+                return HttpResponse('Invalid link', status=400)
+        else:
+            return HttpResponse('Passwords do not match', status=400)
+    return render(request, 'core/reset_password.html')
+
+def password_reset_done(request):
+    return render(request, 'core/password_reset_done.html')

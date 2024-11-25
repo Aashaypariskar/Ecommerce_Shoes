@@ -23,12 +23,14 @@ urlpatterns = [
     path('address/',views.address,name='address'),
     path('delete_address/<int:id>',views.delete_address,name='deleteaddress'),
     path('show_address/',views.show_address,name='show_address'),
-    # path('payment_success/<int:selected_address_id>',views.payment_success,name='paymentsuccess'),
-    # path('payment_failed/',views.payment_failed,name='paymentfailed'),
-    # path('payment/',views.payment,name='payment'),
+    path('payment_success',views.payment_success,name='paymentsuccess'),
+    path('payment_failed/',views.payment_failed,name='paymentfailed'),
+    path('payment/',views.payment,name='payment'),
     # path('order/',views.order,name='order'),
-
-    # path('checkout/<int:id>',views.checkout, name="checkout"),
+    path('checkout',views.checkout, name="checkout"),
+    path('forgotpassword/',views.forgot_password, name="forgotpassword"),
+    path('reset_password/<uidb64>/<token>/', views.reset_password, name='resetpassword'),
+    path('password_reset_done/', views.password_reset_done, name='passwordresetdone'),
 
        
 ]

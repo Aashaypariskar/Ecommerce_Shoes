@@ -1,6 +1,8 @@
 {% extends "core/base.html" %}
 {% load static %}
  
+
+{% block content %}
  <!-- Order Summary Section -->
  <div class="col-lg-4">
     <div class="card">
@@ -40,9 +42,11 @@
                     </tr>
                 </tbody>
             </table>
-            <button type="button" class="btn btn-success btn-block btn-lg mt-3">Proceed to Pay</button>
+            <a href="{% url "payment" %}">hyjuj
+            <button type="button" class="btn btn-success btn-block btn-lg mt-3">Proceed to Pay</button></a>
         </div>
     </div>
 </div>
 </div>
 </div>
+{% endblock content %}

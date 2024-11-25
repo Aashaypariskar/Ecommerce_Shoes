@@ -114,6 +114,15 @@ USE_I18N = True
 USE_TZ = True
 
 
+#========================== Email Settings =================================
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp-relay.brevo.com'  # Brevo's SMTP server
+EMAIL_PORT = 587  # SMTP port for TLS
+EMAIL_USE_TLS = True  # Use TLS for secure connection
+EMAIL_HOST_USER = '80290d002@smtp-brevo.com'  # This is the Brevo SMTP login email
+EMAIL_HOST_PASSWORD = 'nUxLdA1b9CkMwTFD'  # Brevo SMTP password
+DEFAULT_FROM_EMAIL = 'fordjangopproject@gmail.com'  # Your Gmail address (or a verified Brevo email address)    
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
@@ -122,7 +131,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media'
 
 
-PAYPAL_RECEIVER_EMAIL = 'sb-pbeov29792521@business.example.com' # where cash is paid into i.e Merchant receiver mail
+PAYPAL_RECEIVER_EMAIL = 'sb-aashaypariskar@business.example.com' # where cash is paid into i.e Merchant receiver mail
 PAYPAL_TEST = True
 
 # Default primary key field type
