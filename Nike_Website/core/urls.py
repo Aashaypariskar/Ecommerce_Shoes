@@ -26,11 +26,11 @@ urlpatterns = [
     path('payment_success',views.payment_success,name='paymentsuccess'),
     path('payment_failed/',views.payment_failed,name='paymentfailed'),
     path('payment/',views.payment,name='payment'),
-    # path('order/',views.order,name='order'),
     path('checkout',views.checkout, name="checkout"),
     path('forgotpassword/',views.forgot_password, name="forgotpassword"),
     path('reset_password/<uidb64>/<token>/', views.reset_password, name='resetpassword'),
     path('password_reset_done/', views.password_reset_done, name='passwordresetdone'),
+    path('Order/',views.Order,name='Order'),
 
        
 ]

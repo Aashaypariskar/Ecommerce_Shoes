@@ -111,6 +111,7 @@ def running_shoes(request):
 
 def card_info(request,id):
     fs = Shoes.objects.get(pk=id)
+    print(fs)
     return render(request,'core/card_info.html',{'fs':fs})
 
 
