@@ -229,9 +229,8 @@ def payment(request):
     for item in cart_items:
         item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
         total += item.product.price_and_quantity_total
-        final_price= delhivery_charge + total
-    
-    address = UserDetails.objects.filter(user=request.user)
+    final_price= delhivery_charge + total
+
 
 
  #============== Paypal Code =====================
@@ -245,7 +244,7 @@ def payment(request):
         'invoice': uuid.uuid4(),  #A unique identifier for the invoice. It uses uuid.uuid4() to generate a random UUID.
         'currency_code': 'USD',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",         #The URL where PayPal will send Instant Payment Notifications (IPN) to notify the merchant about payment-related events
-        'return_url': f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",     #The URL where the customer will be redirected after a successful payment. 
+        'return_url': f"http://{host}{reverse('paymentsuccess')}",     #The URL where the customer will be redirected after a successful payment. 
         'cancel_url': f"http://{host}{reverse('paymentfailed')}",      #The URL where the customer will be redirected if they choose to cancel the payment. 
     }
 

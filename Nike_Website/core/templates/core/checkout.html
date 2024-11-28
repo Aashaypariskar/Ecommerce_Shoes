@@ -57,24 +57,24 @@
                 <form action="{% url "payment" %}" method="POST">
                         {% csrf_token %}
                         {% for add in address %}
-                        <label >
-                            <div class="card flex-md-row mb-4 box-shadow h-md-250 mt-4 ml-4">
-                                <div class="card-body d-flex flex-column align-items-start">
-                                    <h3 class="mb-0">
-                                        <input type="radio" name="selected_address" value="{{ add.id }}" checked>
-                                    Name: {{add.name}}
-                                </h3>
-                                <p class="card-text mb-auto">Address:{{add.address}} </p>
-                                <p class="card-text mb-auto">City:{{add.city}} </p>
-                                <p class="card-text mb-auto">State: {{add.state}} </p>
-                                <p class="card-text mb-auto">Pincode:{{add.pincode}} </p>
-                                
-                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                            <label >
+                                <div class="card flex-md-row mb-4 box-shadow h-md-250 mt-4 ml-4">
+                                    <div class="card-body d-flex flex-column align-items-start">
+                                        <h3 class="mb-0">
+                                            <input type="radio" name="selected_address" value="{{ add.id }}" checked>
+                                        Name: {{add.name}}
+                                    </h3>
+                                    <p class="card-text mb-auto">Address:{{add.address}} </p>
+                                    <p class="card-text mb-auto">City:{{add.city}} </p>
+                                    <p class="card-text mb-auto">State: {{add.state}} </p>
+                                    <p class="card-text mb-auto">Pincode:{{add.pincode}} </p>
                                     
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                        
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </label>
+                            </label>
                         {% endfor %}
                         <input type="submit" class="btn btn-primary btn-sm mt-2" value="Proceed to Payment">
                     </form>   
