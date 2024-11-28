@@ -131,12 +131,8 @@ def add_to_cart(request,id):
 
 def show_cart(request):
     fs= Shoes_cart.objects.filter(user=request.user)
-    total = 0
-    delivery_charge = 500
-    for f in fs:
-        total += f.product.discounted_price*f.quantity
-        final_price= total+ delivery_charge
-    return render(request,'core/show_cart.html',{'fs':fs,'total':total,'final_price':final_price})
+        
+    return render(request,'core/show_cart.html',{'fs':fs})
 
 # ============================== Checkout Page ==============================
 
@@ -249,7 +245,7 @@ def payment(request):
         'invoice': uuid.uuid4(),  #A unique identifier for the invoice. It uses uuid.uuid4() to generate a random UUID.
         'currency_code': 'USD',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",         #The URL where PayPal will send Instant Payment Notifications (IPN) to notify the merchant about payment-related events
-        'return_url': f"http://{host}{reverse('paymentsuccess')}",     #The URL where the customer will be redirected after a successful payment. 
+        'return_url': f"http://{host}{reverse('paymentsuccess',args=[selected_address_id])}",     #The URL where the customer will be redirected after a successful payment. 
         'cancel_url': f"http://{host}{reverse('paymentfailed')}",      #The URL where the customer will be redirected if they choose to cancel the payment. 
     }
 
