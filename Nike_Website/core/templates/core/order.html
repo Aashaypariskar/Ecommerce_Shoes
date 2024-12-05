@@ -1,0 +1,92 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<style>
+    .card-stepper {
+        z-index: 0;
+    }
+
+    #progressbar-2 {
+        color: #455A64;
+    }
+
+    #progressbar-2 li {
+        list-style-type: none;
+        font-size: 13px;
+        width: 25%;
+        float: left;
+        position: relative;
+        text-align: center;
+    }
+
+    #progressbar-2 li:before {
+        content: '\f111'; /* Default icon */
+        font-family: "Font Awesome 5 Free";
+        color: #fff;
+        width: 37px;
+        line-height: 37px;
+        display: block;
+        font-size: 12px;
+        background: #c5cae9;
+        border-radius: 50%;
+        margin: auto;
+    }
+
+    #progressbar-2 li:after {
+        content: '';
+        width: 100%;
+        height: 10px;
+        background: #c5cae9;
+        position: absolute;
+        top: 15px;
+        left: 0;
+        z-index: -1;
+    }
+
+    #progressbar-2 li:first-child:after {
+        left: 50%;
+    }
+
+    #progressbar-2 li:last-child:after {
+        width: 50%;
+    }
+
+    #progressbar-2 li.active:before,
+    #progressbar-2 li.active:after {
+        background: #6520ff;
+    }
+</style>
+
+<section class="vh-100" style="background-color: #8c9eff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                {% for o in ord %}
+                <div class="card card-stepper mb-4" style="border-radius: 16px;">
+                    <div class="card-body p-5">
+                        <div class="d-flex justify-content-between align-items-center mb-5">
+                            <div>
+                                <h5 class="mb-0">INVOICE <span class="text-primary font-weight-bold">#Y34XDHR</span></h5>
+                            </div>
+                            <div class="text-end">
+                                <p class="mb-0">Expected Arrival: <span>01/12/19</span></p>
+                                <p class="mb-0">USPS: <span class="font-weight-bold">234094567242423422898</span></p>
+                            </div>
+                        </div>
+
+                        <ul id="progressbar-2" class="d-flex justify-content-between mx-0 px-0">
+                            <li class="step0 {% if o.status in 'PENDING PROCESSING SHIPPED COMPLETED' %}active{% endif %}">Pending</li>
+                            <li class="step0 {% if o.status in 'PROCESSING SHIPPED COMPLETED' %}active{% endif %}">Processing</li>
+                            <li class="step0 {% if o.status in 'SHIPPED COMPLETED' %}active{% endif %}">Shipped</li>
+                            <li class="step0 {% if o.status == 'COMPLETED' %}active{% endif %}">Completed</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

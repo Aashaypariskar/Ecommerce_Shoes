@@ -244,7 +244,7 @@ def payment(request):
         'invoice': uuid.uuid4(),  #A unique identifier for the invoice. It uses uuid.uuid4() to generate a random UUID.
         'currency_code': 'USD',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",         #The URL where PayPal will send Instant Payment Notifications (IPN) to notify the merchant about payment-related events
-        'return_url': f"http://{host}{reverse('paymentsuccess')}",     #The URL where the customer will be redirected after a successful payment. 
+        'return_url': f"http://{host}{reverse('paymentsuccess' ,args=[selected_address_id])}",     #The URL where the customer will be redirected after a successful payment. 
         'cancel_url': f"http://{host}{reverse('paymentfailed')}",      #The URL where the customer will be redirected if they choose to cancel the payment. 
     }
 
@@ -252,7 +252,7 @@ def payment(request):
 
  #=============== Paypal Code  End =====================
 
-    return render(request,'core/payment.html',{'paypal':paypal_payment})
+    return render(request,'core/payment.html',{'paypal':paypal_payment}) 
 
 # ==================== Payment Success Page =====================================
 def payment_success(request,selected_address_id):
@@ -269,6 +269,15 @@ def payment_success(request,selected_address_id):
 
 def payment_failed(request):
     return render(request,'core/payment_failed.html')
+
+
+
+# ========================= Order Page ==================================
+
+def order(request):
+    ord= Order.objects.filter(user=request.user)
+    return render(request,'core/order.html',{'ord':ord})
+
 
 #================================== Forget Password ====================================================
 

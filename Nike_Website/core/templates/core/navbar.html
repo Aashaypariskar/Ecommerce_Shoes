@@ -33,7 +33,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             {% if request.user.is_authenticated %}
                                 <li><a class="dropdown-item" href="{% url "profile" %}">My profile</a></li>
-                                <li><a class="dropdown-item" href="">Orders</a></li>
+                                <li><a class="dropdown-item" href="{% url "order" %}">Orders</a></li>
                                 <li><a class="dropdown-item" href="#">Wishlist</a></li>
                                 <li><a class="dropdown-item" href="{% url "logout" %}">Logout</a></li>
                             {% else %}

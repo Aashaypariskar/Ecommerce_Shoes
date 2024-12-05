@@ -30,7 +30,7 @@ urlpatterns = [
     path('forgotpassword/',views.forgot_password, name="forgotpassword"),
     path('reset_password/<uidb64>/<token>/', views.reset_password, name='resetpassword'),
     path('password_reset_done/', views.password_reset_done, name='passwordresetdone'),
-    path('Order/',views.Order,name='Order'),
+    path('order/',views.order,name='order'),
 
        
 ]
