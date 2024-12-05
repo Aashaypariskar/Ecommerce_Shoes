@@ -1,18 +1,18 @@
 {% load static %}
 <div class="row">
     <div class="col-md-12">
-        <nav class="navbar navbar-expand-lg navbar-light bg-transparent" style="z-index: 10;">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm">
             <div class="container-fluid">
                 <!-- Logo -->
-                <a class="navbar-brand" href="{% url "index" %}">
-                    <img src="{% static "core/images/Nike logo.png" %}" alt="Nike Logo" style="height: 48px; width: 100px;">
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'core/images/Nike logo.png' %}" alt="Nike Logo" style="height: 50px; width: 100px; object-fit: contain;">
                 </a>
 
                 <!-- Centered Search Bar -->
                 <div class="d-flex justify-content-center flex-grow-1">
-                    <form class="d-flex" style="width: 50%;">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" style="border-radius: 20px; color: black;">
-                        <button class="btn btn-outline" type="submit" style="border: none; font-size: 1.2rem; background-color: transparent; color: black;">
+                    <form class="d-flex w-50">
+                        <input class="form-control me-2 rounded-pill shadow-sm" type="search" placeholder="Search for products" aria-label="Search" style="font-size: 1.1rem; padding: 0.5rem 1.25rem; border: 1px solid #ccc;">
+                        <button class="btn btn-outline-dark rounded-pill shadow-sm" type="submit" style="border: none; font-size: 1.2rem; background-color: transparent;">
                             <i class="fas fa-search"></i>
                         </button>
                     </form>
@@ -28,41 +28,45 @@
                         <!-- User Dropdown -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-user" style="font-size: 1.3rem; color: black;"></i>
+                                <i class="fas fa-user" style="font-size: 1.5rem; color: black;"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% if request.user.is_authenticated %}
-                                <li><a class="dropdown-item" href="{% url "profile" %}">My profile</a></li>
-                                <li><a class="dropdown-item" href="{% url "order" %}">Orders</a></li>
-                                <li><a class="dropdown-item" href="#">Wishlist</a></li>
-                                <li><a class="dropdown-item" href="{% url "logout" %}">Logout</a></li>
-                            {% else %}
-                                <li><a class="dropdown-item" href="{% url "registration" %}">register</a></li>
-                                <li><a class="dropdown-item" href="{% url "login" %}">Login</a></li>
-                            {% endif %}
+                                {% if request.user.is_authenticated %}
+                                    <li><a class="dropdown-item" href="{% url 'profile' %}">My profile</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'order' %}">Orders</a></li>
+                                    <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                {% else %}
+                                    <li><a class="dropdown-item" href="{% url 'registration' %}">Register</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                                {% endif %}
                             </ul>
                         </li>
 
                         <!-- Categories Dropdown -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-list" style="font-size: 1.2rem; color: black;"></i>
+                                <i class="fas fa-list" style="font-size: 1.5rem; color: black;"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="sneakers.html">Sneakers</a></li>
                                 <li><a class="dropdown-item" href="running_shoes.html">Running Shoes</a></li>
-                                <li><a class="dropdown-item" href="{% url "football_shoes" %}">Football Shoes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'football_shoes' %}">Football Shoes</a></li>
                             </ul>
                         </li>
 
                         <!-- Wishlist Icon -->
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i class="fas fa-heart" style="font-size: 1.3rem; color: black;"></i></a>
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-heart" style="font-size: 1.5rem; color: black;"></i>
+                            </a>
                         </li>
 
                         <!-- Cart Icon -->
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url "show_cart" %}"><i class="fas fa-shopping-cart" style="font-size: 1.2rem; color: black;"></i></a>
+                            <a class="nav-link" href="{% url 'show_cart' %}">
+                                <i class="fas fa-shopping-cart" style="font-size: 1.5rem; color: black;"></i>
+                            </a>
                         </li>
                     </ul>
                 </div>
