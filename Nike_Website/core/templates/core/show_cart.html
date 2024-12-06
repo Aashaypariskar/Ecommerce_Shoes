@@ -2,72 +2,330 @@
 {% load static %}
 
 {% block content %}
-<section class="h-100 h-custom">
-    <div class="container h-100 py-5">
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    .cart-page {
+        padding: 40px 0;
+    }
+
+    .cart-page h2 {
+        font-size: 26px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #222;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+
+    /* Cart Items Section */
+    .cart-items .cart-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .cart-items .cart-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .cart-items img {
+        border-radius: 10px;
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .cart-items .product-details {
+        margin-left: 15px;
+    }
+
+    .cart-items .product-details p {
+        margin: 0;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    .cart-items .product-details small {
+        color: #777;
+        font-size: 13px;
+    }
+
+    .cart-items .price-info {
+        text-align: center;
+    }
+
+    .cart-items .price-info p {
+        margin: 0;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .cart-items .price-info .text-decoration-line-through {
+        font-size: 13px;
+        color: #bbb;
+    }
+
+    .cart-items .quantity-control {
+        display: flex;
+        align-items: center;
+    }
+
+    .cart-items .quantity-control a {
+        font-size: 20px;
+        color: #555;
+        transition: color 0.3s ease;
+    }
+
+    .cart-items .quantity-control a:hover {
+        color: #000;
+    }
+
+    .cart-items .quantity-control input {
+        width: 50px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-weight: 600;
+        margin: 0 8px;
+    }
+
+    .cart-items .remove-item {
+        color: #e63946;
+        font-size: 20px;
+        transition: transform 0.3s, color 0.3s;
+    }
+
+    .cart-items .remove-item:hover {
+        color: #c0392b;
+        transform: scale(1.2);
+    }
+
+    /* Coupon Section */
+    .coupon-section {
+        margin-top: 30px;
+        display: flex;
+    }
+
+    .coupon-section input {
+        flex: 1;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .coupon-section button {
+        padding: 10px 20px;
+        border: none;
+        background-color: #333;
+        color: #fff;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .coupon-section button:hover {
+        background-color: #555;
+    }
+
+    
+       /* Order Summary Section Styles */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .card-header {
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        text-align: left;
+    }
+
+    .table-borderless {
+        width: 100%;
+        margin-bottom: 15px;
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    .table-borderless th,
+    .table-borderless td {
+        padding: 8px 0;
+        font-size: 14px;
+    }
+
+    .table-borderless th {
+        text-align: left;
+        font-weight: normal;
+        color: #888;
+    }
+
+    .table-borderless td {
+        text-align: right;
+        color: #555;
+    }
+
+    .table-borderless td:first-child {
+        text-align: left;
+    }
+
+    .total-row td {
+        font-weight: bold;
+        color: #000;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+    }
+
+    .btn-success {
+        background-color: #000;
+        color: #fff;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 0;
+        width: 100%;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+    }
+
+    .btn-success:hover {
+        background-color: #333;
+    }
+
+    .continue-shopping {
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    .continue-shopping:hover {
+        color: #000;
+    }
+
+    /* Footer */
+    footer {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #777;
+    }
+</style>
+
+<section class="cart-page">
+    <div class="container">
+        <h2>Your Cart</h2>
         <div class="row">
-            <!-- Shopping Bag Section -->
+            <!-- Cart Items Section -->
             <div class="col-lg-8">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" class="h5">Shopping Bag</th>
-                                <th scope="col">Format</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Price</th>
-                                <th scope="col" class="text-end">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for f in fs %}
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="{{ f.product.pets_image.url }}" class="img-fluid rounded-3" 
-                                             style="width: 120px;" alt="Product Image">
-                                        <div class="flex-column ms-4">
-                                            <p class="mb-0" style="font-weight: 500;">{{ f.product.small_description }}</p>
-                                        </div>
-                                    </div>
-                                </th>
-                                <td class="align-middle">
-                                    <p class="mb-0" style="font-weight: 500;">Digital</p>
-                                </td>
-                                <td class="align-middle">
-                                    <div class="d-flex">
-                                        <a href="{% url 'delete_quantity' f.id %}" class="btn btn-link px-2">
-                                            <i class="bi bi-dash-lg"></i>
-                                        </a>
-                                        <input id="form1" min="0" name="quantity" value="{{ f.quantity }}" readonly 
-                                               class="form-control form-control-sm text-center" 
-                                               style="width: 50px; background-color:white;" />
-                                        <a href="{% url 'add_quantity' f.id %}" class="btn btn-link px-2">
-                                            <i class="bi bi-plus-lg"></i>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td class="align-middle">₹{{ f.price_and_quantity_total }}</td>
-                                <td class="align-middle text-end">
-                                    <a href="{% url 'delete_cart' f.id %}" class="text-danger">
-                                        <i class="bi bi-trash3-fill"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="cart-items">
+                    {% for f in fs %}
+                    <div class="cart-item">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ f.product.pets_image.url }}" alt="Product">
+                            <div class="product-details">
+                                <p>{{ f.product.small_description }}</p>
+                                <small>Mint / 100 mg / x{{ f.quantity }}</small>
+                            </div>
+                        </div>
+                        <div class="price-info">
+                            <p>₹{{ f.price_and_quantity_total }}</p>
+                            <small class="text-decoration-line-through">₹{{ f.product.price }}</small>
+                        </div>
+                        <div class="quantity-control">
+                            <a href="{% url 'delete_quantity' f.id %}"><i class="bi bi-dash-lg"></i></a>
+                            <input type="text" readonly value="{{ f.quantity }}">
+                            <a href="{% url 'add_quantity' f.id %}"><i class="bi bi-plus-lg"></i></a>
+                        </div>
+                        <a href="{% url 'delete_cart' f.id %}" class="remove-item"><i class="bi bi-trash3"></i></a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="coupon-section">
+                    <input type="text" placeholder="Have a coupon? Enter code here">
+                    <button>Apply</button>
                 </div>
             </div>
-            
-            <!-- Checkout Button -->
-            <div class="col-lg-4">
-                <div class="d-flex justify-content-end">
-                    <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">
-                        Proceed to Checkout
-                    </a>
-                </div>
-            </div>
+
+            <!-- Order Summary Section -->
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0 text-center">Order Summary</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-end">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td class="text-center">₹{{ item.discounted_price }}</td>
+                        <td class="text-center">{{ item.quantity }}</td>
+                        <td class="text-end">₹{{ item.price_and_quantity_total }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                        <td class="text-end">₹{{ total }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Shipping</strong></td>
+                        <td class="text-end">₹2000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Total</strong></td>
+                        <td class="text-end">₹<b>{{ final_price }}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="{% url 'payment' %}">
+                <button type="button" class="btn btn-success btn-block btn-lg mt-3">Proceed to Pay</button>
+            </a>
+        </div>
+    </div>
+</div>
+
         </div>
     </div>
 </section>
+
+<footer class="text-center">
+    <p>© 2023 Simply Soluble CBD. All rights reserved.</p>
+</footer>
+
 {% endblock content %}
