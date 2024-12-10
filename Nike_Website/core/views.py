@@ -206,6 +206,8 @@ def delete_address(request,id):
 
 def checkout(request):
 
+    
+
     cart_items = Shoes_cart.objects.filter(user=request.user)      # cart_items will fetch product of current user, and show product available in the cart of the current user.
     total =0
     delhivery_charge =2000
