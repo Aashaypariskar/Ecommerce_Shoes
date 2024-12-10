@@ -277,7 +277,7 @@
             <!-- Order Summary Section -->
 <div class="col-lg-4">
     <div class="card">
-        <div class="card-header bg-primary text-white">
+        <div class="card-header bg-dark text-white">
             <h5 class="mb-0 text-center">Order Summary</h5>
         </div>
         <div class="card-body">
@@ -301,7 +301,7 @@
                     {% endfor %}
                     <tr>
                         <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
-                        <td class="text-end">₹{{ total }}</td>
+                        <td class="text-end">₹{{ item.discounted_price }}</td>
                     </tr>
                     <tr>
                         <td colspan="3" class="text-end"><strong>Shipping</strong></td>
@@ -314,82 +314,9 @@
                 </tbody>
             </table>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             
-            <a href="{% url 'payment' %}">
-                <button type="submit" class="btn btn-success btn-block btn-lg mt-3">Proceed to Pay</button>
+            <a href="{% url 'checkout' %}">
+                <button type="button" class="btn btn-success btn-block btn-lg mt-3">Proceed to Pay</button>
             </a>
         </div>
     </div>
