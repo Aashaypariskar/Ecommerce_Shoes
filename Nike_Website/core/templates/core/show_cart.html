@@ -301,11 +301,11 @@
                         <td class="text-center">{{ item.quantity }}</td>
                         <td class="text-end">₹{{ item.price_and_quantity_total }}</td>
                     </tr>
-                    {% endfor %}
                     <tr>
                         <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
                         <td class="text-end">₹{{ item.product.discounted_price }}</td>
                     </tr>
+                    {% endfor %}
                     <tr>
                         <td colspan="3" class="text-end"><strong>Shipping</strong></td>
                         <td class="text-end">₹2000</td>

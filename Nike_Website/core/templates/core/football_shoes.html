@@ -3,30 +3,26 @@
 {% block content %}
  
 <style>
-    /*football front */ 
-    /* Apply smooth transition to all items for both filter and transform effects */
+    /* Football Front Effects */
     .item {
         transition: transform 0.5s ease, filter 0.5s ease;
         z-index: 1;
-        position: relative; /* Ensure z-index works properly */
+        position: relative;
     }
-    
-    /* When hovering over .list, non-hovered items will be blurred and grayscale */
+
     .list:hover .item:not(:hover) {
-        filter: grayscale(1) blur(8px); /* Slightly reduce the blur for better aesthetics */
-        transform: scale(0.9); /* Add a slight shrink effect to non-hovered items for focus */
+        filter: grayscale(1) blur(8px);
+        transform: scale(0.9);
         transition: transform 0.5s ease, filter 0.5s ease;
     }
-    
-    /* Hover effect on the active .item */
+
     .item:hover {
         transform: scale(1.3);
-        z-index: 2; /* Bring hovered item to the front */
-        filter: none; /* Remove blur and grayscale */
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Add a subtle shadow for depth */
+        z-index: 2;
+        filter: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
-    
-    /* Optional: Add more shadow effect for the transition */
+
     .item:hover::before {
         content: '';
         position: absolute;
@@ -34,14 +30,13 @@
         left: 0;
         width: 100%;
         height: 100%;
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4); /* Adds a shadow beneath the image */
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
         z-index: -1;
         transition: box-shadow 0.5s ease;
     }
-    /*football front */ 
 
-    .football_container{
-        background-image:url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYFKmvT_7t3cAMQSSa_mCpl3Pq4u3yj5df7c1Ss3pI0bhy6sU4');
+    .football_container {
+        background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYFKmvT_7t3cAMQSSa_mCpl3Pq4u3yj5df7c1Ss3pI0bhy6sU4');
         height: 100vh; 
         background-size: cover; 
         background-position: center; 
@@ -51,7 +46,6 @@
         align-items: center;
     }
 
-    /* Gallery Container */
     .gallery-container {
         display: grid;
         grid-template-areas:
@@ -66,32 +60,31 @@
         border-radius: 15px;
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
-    
-    /* Grid Items */
+
     .gallery-item {
         overflow: hidden;
         border-radius: 15px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         position: relative;
     }
-    
+
     .gallery-item img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        object-fit: cover;
         display: block;
         transition: transform 0.3s ease;
     }
-    
+
     .gallery-item:hover {
         transform: scale(1.05);
         box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
     }
-    
+
     .gallery-item:hover img {
         transform: scale(1.1);
     }
-    
-    /* Add a subtle overlay effect */
+
     .gallery-item::after {
         content: '';
         position: absolute;
@@ -105,108 +98,95 @@
         z-index: 1;
         border-radius: 15px;
     }
-    
+
     .gallery-item:hover::after {
         opacity: 1;
     }
-    
-    /* Specific Sizes */
+
     .large {
         grid-area: large;
         grid-row: span 2;
         grid-column: span 2;
     }
-    
+
     .medium {
         grid-area: medium;
     }
-    
+
     .small {
         grid-area: small;
     }
-    
 
+    .btn-nike {
+        background: #111;
+        color: #fff;
+        border: none;
+    }
 
-
-</style>
-
- <div class="container-fluid football_container"
->
- <!-- Add your content here -->
-
-
-     <div class="row h-100">
-         <div class="col-md-12 d-flex justify-content-center align-items-center">
-             <div class="banner" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
-                 <div class="list" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
-                     <div class="item"><img src="{% static "core/images/De%20bruyne.jpg" %}" alt="" style="height: 400px;"></div>
-                     <div class="item"><img src="{% static "core/images/Neymar.jpg" %}" alt="" style="height: 400px;"></div>
-                     <div class="item"><img src="{% static "core/images/Young%20ronaldo.jpg" %}" alt="" style="height: 400px;"></div>
-                     <div class="item"><img src="{% static "core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg" %}" alt="" style="height: 400px;"></div>
-                     <div class="item"><img src="{% static "core/images/Halland.jpg" %}" alt="" style="height: 400px;"></div>
-                 </div>
-                 
-             </div>
-         </div>
-     </div>
- </div>
-
- 
-
- <div style="background-color: #222; margin-top: 20px; height: 200px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-     <h1 style="color: #fff; font-family: 'Impact', sans-serif; text-align: center; font-size: 36px; letter-spacing: 2px; padding-bottom: 20px;"> 
-         JUST DO IT THEN DO IT AGAIN
-     </h1>
-     <button class="btn btn-lg btn-nike rounded-pill px-5 py-2">Explore Now</button>
- </div>
- 
- 
-
- <style>
-    .card-row {
-        gap: 3px;
+    .btn-nike:hover {
+        background: #333;
+        color: #fff;
     }
 </style>
 
-<div class="container mt-5   ">
-    <div class="row g-0 justify-content-start">
-      {% for f in fs  %}
-        <div class="col-md-3 mb-4" style="padding-left: 20px;">
-          <div class="card product-card">
-            <a href="{% url "card_info" f.id %}">
-              <img src="{{f.pets_image.url}}" alt="" class="card-img-top" height="280px" width="100px">
-            </a>
-            <div class="card-body product-info">
-              <p class="product-title">{{f.small_description}}</p>
-              <p class="product-price">INR &#8377 {{f.discounted_price}}   <s style="color:red;">{{f.original_price}}</s></p>
-              <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i>  </button>
+<div class="container-fluid football_container">
+    <div class="row h-100">
+        <div class="col-md-12 d-flex justify-content-center align-items-center">
+            <div class="banner" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
+                <div class="list" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
+                    <div class="item"><img src="{% static 'core/images/De%20bruyne.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/Neymar.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/Halland.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
+                </div>
             </div>
-          
-            
-          </div>
+        </div>
+    </div>
+</div>
+
+<div style="background-color: #222; margin-top: 20px; height: 200px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <h1 style="color: #fff; font-family: 'Impact', sans-serif; text-align: center; font-size: 36px; letter-spacing: 2px; padding-bottom: 20px;"> 
+        JUST DO IT THEN DO IT AGAIN
+    </h1>
+    <button class="btn btn-lg btn-nike rounded-pill px-5 py-2">Explore Now</button>
+</div>
+
+<div class="container mt-5">
+    <div class="row g-0 justify-content-start">
+        {% for f in fs  %}
+        <div class="col-md-3 mb-4" style="padding-left: 20px;">
+            <div class="card product-card">
+                <a href="{% url 'card_info' f.id %}">
+                    <img src="{{f.pets_image.url}}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
+                </a>
+                <div class="card-body product-info">
+                    <p class="product-title">{{f.small_description}}</p>
+                    <p class="product-price">INR &#8377 {{f.discounted_price}}   <s style="color:red;">{{f.original_price}}</s></p>
+                    <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i></button>
+                </div>
+            </div>
         </div>
         {% endfor %}
+    </div>
+</div>
 
+<div class="gallery-container">
+    <div class="gallery-item large">
+        <img src="{% static 'core/images/image.jpg' %}" alt="Nike Shoe 1">
+    </div>
+    <div class="gallery-item medium">
+        <img src="{% static 'core/images/Neymar.jpg' %}" alt="Nike Shoe 2">
+    </div>
+    <div class="gallery-item small">
+        <img src="{% static 'core/images/Halland.jpg' %}" alt="Nike Shoe 3">
+    </div>
+    <div class="gallery-item medium">
+        <img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="Nike Shoe 4">
+    </div>
+    <div class="gallery-item small">
+        <img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="Nike Shoe 5">
+    </div>
+</div>
 
-        <div class="gallery-container">
-            <div class="gallery-item large">
-                <img src="{% static "core/images/image.jpg" %}" alt="Nike Shoe 1">
-            </div>
-            <div class="gallery-item medium">
-                <img src="{% static "core/images/Neymar.jpg" %}" alt="Nike Shoe 2">
-            </div>
-            <div class="gallery-item small">
-                <img src="{% static "core/images/Halland.jpg" %}" alt="Nike Shoe 3">
-            </div>
-            <div class="gallery-item medium">
-                <img src="{% static "core/images/Young%20ronaldo.jpg" %}" alt="Nike Shoe 4">
-            </div>
-            <div class="gallery-item small">
-                <img src="{% static "core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg" %}" alt="Nike Shoe 5">
-            </div>
-        </div>
-
-
-
-{% endblock content %}
-
+{% endblock content %}  

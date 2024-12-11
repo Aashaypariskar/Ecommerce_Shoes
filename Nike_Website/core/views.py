@@ -131,8 +131,17 @@ def add_to_cart(request,id):
 
 def show_cart(request):
     fs= Shoes_cart.objects.filter(user=request.user)
+    cart_items= Shoes_cart.objects.filter(user=request.user)
+    cart_items = Shoes_cart.objects.filter(user=request.user)      # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    total =0
+    delhivery_charge =2000
+    for item in cart_items:
+        item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
+        total += item.product.price_and_quantity_total
+        final_price= delhivery_charge + total
+
         
-    return render(request,'core/show_cart.html',{'fs':fs})
+    return render(request,'core/show_cart.html',{'fs':fs,'cart_items':cart_items,'final_price':final_price})
 
 # ============================== Checkout Page ==============================
 
