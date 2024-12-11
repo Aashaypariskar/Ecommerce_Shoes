@@ -4,10 +4,13 @@
 {% block content %}
 
 <style>
+
     /* General Styles */
     body {
         font-family: 'Poppins', sans-serif;
         background-color: #f9f9f9;
+        background: url("{% static 'core/images/basketball2.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
         color: #333;
     }
 
@@ -294,14 +297,14 @@
                     {% for item in cart_items %}
                     <tr>
                         <td>{{ item.product.name }}</td>
-                        <td class="text-center">₹{{ item.discounted_price }}</td>
+                        <td class="text-center">₹{{ item.product.discounted_price }}</td>
                         <td class="text-center">{{ item.quantity }}</td>
                         <td class="text-end">₹{{ item.price_and_quantity_total }}</td>
                     </tr>
                     {% endfor %}
                     <tr>
                         <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
-                        <td class="text-end">₹{{ item.discounted_price }}</td>
+                        <td class="text-end">₹{{ item.product.discounted_price }}</td>
                     </tr>
                     <tr>
                         <td colspan="3" class="text-end"><strong>Shipping</strong></td>
