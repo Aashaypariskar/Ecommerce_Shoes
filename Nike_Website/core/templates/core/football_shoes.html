@@ -46,87 +46,77 @@
         align-items: center;
     }
 
-    .gallery-container {
-        display: grid;
-        grid-template-areas:
-            "large medium"
-            "small medium"
-            "small medium";
-        grid-gap: 15px;
-        padding: 20px;
-        max-width: 1000px;
-        margin: 50px auto;
-        background: #fff;
-        border-radius: 15px;
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .gallery-item {
-        overflow: hidden;
-        border-radius: 15px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        position: relative;
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-        transition: transform 0.3s ease;
-    }
-
-    .gallery-item:hover {
-        transform: scale(1.05);
-        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .gallery-item:hover img {
-        transform: scale(1.1);
-    }
-
-    .gallery-item::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.2);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        z-index: 1;
-        border-radius: 15px;
-    }
-
-    .gallery-item:hover::after {
-        opacity: 1;
-    }
-
-    .large {
-        grid-area: large;
-        grid-row: span 2;
-        grid-column: span 2;
-    }
-
-    .medium {
-        grid-area: medium;
-    }
-
-    .small {
-        grid-area: small;
-    }
-
-    .btn-nike {
-        background: #111;
-        color: #fff;
-        border: none;
-    }
-
-    .btn-nike:hover {
-        background: #333;
-        color: #fff;
-    }
+    <style>
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusts card size */
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px; /* Matches container width to center-align */
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+    
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 300px; /* Uniform height for all cards */
+        }
+    
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image fits card dimensions */
+            display: block;
+            transition: transform 0.3s ease;
+        }
+    
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+        }
+    
+        .gallery-item .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 15px;
+            font-size: 18px;
+            text-align: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    
+        .gallery-item:hover .caption {
+            opacity: 1;
+        }
+    
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+    
+            .gallery-item {
+                height: 200px; /* Smaller height for smaller screens */
+            }
+    
+            .gallery-item .caption {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+    
+    
 </style>
 
 <div class="container-fluid football_container">
@@ -134,11 +124,11 @@
         <div class="col-md-12 d-flex justify-content-center align-items-center">
             <div class="banner" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
                 <div class="list" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
-                    <div class="item"><img src="{% static 'core/images/De%20bruyne.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/Neymar.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/Halland.jpg' %}" alt="" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/De%20bruyne.jpg' %}" alt="De Bruyne" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/Neymar.jpg' %}" alt="Neymar" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="Young Ronaldo" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="Phil Foden" style="height: 400px; object-fit: cover;"></div>
+                    <div class="item"><img src="{% static 'core/images/Halland.jpg' %}" alt="Halland" style="height: 400px; object-fit: cover;"></div>
                 </div>
             </div>
         </div>
@@ -172,21 +162,27 @@
 </div>
 
 <div class="gallery-container">
-    <div class="gallery-item large">
+    <div class="gallery-item">
         <img src="{% static 'core/images/image.jpg' %}" alt="Nike Shoe 1">
+        <div class="caption">Nike Shoe 1</div>
     </div>
-    <div class="gallery-item medium">
+    <div class="gallery-item">
         <img src="{% static 'core/images/Neymar.jpg' %}" alt="Nike Shoe 2">
+        <div class="caption">Nike Shoe 2</div>
     </div>
-    <div class="gallery-item small">
+    <div class="gallery-item">
         <img src="{% static 'core/images/Halland.jpg' %}" alt="Nike Shoe 3">
+        <div class="caption">Nike Shoe 3</div>
     </div>
-    <div class="gallery-item medium">
+    <div class="gallery-item">
         <img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="Nike Shoe 4">
+        <div class="caption">Nike Shoe 4</div>
     </div>
-    <div class="gallery-item small">
+    <div class="gallery-item">
         <img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="Nike Shoe 5">
+        <div class="caption">Nike Shoe 5</div>
     </div>
 </div>
 
-{% endblock content %}  
+
+{% endblock content %}
