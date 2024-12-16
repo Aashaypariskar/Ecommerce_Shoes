@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row g-0 justify-content-start">
+        {% for r in rs %}
+        <div class="col-md-3 mb-4" style="padding-left: 20px;">
+            <div class="card product-card">
+                <a href="{% url 'card_info' r.id %}">
+                    <img src="{{ r.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
+                </a>
+                <div class="card-body product-info">
+                    <p class="product-title">{{ r.small_description }}</p>
+                    <p class="product-price">INR &#8377; {{ r.discounted_price }} <s style="color:red;">{{ r.original_price }}</s></p>
+                    <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock content %}
+
