@@ -171,7 +171,8 @@
                 <div class="card-body product-info">
                     <p class="product-title">{{f.small_description}}</p>
                     <p class="product-price">INR &#8377 {{f.discounted_price}}   <s style="color:red;">{{f.original_price}}</s></p>
-                    <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i></button>
+                    <a href="{% url "buynow " Shoes.id %}">
+                    <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i></button></a>
                 </div>
             </div>
         </div>

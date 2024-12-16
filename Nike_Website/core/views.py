@@ -35,7 +35,8 @@ def registration(request):
             if regf.is_valid():
                 regf.save()
                 messages.success(request,'Registration Successfull !!')
-                return redirect('registration')    
+                return redirect('registration')   
+             
     else:
         regf  = RegistrationForm()
     return render(request,'core/register.html',{'regf':regf})
@@ -231,6 +232,29 @@ def payment(request):
 
 
 
+
+#========================================== Buy Now ========================================================
+def buynow(request,id):
+    Shoes = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    delhivery_charge =2000
+    final_price= delhivery_charge + Shoes.discounted_price
+    
+    address = UserDetails.objects.filter(user=request.user)
+
+    return render(request, 'core/buynow.html', {'final_price':final_price,'address':address,'Shoes':Shoes})
+
+
+def buynow_payment(request,id):
+
+    if request.method == 'POST':
+        selected_address_id = request.POST.get('buynow_selected_address')
+
+    Shoes = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    delhivery_charge =2000
+    final_price= delhivery_charge + Shoes.discounted_price
+    
+    address = UserDetails.objects.filter(user=request.user)
+
  #============== Paypal Code =====================
    
     host = request.get_host()   # Will fecth the domain site is currently hosted on.
@@ -323,3 +347,14 @@ def reset_password(request, uidb64, token):
 
 def password_reset_done(request):
     return render(request, 'core/password_reset_done.html')
+
+def buynow_payment_success(request,selected_address_id,id):
+    print('payment sucess',selected_address_id)   # we have fetch this id from return_url': f"http://{host}{reverse('paymentsuccess', args=[selected_address_id])}
+                                                  # This id contain address detail of particular customer
+    user =request.user
+    customer_data = UserDetails.objects.get(pk=selected_address_id,)
+    
+    pet = Shoes.objects.get(pk=id)
+    Order(user=user,customer=customer_data,pet=pet,quantity=1).save()
+   
+    return render(request,'core/buynow_payment_success.html')

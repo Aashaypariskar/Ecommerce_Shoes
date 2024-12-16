@@ -1,0 +1,181 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+
+    /* Order Summary Section Styles */
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        font-family: Arial, sans-serif;
+    }
+
+    .card-header {
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        text-align: left;
+    }
+
+    .table-borderless {
+        width: 100%;
+        margin-bottom: 15px;
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    .table-borderless th,
+    .table-borderless td {
+        padding: 8px 0;
+        font-size: 14px;
+    }
+
+    .table-borderless th {
+        text-align: left;
+        font-weight: normal;
+        color: #888;
+    }
+
+    .table-borderless td {
+        text-align: right;
+        color: #555;
+    }
+
+    .table-borderless td:first-child {
+        text-align: left;
+    }
+
+    .total-row td {
+        font-weight: bold;
+        color: #000;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+    }
+
+    .btn-success {
+        background-color: #000;
+        color: #fff;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 0;
+        width: 100%;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        margin-top: 15px;
+    }
+
+    .btn-success:hover {
+        background-color: #333;
+    }
+
+    .continue-shopping {
+        margin-top: 10px;
+        display: block;
+        text-align: center;
+        color: #888;
+        font-size: 14px;
+        text-decoration: none;
+    }
+
+    .continue-shopping:hover {
+        color: #000;
+    }
+
+</style>
+
+
+<div class="col-lg-4">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h5 class="mb-0 text-center">Order Summary</h5>
+        </div>
+        <div class="card-body">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th class="text-center">Price</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-end">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                    <tr>
+                        <td>{{ item.product.name }}</td>
+                        <td class="text-center">₹{{ item.product.discounted_price }}</td>
+                        <td class="text-center">{{ item.quantity }}</td>
+                        <td class="text-end">₹{{ item.price_and_quantity_total }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                        <td class="text-end">₹{{ item.product.discounted_price }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Shipping</strong></td>
+                        <td class="text-end">₹2000</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Total</strong></td>
+                        <td class="text-end">₹<b>{{ final_price }}</b></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            
+            <a href="{% url 'checkout' %}">
+                <button type="button" class="btn btn-success btn-block btn-lg mt-3">Proceed to Pay</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-sm-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 mt-3">
+                <form action="{% url "payment" %}" method="POST">
+                        {% csrf_token %}
+                        {% for add in address %}
+                            <label >
+                                <div class="card flex-md-row mb-4 box-shadow h-md-250 mt-4 ml-4">
+                                    <div class="card-body d-flex flex-column align-items-start">
+                                        <h3 class="mb-0">
+                                            <input type="radio" name="selected_address" value="{{ add.id }}" checked>
+                                        Name: {{add.name}}
+                                    </h3>
+                                    <p class="card-text mb-auto">Address:{{add.address}} </p>
+                                    <p class="card-text mb-auto">City:{{add.city}} </p>
+                                    <p class="card-text mb-auto">State: {{add.state}} </p>
+                                    <p class="card-text mb-auto">Pincode:{{add.pincode}} </p>
+                                    
+                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        {% endfor %}
+                        <input type="submit" class="btn btn-primary btn-sm mt-2" value="Proceed to Payment">
+                    </form>   
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content %}
