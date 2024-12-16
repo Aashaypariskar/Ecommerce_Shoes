@@ -13,12 +13,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .gallery-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ensures proper image sizing */
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       grid-gap: 20px;
       width: 90%;
       max-width: 1200px;
@@ -36,23 +36,21 @@
 
     .gallery-item img {
       width: 100%;
-      height: 100%;
-      object-fit: cover; /* Ensures images fill the container without distortion */
+      height: auto;
+      max-height: 300px;
+      object-fit: cover;
       transition: transform 0.3s ease;
     }
 
-    /* Hover effect: Zoom in on image */
     .gallery-item:hover img {
-      transform: scale(1.05); /* Slight zoom effect on hover */
+      transform: scale(1.05);
     }
 
-    /* Hover effect: Elevate the card */
     .gallery-item:hover {
-      transform: scale(1.03); /* Slight zoom on the card */
+      transform: scale(1.03);
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
-    /* Overlay styling */
     .gallery-overlay {
       position: absolute;
       top: 0;
@@ -71,12 +69,10 @@
       border-radius: 15px;
     }
 
-    /* Show overlay on hover */
     .gallery-item:hover .gallery-overlay {
       opacity: 1;
     }
 
-    /* Title and description styling */
     .gallery-overlay h3 {
       font-size: 24px;
       font-weight: bold;
@@ -89,7 +85,6 @@
       font-weight: 300;
     }
 
-    /* Customizing different image sizes */
     .gallery-item.large {
       grid-column: span 2;
       grid-row: span 2;
@@ -104,7 +99,6 @@
       grid-column: span 1;
       grid-row: span 1;
     }
-
   </style>
 </head>
 <body>
@@ -112,7 +106,10 @@
   <div class="gallery-container">
     <!-- First Image -->
     <div class="gallery-item large">
-      <img src="Assets/image/20230815-about-image-nike.webp" alt="Image 1">
+      <picture>
+        <source srcset="Assets/image/20230815-about-image-nike.webp" type="image/webp">
+        <img src="Assets/image/20230815-about-image-nike.jpg" alt="Mountain Adventure">
+      </picture>
       <div class="gallery-overlay">
         <div>
           <h3>Mountain Adventure</h3>
@@ -123,7 +120,10 @@
 
     <!-- Second Image -->
     <div class="gallery-item medium">
-      <img src="Assets/image/index sneakers banner.jpg" alt="Image 2">
+      <picture>
+        <source srcset="Assets/image/index sneakers banner.webp" type="image/webp">
+        <img src="Assets/image/index sneakers banner.jpg" alt="Sunset Over Ocean">
+      </picture>
       <div class="gallery-overlay">
         <div>
           <h3>Sunset Over Ocean</h3>
@@ -134,7 +134,10 @@
 
     <!-- Third Image -->
     <div class="gallery-item small">
-      <img src="Assets/image/running banner.jpg" alt="Image 4">
+      <picture>
+        <source srcset="Assets/image/running banner.webp" type="image/webp">
+        <img src="Assets/image/running banner.jpg" alt="City Lights">
+      </picture>
       <div class="gallery-overlay">
         <div>
           <h3>City Lights</h3>
@@ -144,19 +147,11 @@
     </div>
 
     <!-- Fourth Image -->
-    <div class="gallery-item large">
-      <img src="Assets/image/purple.jpg" alt="Image 5">
-      <div class="gallery-overlay">
-        <div>
-          <h3>Desert Landscape</h3>
-          <p>Wide open desert landscape</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Fifth Image -->
     <div class="gallery-item small">
-      <img src="Assets/image/poster.jpg" alt="Image 6">
+      <picture>
+        <source srcset="Assets/image/poster.webp" type="image/webp">
+        <img src="Assets/image/poster.jpg" alt="Snowy Mountains">
+      </picture>
       <div class="gallery-overlay">
         <div>
           <h3>Snowy Mountains</h3>
@@ -165,9 +160,26 @@
       </div>
     </div>
 
+    <!-- Fifth Image -->
+    <div class="gallery-item large">
+      <picture>
+        <source srcset="Assets/image/never-done-challenging-convention-circa-72.jpg" type="image/webp">
+        <img src="Assets/image/never-done-challenging-convention-circa-72.jpg" alt="Desert Landscape">
+      </picture>
+      <div class="gallery-overlay">
+        <div>
+          <h3>Desert Landscape</h3>
+          <p>Wide open desert landscape</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Sixth Image -->
     <div class="gallery-item medium">
-      <img src="Assets/image/index category1.jpg" alt="Image 7">
+      <picture>
+        <source srcset="Assets/image/index category1.webp" type="image/webp">
+        <img src="Assets/image/index category1.jpg" alt="Peaceful Lakeside">
+      </picture>
       <div class="gallery-overlay">
         <div>
           <h3>Peaceful Lakeside</h3>

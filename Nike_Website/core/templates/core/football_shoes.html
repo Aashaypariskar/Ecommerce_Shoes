@@ -46,74 +46,92 @@
         align-items: center;
     }
 
-    <style>
-        .gallery-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusts card size */
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px; /* Matches container width to center-align */
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
     
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            height: 300px; /* Uniform height for all cards */
-        }
-    
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Ensures image fits card dimensions */
-            display: block;
-            transition: transform 0.3s ease;
-        }
-    
-        .gallery-item:hover {
-            transform: scale(1.03);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
-        }
-    
-        .gallery-item .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
-            padding: 15px;
-            font-size: 18px;
-            text-align: center;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-    
-        .gallery-item:hover .caption {
-            opacity: 1;
-        }
-    
-        @media (max-width: 768px) {
-            .gallery-container {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-    
-            .gallery-item {
-                height: 200px; /* Smaller height for smaller screens */
-            }
-    
-            .gallery-item .caption {
-                font-size: 14px;
-                padding: 10px;
-            }
-        }
+
+.gallery-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px;
+      padding: 10px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 10px;
+      text-align: center;
+      border-radius: 15px;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay h3 {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .gallery-overlay p {
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+
+    .gallery-item.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery-item.medium {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    .gallery-item.small {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+
     </style>
     
     
@@ -161,28 +179,95 @@
     </div>
 </div>
 
-<div class="gallery-container">
-    <div class="gallery-item">
-        <img src="{% static 'core/images/image.jpg' %}" alt="Nike Shoe 1">
-        <div class="caption">Nike Shoe 1</div>
-    </div>
-    <div class="gallery-item">
-        <img src="{% static 'core/images/Neymar.jpg' %}" alt="Nike Shoe 2">
-        <div class="caption">Nike Shoe 2</div>
-    </div>
-    <div class="gallery-item">
-        <img src="{% static 'core/images/Halland.jpg' %}" alt="Nike Shoe 3">
-        <div class="caption">Nike Shoe 3</div>
-    </div>
-    <div class="gallery-item">
-        <img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="Nike Shoe 4">
-        <div class="caption">Nike Shoe 4</div>
-    </div>
-    <div class="gallery-item">
-        <img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="Nike Shoe 5">
-        <div class="caption">Nike Shoe 5</div>
-    </div>
-</div>
 
+
+
+
+<div class="gallery-container ms-5">
+    <!-- First Image -->
+    <div class="gallery-item large">
+        <picture>
+            <source srcset="{% static 'core/images/gallery4.jpg' %}" type="image/webp">
+            <img src="{% static 'core/images/image.jpg' %}" alt="Mountain Adventure" style="width: 100%; height: 400px; object-fit: cover; border-radius: 15px;">
+        </picture>
+        <div class="gallery-overlay">
+            <div>
+                <h3>Mountain Adventure</h3>
+                <p>A breathtaking mountain view</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Second Image -->
+    <div class="gallery-item medium">
+      <picture>
+        <source srcset="{% static "core/images/gallery 2.jpg" %}" type="image/webp">
+        <img src="Assets/image/index sneakers banner.jpg" alt="Sunset Over Ocean">
+      </picture>
+      <div class="gallery-overlay">
+        <div>
+          <h3>Sunset Over Ocean</h3>
+          <p>Sunset over the ocean horizon</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Third Image -->
+    <div class="gallery-item small">
+      <picture>
+        <source srcset="{% static "core/images/gallery3.jpg" %}" type="image/webp">
+        <img src="Assets/image/running banner.jpg" alt="City Lights">
+      </picture>
+      <div class="gallery-overlay">
+        <div>
+          <h3>City Lights</h3>
+          <p>City lights at night</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fourth Image -->
+    <div class="gallery-item small">
+      <picture>
+        <source srcset="{% static "core/images/gallery5.jpg" %}" type="image/webp">
+        <img src="Assets/image/poster.jpg" alt="Snowy Mountains">
+      </picture>
+      <div class="gallery-overlay">
+        <div>
+          <h3>Snowy Mountains</h3>
+          <p>Snow-capped mountains in winter</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fifth Image -->
+    <div class="gallery-item large">
+      <picture>
+        <source srcset="{% static "core/images/gallery image.jpg" %}" type="image/webp">
+        <img src="Assets/image/never-done-challenging-convention-circa-72.jpg" alt="Desert Landscape">
+      </picture>
+      <div class="gallery-overlay">
+        <div>
+          <h3>Desert Landscape</h3>
+          <p>Wide open desert landscape</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sixth Image -->
+    <div class="gallery-item medium">
+      <picture>
+        <source srcset="{% static "core/images/image.jpg" %}" type="image/webp">
+        <img src="{% static "core/images/image.jpg" %}" alt="Peaceful Lakeside">
+      </picture>
+      <div class="gallery-overlay">
+        <div>
+          <h3>Peaceful Lakeside</h3>
+          <p>Peaceful lakeside reflection</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 {% endblock content %}
