@@ -120,6 +120,14 @@ def trending(request):
     ts = Shoes.objects.filter(category='TRENDING')
     return render(request,'core/trending.html',{'ts':ts})
 
+def new_arrival(request):
+    na = Shoes.objects.filter(category='NEW ARRIVAL')
+    return render(request,'core/new_arrival.html',{'na':na})
+
+def limited_edition(request):
+    le = Shoes.objects.filter(category='LIMITED EDITION')
+    return render(request,'core/limited_edition.html',{'le':le})
+
 
 
 def add_to_cart(request,id):

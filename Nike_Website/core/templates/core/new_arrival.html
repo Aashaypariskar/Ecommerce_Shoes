@@ -4,15 +4,15 @@
 
 <div class="container mt-5">
     <div class="row g-0 justify-content-start">
-        {% for t in ts %}
+        {% for n in na %}
         <div class="col-md-3 mb-4" style="padding-left: 20px;">
             <div class="card product-card">
-                <a href="{% url 'card_info' t.id %}">
-                    <img src="{{ t.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
+                <a href="{% url 'card_info' n.id %}">
+                    <img src="{{ n.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
                 </a>
                 <div class="card-body product-info">
-                    <p class="product-title">{{ t.small_description }}</p>
-                    <p class="product-price">INR &#8377; {{ t.discounted_price }} <s style="color:red;">{{ t.original_price }}</s></p>
+                    <p class="product-title">{{ r.small_description }}</p>
+                    <p class="product-price">INR &#8377; {{ n.discounted_price }} <s style="color:red;">{{ n.original_price }}</s></p>
                     <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
                 </div>
             </div>
