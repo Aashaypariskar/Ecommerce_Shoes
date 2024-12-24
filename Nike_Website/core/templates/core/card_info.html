@@ -191,7 +191,7 @@
       <div class="product-details">
         <h1 class="product-title">AIR JORDAN 1 LOW</h1>
         <p class="product-subtitle">WHITE/SKY GREY-FOOTBALL GREY</p>
-        <p class="price">₹ 10,795.00</p>
+        <p class="price">{{fs.discounted_price}}</p>
   
         <label for="size" class="size-label">Shoe Size (UK)</label>
         <div class="size-options">
@@ -207,9 +207,10 @@
           <a href="{% url "add_to_cart" fs.id %}">
             <button class="add-to-bag">Add to Bag</button>
         </a>
+          <a href="{% url "buynow" fs.id %}">
           <button class="favourite">
             <span>&#9825;</span> Favourite
-          </button>
+          </button></a>
         </div>
   
         <h3 class="about-product">About Product</h3>

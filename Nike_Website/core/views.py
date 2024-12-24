@@ -243,13 +243,14 @@ def payment(request):
 
 #========================================== Buy Now ========================================================
 def buynow(request,id):
-    Shoes = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    Shoe = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
     delhivery_charge =2000
-    final_price= delhivery_charge + Shoes.discounted_price
+    print(Shoes.discounted_price)
+    final_price= delhivery_charge + Shoe.discounted_price
     
     address = UserDetails.objects.filter(user=request.user)
 
-    return render(request, 'core/buynow.html', {'final_price':final_price,'address':address,'Shoes':Shoes})
+    return render(request, 'core/buy_now.html', {'final_price':final_price,'address':address,'Shoe':Shoe})
 
 
 def buynow_payment(request,id):
@@ -362,7 +363,7 @@ def buynow_payment_success(request,selected_address_id,id):
     user =request.user
     customer_data = UserDetails.objects.get(pk=selected_address_id,)
     
-    pet = Shoes.objects.get(pk=id)
-    Order(user=user,customer=customer_data,pet=pet,quantity=1).save()
+    Shoes = Shoes.objects.get(pk=id)
+    Order(user=user,customer=customer_data,pet=Shoes,quantity=1).save()
    
     return render(request,'core/buynow_payment_success.html')
