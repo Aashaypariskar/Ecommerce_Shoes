@@ -258,9 +258,10 @@ def buynow_payment(request,id):
     if request.method == 'POST':
         selected_address_id = request.POST.get('buynow_selected_address')
 
-    Shoes = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    Shoe = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
+    print('cvgcgcjgj' ,Shoes)
     delhivery_charge =2000
-    final_price= delhivery_charge + Shoes.discounted_price
+    final_price= delhivery_charge + Shoe.discounted_price
     
     address = UserDetails.objects.filter(user=request.user)
 

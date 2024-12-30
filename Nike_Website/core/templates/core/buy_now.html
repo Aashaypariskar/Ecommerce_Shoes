@@ -242,15 +242,14 @@
                     </tr>
                 </tbody>
             </table>
-            <a href="{% url 'buynowpayment' Shoe.id %}">
-                <button class="btn-success">Proceed to Pay</button>
-            </a>
         </div>
     </div>
 
     <!-- Address Section -->
     <div class="address-container">
         <div class="address-title">Select Address</div>
+        <form action="{% url 'buynowpayment' Shoe.id %}" method="POST">
+            {% csrf_token %}
         {% for add in address %}
         <label class="address-card">
             <input type="radio" name="buynow_selected_address" value="{{ add.id }}" checked>
@@ -261,6 +260,8 @@
             </div>
         </label>
         {% endfor %}
+        <input type="submit" class='btn btn-success' value="Proceed To Pay">
+    </form>
     </div>
 </div>
 
