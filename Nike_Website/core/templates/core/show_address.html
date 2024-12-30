@@ -3,44 +3,183 @@
 
 {% block content %}
 
-<div class="container">
-    <!-- Add Address Button -->
-    <div class="text-end mt-4">
-        <a href="{% url 'address' %}" class="btn btn-success btn-sm">
-            <i class="fas fa-plus"></i> Add Address
-        </a>
-    </div>
+<style>
+    /* Global Styling */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f4f5f7;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
 
-    <div class="col-sm-6">
-        <div class="row">
-            <div class="col-sm-12">
-                {% for add in address %}
-                <div class="card flex-md-row mb-4 box-shadow h-md-250 mt-4 ml-4">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 class="mb-0">
-                            Name: {{add.name}}
-                        </h3>
-                        <p class="card-text mb-auto">Address: {{add.address}}</p>
-                        <p class="card-text mb-auto">City: {{add.city}}</p>
-                        <p class="card-text mb-auto">State: {{add.state}}</p>
-                        <p class="card-text mb-auto">Pincode: {{add.pincode}}</p>
-                        <form action="{% url "deleteaddress" add.id %}" method="POST">
+    /* Container Styling */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Address Page Styling */
+    .card {
+        background-color: #fff;
+        border: 1px solid #e1e4e8;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+    }
+
+    .card-text {
+        font-size: 0.95rem;
+        color: #6c757d;
+        margin-bottom: 8px;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 10px 16px;
+    }
+
+    /* Button Styling */
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: #fff;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: #fff;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    /* New Add Address Box Styling */
+    .add-address-box {
+        background-color: #fff;
+        border: 1px solid #e1e4e8;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        height: 250px;
+        max-height: 250px;
+        min-height: 250px;
+        text-align: center;
+    }
+
+    .add-address-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .add-address-box i {
+        font-size: 4rem;
+        color: #007bff;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .add-address-box:hover i {
+        color: #0056b3;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+        .card {
+            margin: 15px 0;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .col-md-6, .col-lg-4 {
+            max-width: 100%;
+        }
+
+        .add-address-box {
+            margin: 10px 0;
+            height: 200px;
+        }
+
+        .add-address-box i {
+            font-size: 3.5rem;
+        }
+    }
+</style>
+
+<div class="container py-5">
+    <!-- Address Cards -->
+    <div class="row">
+        {% for add in address %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-dark">Name: {{ add.name }}</h5>
+                    <p class="card-text text-muted mb-1">Address: {{ add.address }}</p>
+                    <p class="card-text text-muted mb-1">City: {{ add.city }}</p>
+                    <p class="card-text text-muted mb-1">State: {{ add.state }}</p>
+                    <p class="card-text text-muted">Pincode: {{ add.pincode }}</p>
+                    <div class="d-flex justify-content-end mt-3">
+                        <form action="{% url 'deleteaddress' add.id %}" method="POST">
                             {% csrf_token %}
-                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                <input type="submit" class="btn btn-danger btn-sm mt-2" value="Delete Address">
-                            </div>
+                            <button type="submit" class="btn btn-danger btn-sm rounded-pill">
+                                Delete Address
+                            </button>
                         </form>
                     </div>
                 </div>
-                {% endfor %}
             </div>
+        </div>
+        {% endfor %}
+
+        <!-- Add Address Box -->
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'address' %}" class="add-address-box d-flex justify-content-center align-items-center">
+                <i class="fas fa-plus text-primary"></i>
+            </a>
         </div>
     </div>
 
-    <div class="container mt-4 text-center">
-        <!-- Add New Address Button -->
-        <a href="{% url 'address' %}" class="btn btn-primary btn-lg">
-            <i class="fas fa-plus"></i> Add New Address
+    <!-- Add New Address Button -->
+    <div class="text-center mt-4">
+        <a href="{% url 'address' %}" class="btn btn-primary btn-lg rounded-pill px-5">
+            <i class="fas fa-plus me-2"></i>Add New Address
         </a>
     </div>
 </div>
