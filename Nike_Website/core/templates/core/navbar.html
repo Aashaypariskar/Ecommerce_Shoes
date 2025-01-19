@@ -1,82 +1,83 @@
 {% load static %}
 
 <style>
-/* Search Bar Container - Centering with Flexbox */
-.search-bar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height to center the bar */
-    margin: 0 auto; /* Ensures the search bar is horizontally centered */
-    padding: 20px; /* Add padding around the container */
-}
-
-/* Centered and Wider Search Bar */
-.search-bar-form {
-    width: 50%; /* Adjust the width for a larger search bar */
-    max-width: 800px; /* Limit the maximum width */
-    border-radius: 50px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-}
-
-/* Input Field Styling */
-.search-bar-input {
-    flex-grow: 1;
-    padding: 0.75rem 1.5rem;
-    font-size: 1.1rem;
-    border: none;
-    outline: none;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.search-bar-input:focus {
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-/* Button Styling */
-.search-bar-button {
-    background-color: #000;
-    color: #fff;
-    font-size: 1.2rem;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease;
-    cursor: pointer;
-}
-
-.search-bar-button:hover {
-    background-color: #333;
-    transform: scale(1.05);
-}
-
-.search-bar-button i {
-    font-size: 1.4rem;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
+    /* Search Bar Container - Centering with Flexbox */
+    .search-bar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height to center the bar */
+        margin: 0 auto; /* Ensures the search bar is horizontally centered */
+        padding: 20px; /* Add padding around the container */
+    }
+    
+    /* Centered and Wider Search Bar */
     .search-bar-form {
-        width: 90%; /* Take most of the screen width on mobile */
+        width: 60%; /* Increase the width for a larger search bar */
+        max-width: 900px; /* Limit the maximum width */
+        border-radius: 50px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
     }
-
+    
+    /* Input Field Styling */
     .search-bar-input {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
+        flex-grow: 2; /* Occupies more space in the search bar */
+        padding: 0.75rem 1.5rem;
+        font-size: 1.2rem; /* Slightly larger font size */
+        border: none;
+        outline: none;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
-
+    
+    .search-bar-input:focus {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Button Styling */
     .search-bar-button {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
+        background-color: #000;
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+        cursor: pointer;
     }
-}
+    
+    .search-bar-button:hover {
+        background-color: #333;
+        transform: scale(1.05);
+    }
+    
+    .search-bar-button i {
+        font-size: 1.4rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .search-bar-form {
+            width: 90%; /* Take most of the screen width on mobile */
+        }
+    
+        .search-bar-input {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+        }
+    
+        .search-bar-button {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+    
 
 
 
