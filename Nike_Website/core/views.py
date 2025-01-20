@@ -145,9 +145,9 @@ def show_cart(request):
     total =0
     delhivery_charge =2000
     for item in cart_items:
-        item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
-        total += item.product.price_and_quantity_total
-        final_price= delhivery_charge + total
+        # item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
+        total += item.price_and_quantity_total
+    final_price= delhivery_charge + total
 
         
     return render(request,'core/show_cart.html',{'fs':fs,'cart_items':cart_items,'final_price':final_price})
@@ -234,9 +234,27 @@ def payment(request):
     total =0
     delhivery_charge =2000
     for item in cart_items:
-        item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
-        total += item.product.price_and_quantity_total
+    #     item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
+        total += item.price_and_quantity_total
     final_price= delhivery_charge + total
+    host = request.get_host()   # Will fecth the domain site is currently hosted on.
+   
+    paypal_checkout = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,   #This is typically the email address associated with the PayPal account that will receive the payment.
+        'amount': final_price,    #: The amount of money to be charged for the transaction. 
+        'item_name': 'Pet',       # Describes the item being purchased.
+        'invoice': uuid.uuid4(),  #A unique identifier for the invoice. It uses uuid.uuid4() to generate a random UUID.
+        'currency_code': 'USD',
+        'notify_url': f"http://{host}{reverse('paypal-ipn')}",         #The URL where PayPal will send Instant Payment Notifications (IPN) to notify the merchant about payment-related events
+        'return_url': f"http://{host}{reverse('paymentsuccess' ,args=[selected_address_id])}",     #The URL where the customer will be redirected after a successful payment. 
+        'cancel_url': f"http://{host}{reverse('paymentfailed')}",      #The URL where the customer will be redirected if they choose to cancel the payment. 
+    }
+
+    paypal_payment = PayPalPaymentsForm(initial=paypal_checkout)
+
+ #=============== Paypal Code  End =====================
+
+    return render(request,'core/payment.html',{'paypal':paypal_payment}) 
 
 
 
