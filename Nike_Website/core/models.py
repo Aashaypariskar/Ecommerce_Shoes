@@ -75,9 +75,7 @@ class Shoes(models.Model):
     original_price = models.IntegerField()
     discounted_price = models.IntegerField()
     pets_image = models.ImageField(upload_to='pet_images')  # As we are using image field we have to intall 'pillow'. And we have to Define MEDIA_URL in settings.py file so that all folder should save in media directory
-    # pets_image1 = models.ImageField(upload_to='pet_images1')
-    # pets_image2 = models.ImageField(upload_to='pet_images2')
-    # pets_image3 = models.ImageField(upload_to='pet_images3')
+
     
 class Shoes_cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
