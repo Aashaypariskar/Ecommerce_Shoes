@@ -3,12 +3,15 @@
 
 {% block content %}
 
+<!-- Include Font Awesome CSS for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <style>
     /* Global Styling */
     body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(to right, #ece9e6, #ffffff);
-        color: #333333;
+        background: linear-gradient(to right, #f2f6ff, #e7f3f9);
+        color: #4d4d4d;
         line-height: 1.6;
     }
 
@@ -19,7 +22,7 @@
         padding: 40px;
         background: #ffffff;
         border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         animation: fadeIn 0.8s ease-in-out;
     }
 
@@ -27,43 +30,57 @@
     .profile-container h2 {
         font-size: 32px;
         font-weight: bold;
-        color: #007bff;
+        color: #4b6584; /* Deep Steel Blue */
         margin-bottom: 10px;
     }
 
     .profile-container p {
         font-size: 15px;
-        color: #6c757d;
+        color: #8395a7; /* Light Slate Gray */
         margin-bottom: 30px;
     }
 
     /* Form Styling */
-    .profile-container form .form-control {
-        border: 1px solid #ced4da;
-        border-radius: 8px;
-        padding: 12px 15px;
-        font-size: 15px;
-        transition: all 0.3s ease;
-        background: #f8f9fa;
+    .profile-container form .input-group {
+        position: relative;
+        margin-bottom: 20px;
     }
 
-    .profile-container form .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+    .profile-container form .input-group .form-control {
+        border: 1px solid #d1d8e0;
+        border-radius: 8px;
+        padding: 12px 15px 12px 40px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+        background: #f7f9fc; /* Light Grayish Blue */
+    }
+
+    .profile-container form .input-group .form-control:focus {
+        border-color: #54a0ff; /* Soft Blue */
+        box-shadow: 0 0 8px rgba(84, 160, 255, 0.4);
         background: #ffffff;
+    }
+
+    .profile-container form .input-group i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #8395a7; /* Light Slate Gray */
+        font-size: 18px;
     }
 
     .profile-container form label {
         font-size: 14px;
         font-weight: 600;
-        color: #333333;
+        color: #2c3e50; /* Dark Blue Gray */
         margin-bottom: 5px;
         display: block;
     }
 
     /* Buttons */
     .btn-primary {
-        background: linear-gradient(to right, #007bff, #0056b3);
+        background: linear-gradient(to right, #1e90ff, #007aff); /* Gradient Blue */
         border: none;
         color: #ffffff;
         font-size: 16px;
@@ -73,15 +90,19 @@
         transition: all 0.3s ease;
     }
 
+    .btn-primary i {
+        margin-right: 8px;
+    }
+
     .btn-primary:hover {
-        background: linear-gradient(to right, #0056b3, #004085);
-        box-shadow: 0px 8px 15px rgba(0, 91, 187, 0.4);
+        background: linear-gradient(to right, #0056b3, #003d99);
+        box-shadow: 0px 8px 15px rgba(30, 144, 255, 0.4);
         transform: translateY(-3px);
     }
 
     .btn-outline-dark {
-        border-color: #343a40;
-        color: #343a40;
+        border-color: #576574; /* Muted Gray */
+        color: #576574;
         font-size: 16px;
         font-weight: 600;
         padding: 12px 30px;
@@ -89,17 +110,14 @@
         transition: all 0.3s ease;
     }
 
-    .btn-outline-dark:hover {
-        background-color: #343a40;
-        color: #ffffff;
-        box-shadow: 0px 8px 15px rgba(52, 58, 64, 0.3);
+    .btn-outline-dark i {
+        margin-right: 8px;
     }
 
-    /* Error Styling */
-    .form-error {
-        font-size: 13px;
-        color: #d9534f;
-        margin-top: 5px;
+    .btn-outline-dark:hover {
+        background-color: #576574;
+        color: #ffffff;
+        box-shadow: 0px 8px 15px rgba(87, 101, 116, 0.3);
     }
 
     /* Responsive Adjustments */
@@ -139,16 +157,23 @@
             {% csrf_token %}
             <div class="row">
                 {% for a in af %}
-                <div class="col-md-6 mb-4">
+                <div class="col-md-6">
                     <label>{{ a.label }}</label>
-                    {{ a }}
+                    <div class="input-group">
+                        <i class="fa-solid fa-user"></i> <!-- Example Icon -->
+                        {{ a }}
+                    </div>
                     <div class="form-error">{{ a.errors }}</div>
                 </div>
                 {% endfor %}
             </div>
             <div class="text-center mt-4">
-                <input type="submit" value="Save Changes" class="btn btn-primary">
-                <a href="{% url 'show_address' %}" class="btn btn-outline-dark">Show Address</a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-save"></i> Save Changes
+                </button>
+                <a href="{% url 'show_address' %}" class="btn btn-outline-dark">
+                    <i class="fa-solid fa-location-dot"></i> Show Address
+                </a>
             </div>
         </form>
     </div>

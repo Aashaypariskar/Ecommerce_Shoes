@@ -1,1 +1,158 @@
-{% extends "core/base.html" %}
+{% block content %}
+{% load static %}
+
+<!-- Include Font Awesome for Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+    /* Global Styling */
+    body {
+        background-image: url("{% static 'core/images/never-done-challenging-convention-circa-72.jpg' %}"); 
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #ffffff; /* Ensures text is readable on dark backgrounds */
+    }
+
+    /* Success Container Styling */
+    .success-container {
+        text-align: center;
+        margin-top: 170px;
+        margin-bottom: 200px;
+        padding: 40px;
+        background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1);
+        border-radius: 5px; /* Optional: To make the box edges slightly rounded */
+    }
+
+    /* Success Icon Styling */
+    .success-icon {
+        font-size: 100px;
+        color: #28a745;
+        margin-bottom: 20px;
+        animation: bounce 1s infinite;
+    }
+
+    /* Success Message Styling */
+    .success-message {
+        font-size: 34px;
+        color: #343a40;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    /* Description Styling */
+    .success-description {
+        font-size: 18px;
+        color: #6c757d;
+        margin-bottom: 30px;
+    }
+
+    /* Button Container Styling */
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Primary Button Styling (Continue Shopping) */
+    .btn-primary {
+        background-color: #007bff; /* Blue color for a more professional look */
+        border-color: #007bff;
+        color: #ffffff; /* White text for contrast */
+        font-size: 18px;
+        font-weight: bold;
+        padding: 14px 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 4px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+        border-color: #004085;
+        transform: translateY(-2px);
+    }
+
+    /* Secondary Button Styling (View Orders) */
+    .btn-secondary {
+        background-color: #28a745; /* Green color for positive action */
+        border-color: #28a745;
+        color: #ffffff; /* White text for contrast */
+        font-size: 18px;
+        font-weight: bold;
+        padding: 14px 30px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-radius: 4px; /* Rounded corners */
+        text-decoration: none; /* Remove underline */
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+        background-color: #218838; /* Darker green on hover */
+        border-color: #1e7e34;
+        transform: translateY(-2px);
+    }
+
+    /* Bounce Animation for Success Icon */
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .success-message {
+            font-size: 28px;
+        }
+
+        .success-description {
+            font-size: 16px;
+        }
+
+        .btn-primary, .btn-secondary {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+    }
+</style>
+
+<div class="container success-container">
+    <i class="fa-solid fa-circle-check success-icon"></i>
+    <h1 class="success-message">Order Placed Successfully!</h1>
+    <p class="success-description">
+        Thank you for shopping with us. Your order has been placed successfully and will be delivered soon.
+    </p>
+    <div class="btn-container">
+        <!-- Updated Button for Continue Shopping with Icon -->
+        <a href="{% url 'index' %}" class="btn btn-primary">
+            <i class="fa-solid fa-shopping-cart"></i> Continue Shopping
+        </a>
+        <!-- Updated Button for View Orders with Icon -->
+        <a href="{% url 'order' %}" class="btn btn-secondary">
+            <i class="fa-solid fa-box"></i> View Orders
+        </a>
+    </div>
+</div>
+
+{% endblock content %}

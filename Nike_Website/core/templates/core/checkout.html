@@ -3,20 +3,22 @@
 
 {% block content %}
 
-<style>
+<!-- Include Font Awesome CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
+<style>
     body {
         background-color: #f8f9fa;
         font-family: 'Arial', sans-serif;
     }
-    
+
     h2 {
         font-size: 28px;
         color: #343a40;
         font-weight: bold;
         margin-bottom: 20px;
     }
-    
+
     .address-card {
         border: 1px solid #ddd;
         border-radius: 10px;
@@ -24,76 +26,91 @@
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
         padding: 10px; /* Extra padding for better readability */
     }
-    
+
     .address-card:hover {
         transform: translateY(-5px);
         box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
         border-color: #28a745;
     }
-    
+
     .address-card input[type="radio"] {
         margin-top: 5px;
         cursor: pointer;
     }
-    
+
     .card-title {
         color: #28a745;
         font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Spacing between icon and text */
     }
-    
+
+    .card-title i {
+        color: #28a745;
+    }
+
     .card-text {
         color: #555;
         font-size: 14px;
         margin-top: 5px;
     }
-    
+
+    .card-text i {
+        color: #6c757d;
+        margin-right: 5px;
+    }
+
     .btn-success {
         background-color: #28a745;
         border-color: #28a745;
         font-size: 18px;
         font-weight: bold;
         padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Spacing between icon and text */
     }
-    
+
     .btn-success:hover {
         background-color: #218838;
         border-color: #1e7e34;
     }
-    
+
     .btn-secondary {
         background-color: #6c757d;
         border-color: #6c757d;
         font-size: 18px;
         font-weight: bold;
         padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Spacing between icon and text */
     }
-    
+
     .btn-secondary:hover {
         background-color: #5a6268;
         border-color: #545b62;
     }
-    
+
     .row.g-4 {
         row-gap: 20px; /* Extra spacing between rows */
     }
-    
+
     @media (max-width: 768px) {
         h2 {
             font-size: 24px;
         }
+
         .btn-success, .btn-secondary {
             font-size: 16px;
             padding: 8px 15px;
         }
     }
-    
-    
-
 </style>
 
-
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Select Delivery Address</h2>
+    <h2 class="text-center mb-4"><i class="fa-solid fa-location-dot"></i> Select Delivery Address</h2>
     <form action="{% url 'payment' %}" method="POST">
         {% csrf_token %}
         <div class="row g-4">
@@ -104,11 +121,13 @@
                         <div class="d-flex align-items-start">
                             <input type="radio" name="selected_address" value="{{ add.id }}" class="form-check-input me-3" checked>
                             <div>
-                                <h5 class="card-title mb-1">{{ add.name }}</h5>
-                                <p class="card-text mb-0"><strong>Address:</strong> {{ add.address }}</p>
-                                <p class="card-text mb-0"><strong>City:</strong> {{ add.city }}</p>
-                                <p class="card-text mb-0"><strong>State:</strong> {{ add.state }}</p>
-                                <p class="card-text mb-0"><strong>Pincode:</strong> {{ add.pincode }}</p>
+                                <h5 class="card-title mb-1">
+                                    <i class="fa-solid fa-user"></i> {{ add.name }}
+                                </h5>
+                                <p class="card-text mb-0"><i class="fa-solid fa-home"></i> <strong>Address:</strong> {{ add.address }}</p>
+                                <p class="card-text mb-0"><i class="fa-solid fa-city"></i> <strong>City:</strong> {{ add.city }}</p>
+                                <p class="card-text mb-0"><i class="fa-solid fa-map-marker-alt"></i> <strong>State:</strong> {{ add.state }}</p>
+                                <p class="card-text mb-0"><i class="fa-solid fa-envelope"></i> <strong>Pincode:</strong> {{ add.pincode }}</p>
                             </div>
                         </div>
                     </div>
@@ -117,7 +136,9 @@
             {% endfor %}
         </div>
         <div class="d-flex justify-content-between align-items-center mt-4">
-            <a href="{% url 'address' %}" class="btn btn-secondary btn-lg">Add Address</a>
+            <a href="{% url 'address' %}" class="btn btn-secondary btn-lg">
+                <i class="fa-solid fa-plus"></i> Add Address
+            </a>
             <input type="submit" class="btn btn-success btn-lg" value="Proceed to Payment">
         </div>
     </form>
