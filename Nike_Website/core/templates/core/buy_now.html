@@ -227,9 +227,13 @@
                     {% for item in cart_items %}
                     <tr>
                         <td>{{ item.product.name }}</td>
-                        <td class="text-center">₹{{ item.product.discounted_price }}</td>
+                        <td class="text-center">₹{{ Shoe.discounted_price }}</td>
                         <td class="text-center">{{ item.quantity }}</td>
                         <td class="text-end">₹{{ item.price_and_quantity_total }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="text-end"><strong>Subtotal</strong></td>
+                        <td class="text-end">₹{{ item.product.discounted_price }}</td>
                     </tr>
                     {% endfor %}
                     <tr class="total-row">
