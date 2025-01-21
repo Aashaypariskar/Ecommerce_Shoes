@@ -1,36 +1,190 @@
 {% extends "core/base.html" %}
-
+{% load static %}
 {% block content %}
-<div class="container register h-50">
-    <div class="register-heading ">
-        <h2 class="mb-3 text-primary">Register Here</h2>
-    </div>
-   <form action="" method="POST" novalidate>
-        {% csrf_token %}
 
-        {% if mf.non_field_errors %}
-            {% for error in mf.non_field_errors %}
-                <span class="alert alert-danger">{{error}}</span>
+<style>
 
-            {% endfor %}
-        {% endif %}
+    /* General Styles */
+    body {
+        background: #f7f7f7;
+        font-family: 'Roboto', sans-serif;
+    }
+    
+    /* Centered Form Container */
+    .container.register {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    /* Card Style */
+    .card {
+        border-radius: 15px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+    
+    /* Heading Styling */
+    .register-heading h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #007bff;
+        letter-spacing: 1px;
+    }
+    
+    .register-heading p {
+        font-size: 1rem;
+        color: #6c757d;
+        margin-bottom: 2rem;
+    }
+    
+    /* Form Input Styles */
+    input[type="text"], input[type="password"] {
+        border-radius: 8px;
+        padding: 12px;
+        width: 100%;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        transition: border-color 0.3s ease;
+    }
+    
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    
+    /* Form Label */
+    label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    /* Button Styling */
+    input[type="submit"] {
+        font-size: 1.1rem;
+        padding: 12px;
+        background-color: #28a745;
+        border: none;
+        border-radius: 25px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    input[type="submit"]:hover {
+        background-color: #218838;
+        transform: translateY(-3px);
+    }
+    
+    input[type="submit"]:active {
+        background-color: #1e7e34;
+    }
+    
+    /* Forgot Password Link */
+    a {
+        text-decoration: none;
+        font-size: 1rem;
+        color: #007bff;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Error and Message Alerts */
+    .alert-danger, .alert {
+        font-size: 0.9rem;
+        padding: 10px;
+        border-radius: 8px;
+    }
+    
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+    
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+    
+    .alert-info {
+        background-color: #cce5ff;
+        border-color: #b8daff;
+        color: #004085;
+    }
+    
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+    }
+    
+    /* Smooth Transitions */
+    input[type="submit"], input[type="text"], input[type="password"] {
+        transition: all 0.3s ease;
+    }
+    
+    /* Spacing Adjustments */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
 
-        {% for m in mf%}
-        <div class="form-group mr-4 ml-4 ">
-            {{m.label_tag}} {{m}} {{m.errors}}
-        </div> 
-        {% endfor %}
-        <div class="text-center">
-        <input type="submit" value="Login" class="btn btn-success register-button">
-        <a href="{% url "forgotpassword" %}">Forgot Password</a>
+</style>
+
+<div class="container register h-100 d-flex justify-content-center align-items-center">
+    <div class="card shadow-lg p-5 w-100" style="max-width: 450px; border-radius: 15px;">
+        <div class="register-heading text-center mb-4">
+            <h2 class="text-primary font-weight-bold">Login</h2>
+            <p class="text-muted">Please enter your credentials to access your account.</p>
         </div>
-    </form>
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+
+            {% if mf.non_field_errors %}
+                <div class="alert alert-danger mb-3">
+                    {% for error in mf.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for m in mf %}
+                <div class="form-group mb-4">
+                    <label class="font-weight-bold" for="{{ m.id_for_label }}">{{ m.label }}</label>
+                    {{ m }}
+                    {% if m.errors %}
+                        <div class="text-danger mt-2">
+                            {{ m.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-group mb-4 text-center">
+                <input type="submit" value="Login" class="btn btn-success w-100 rounded-pill">
+            </div>
+
+            <div class="text-center">
+                <a href="{% url 'forgotpassword' %}" class="text-muted">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
 </div>
-<br>
-    {% if messages %}
+
+{% if messages %}
+    <div class="container mt-4">
         {% for message in messages %}
-             <span {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}>{{message}}</span>
+            <div class="alert alert-{{ message.tags }} mb-3">
+                {{ message }}
+            </div>
         {% endfor %}
-    {% endif %}
+    </div>
+{% endif %}
 
 {% endblock content %}
