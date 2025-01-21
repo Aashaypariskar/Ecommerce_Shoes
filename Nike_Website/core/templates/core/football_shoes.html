@@ -1,7 +1,7 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% block content %}
- 
+
 <style>
     /* Football Front Effects */
     .item {
@@ -37,105 +37,100 @@
 
     .football_container {
         background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYFKmvT_7t3cAMQSSa_mCpl3Pq4u3yj5df7c1Ss3pI0bhy6sU4');
-        height: 100vh; 
-        background-size: cover; 
-        background-position: center; 
-        background-attachment: fixed; 
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    
-
-.gallery-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      grid-gap: 20px;
-      width: 90%;
-      max-width: 1200px;
-      margin: 20px;
-      margin-left: 170px;
-      padding: 10px;
+    .gallery-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-gap: 20px;
+        width: 90%;
+        max-width: 1200px;
+        margin: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px;
     }
 
     .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .gallery-item img {
-      width: 100%;
-      height: auto;
-      max-height: 300px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.3s ease;
     }
 
     .gallery-item:hover img {
-      transform: scale(1.05);
+        transform: scale(1.05);
     }
 
     .gallery-item:hover {
-      transform: scale(1.03);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transform: scale(1.03);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
 
     .gallery-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      padding: 10px;
-      text-align: center;
-      border-radius: 15px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 10px;
+        text-align: center;
+        border-radius: 15px;
     }
 
     .gallery-item:hover .gallery-overlay {
-      opacity: 1;
+        opacity: 1;
     }
 
     .gallery-overlay h3 {
-      font-size: 24px;
-      font-weight: bold;
-      margin: 0;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 0;
     }
 
     .gallery-overlay p {
-      font-size: 14px;
-      margin-top: 10px;
-      font-weight: 300;
+        font-size: 14px;
+        margin-top: 10px;
+        font-weight: 300;
     }
 
     .gallery-item.large {
-      grid-column: span 2;
-      grid-row: span 2;
+        grid-column: span 2;
+        grid-row: span 2;
     }
 
     .gallery-item.medium {
-      grid-column: span 2;
-      grid-row: span 1;
+        grid-column: span 2;
+        grid-row: span 1;
     }
 
     .gallery-item.small {
-      grid-column: span 1;
-      grid-row: span 1;
+        grid-column: span 1;
+        grid-row: span 1;
     }
 
-    </style>
-    
-    
 </style>
 
 <div class="container-fluid football_container">
@@ -163,17 +158,16 @@
 
 <div class="container mt-5">
     <div class="row g-0 justify-content-start">
-        {% for f in fs  %}
-        <div class="col-md-3 mb-4" style="padding-left: 20px;">
+        {% for f in fs %}
+        <div class="col-md-3 mb-4">
             <div class="card product-card">
                 <a href="{% url 'card_info' f.id %}">
-                    <img src="{{f.pets_image.url}}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
+                    <img src="{{f.pets_image.url}}" alt="" class="card-img-top">
                 </a>
                 <div class="card-body product-info">
                     <p class="product-title">{{f.small_description}}</p>
-                    <p class="product-price">INR &#8377 {{f.discounted_price}}   <s style="color:red;">{{f.original_price}}</s></p>
-                    {% comment %} <a href="{% url "buynow " f.id %}"> {% endcomment %}
-                    <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i></button></a>
+                    <p class="product-price">INR &#8377 {{f.discounted_price}} <s style="color:red;">{{f.original_price}}</s></p>
+                    <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i></button>
                 </div>
             </div>
         </div>
@@ -181,11 +175,7 @@
     </div>
 </div>
 
-
-
-
-
-<div class="gallery-container ms-5">
+<div class="gallery-container">
     <!-- First Image -->
     <div class="gallery-item large">
         <picture>
@@ -199,77 +189,65 @@
             </div>
         </div>
     </div>
-    
 
     <!-- Second Image -->
-    <div class="gallery-item medium">
-      <picture>
-        <source srcset="{% static "core/images/gallery 2.jpg" %}" type="image/webp">
-        <img src="Assets/image/index sneakers banner.jpg" alt="Sunset Over Ocean">
-      </picture>
-      <div class="gallery-overlay">
-        <div>
-          <h3>Sunset Over Ocean</h3>
-          <p>Sunset over the ocean horizon</p>
-        </div>
-      </div>
-    </div>
+    
 
     <!-- Third Image -->
     <div class="gallery-item small">
-      <picture>
-        <source srcset="{% static "core/images/gallery3.jpg" %}" type="image/webp">
-        <img src="Assets/image/running banner.jpg" alt="City Lights">
-      </picture>
-      <div class="gallery-overlay">
-        <div>
-          <h3>City Lights</h3>
-          <p>City lights at night</p>
+        <picture>
+            <source srcset="{% static 'core/images/gallery3.jpg' %}" type="image/webp">
+            <img src="{% static 'core/images/city-lights.jpg' %}" alt="City Lights" style="height: 250px; object-fit: cover;">
+        </picture>
+        <div class="gallery-overlay">
+            <div>
+                <h3>City Lights</h3>
+                <p>City lights at night</p>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Fourth Image -->
     <div class="gallery-item small">
-      <picture>
-        <source srcset="{% static "core/images/gallery5.jpg" %}" type="image/webp">
-        <img src="Assets/image/poster.jpg" alt="Snowy Mountains">
-      </picture>
-      <div class="gallery-overlay">
-        <div>
-          <h3>Snowy Mountains</h3>
-          <p>Snow-capped mountains in winter</p>
+        <picture>
+            <source srcset="{% static 'core/images/gallery5.jpg' %}" type="image/webp">
+            <img src="{% static 'core/images/snow-mountains.jpg' %}" alt="Snowy Mountains" style="height: 250px; object-fit: cover;">
+        </picture>
+        <div class="gallery-overlay">
+            <div>
+                <h3>Snowy Mountains</h3>
+                <p>Snow-capped mountains in winter</p>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Fifth Image -->
     <div class="gallery-item large">
-      <picture>
-        <source srcset="{% static "core/images/gallery image.jpg" %}" type="image/webp">
-        <img src="Assets/image/never-done-challenging-convention-circa-72.jpg" alt="Desert Landscape">
-      </picture>
-      <div class="gallery-overlay">
-        <div>
-          <h3>Desert Landscape</h3>
-          <p>Wide open desert landscape</p>
+        <picture>
+            <source srcset="{% static 'core/images/image.jpg' %}" type="image/webp">
+            <img src="{% static 'core/images/mercurial-vapor-1-rgn-1.webp' %}" alt="Desert Landscape" style="height: 400px; object-fit: cover;">
+        </picture>
+        <div class="gallery-overlay">
+            <div>
+                <h3>Desert Landscape</h3>
+                <p>Wide open desert landscape</p>
+            </div>
         </div>
-      </div>
     </div>
 
     <!-- Sixth Image -->
     <div class="gallery-item medium">
-      <picture>
-        <source srcset="{% static "core/images/image.jpg" %}" type="image/webp">
-        <img src="{% static "core/images/image.jpg" %}" alt="Peaceful Lakeside">
-      </picture>
-      <div class="gallery-overlay">
-        <div>
-          <h3>Peaceful Lakeside</h3>
-          <p>Peaceful lakeside reflection</p>
+        <picture>
+            <source srcset="{% static 'core/images/mercurial-vapor-1-rgn-1.webp' %}" type="image/webp">
+            <img src="{% static 'core/images/peaceful-lakeside.jpg' %}" alt="Peaceful Lakeside" style="height: 300px; object-fit: cover;">
+        </picture>
+        <div class="gallery-overlay">
+            <div>
+                <h3>Peaceful Lakeside</h3>
+                <p>Peaceful lakeside reflection</p>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
 {% endblock content %}

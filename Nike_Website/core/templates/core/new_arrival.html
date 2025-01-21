@@ -1,6 +1,35 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block content %}
+
+<style>
+    .row {
+        display: flex; /* Flexbox ensures items align */
+        flex-wrap: wrap; /* Allows wrapping to the next row */
+    }
+
+    .col-md-3 {
+        display: flex; /* Ensure consistent height adjustment for cards */
+        flex-direction: column; /* Align items vertically */
+    }
+
+    .product-card {
+        display: flex;
+        flex-direction: column; /* Align card content vertically */
+        justify-content: space-between; /* Space out card content evenly */
+        height: 100%; /* Ensure cards stretch to fill available space */
+    }
+
+    .card {
+        flex-grow: 1; /* Makes the card stretch dynamically to match the tallest card */
+    }
+
+    .card-body {
+        margin-top: auto; /* Pushes the content to the bottom if there's extra space */
+    }
+</style>
+
 
 <div class="container mt-5">
     <div class="row g-0 justify-content-start">

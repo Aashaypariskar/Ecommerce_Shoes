@@ -1,12 +1,37 @@
 {% extends "core/base.html" %}
-
+{% load static %}
 {% block content %}
+
+
+<style>
+    .row {
+      display: flex; /* Flexbox ensures alignment of items */
+      flex-wrap: wrap; /* Allows wrapping of cards to the next row */
+    }
+  
+    .product-card {
+      display: flex;
+      flex-direction: column; /* Ensure consistent structure inside the card */
+      justify-content: space-between; /* Space out the card content */
+    }
+  
+    /* Dynamically set all cards to the height of the tallest card in the row */
+    .col-md-3 {
+      display: flex; /* Flexbox ensures equal height for all cards */
+    }
+  
+    .card {
+      flex-grow: 1; /* Allows the card to grow uniformly to match the tallest one */
+    }
+  </style>
+  
+
 
 <div class="container mt-5">
     <div class="row g-0 justify-content-start">
         {% for c in cs %}
         <div class="col-md-3 mb-4" style="padding-left: 20px;">
-            <div class="card product-card">
+            <div class="card product-card equal-height">
                 <a href="{% url 'card_info' c.id %}">
                     <img src="{{ c.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
                 </a>
@@ -21,6 +46,4 @@
     </div>
 </div>
 
-
 {% endblock content %}
-
