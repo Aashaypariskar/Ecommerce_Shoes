@@ -342,7 +342,7 @@ def forgot_password(request):
             send_mail(
                 'Password Reset',
                 f'Click the following link to reset your password: {reset_url}',
-                'fordjangopproject@gmail.com',  # Use a verified email address
+                'aashaypariskar1605@gmail.com',  # Use a verified email address
                 [email],
                 fail_silently=False,
             )

@@ -116,12 +116,12 @@ USE_TZ = True
 
 #========================== Email Settings =================================
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp-relay.brevo.com'  # Brevo's SMTP server
+EMAIL_HOST = 'smtp.gmail.com'  # Brevo's SMTP server
 EMAIL_PORT = 587  # SMTP port for TLS
 EMAIL_USE_TLS = True  # Use TLS for secure connection
-EMAIL_HOST_USER = '80290d002@smtp-brevo.com'  # This is the Brevo SMTP login email
-EMAIL_HOST_PASSWORD = 'nUxLdA1b9CkMwTFD'  # Brevo SMTP password
-DEFAULT_FROM_EMAIL = 'fordjangopproject@gmail.com'  # Your Gmail address (or a verified Brevo email address)    
+EMAIL_HOST_USER = 'aashaypariskar1605@gmail.com'  # This is the Brevo SMTP login email
+EMAIL_HOST_PASSWORD = 'wnum lriz srsl rwld'  # Brevo SMTP password
+DEFAULT_FROM_EMAIL = 'aashaypariskar1605@gmail.com'  # Your Gmail address (or a verified Brevo email address)    
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

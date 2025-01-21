@@ -3,8 +3,20 @@
 {% block content %}
 
 <style>
-
+   
+    
 </style>
+<!-- Display messages -->
+{% if messages %}
+    <div class="container mt-4">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                <strong style="align-items: center;">{{ message }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
 
 <!-- Registration Section -->
 <div class="container register-container py-5">
@@ -50,15 +62,4 @@
     </div>
 </div>
 
-<!-- Display messages -->
-{% if messages %}
-    <div class="container mt-4">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                <strong>{{ message }}</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
 {% endblock content %}
