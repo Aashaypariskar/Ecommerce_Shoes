@@ -18,12 +18,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 1rem;
     }
 
     /* Card Style with Backdrop Blur */
     .card {
         backdrop-filter: blur(5px); /* Blur effect */
-        background-color: rgba(255, 255, 255, 0.75); /* Semi-transparent white */
+        background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         border: none;
         border-radius: 10px;
@@ -34,7 +35,7 @@
 
     /* Heading Styling */
     .register-heading h2 {
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-weight: 800;
         color: #007bff;
         text-transform: uppercase;
@@ -50,12 +51,13 @@
     /* Form Input Styles */
     input[type="text"], input[type="password"] {
         border: 1px solid #ced4da;
-        padding: 14px;
+        padding: 12px;
         width: 100%;
         font-size: 1rem;
         margin-top: 0.5rem;
         color: #495057;
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 5px;
     }
 
     input[type="text"]:focus, input[type="password"]:focus {
@@ -154,7 +156,55 @@
     .text-center {
         text-align: center;
     }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card {
+            padding: 1.5rem;
+            width: 90%;
+        }
+
+        .register-heading h2 {
+            font-size: 1.8rem;
+        }
+
+        .register-heading p {
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], input[type="password"], input[type="submit"] {
+            font-size: 0.9rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            padding: 1rem;
+        }
+
+        .register-heading h2 {
+            font-size: 1.5rem;
+        }
+
+        .register-heading p {
+            font-size: 0.8rem;
+        }
+
+        input[type="text"], input[type="password"], input[type="submit"] {
+            font-size: 0.8rem;
+        }
+
+        label {
+            font-size: 0.8rem;
+        }
+    }
 </style>
+
+
 
 
 <div class="container register">

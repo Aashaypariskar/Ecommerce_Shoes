@@ -1,22 +1,24 @@
 {% load static %}
 <style>
+    /* Promo Section */
     .promo-section {
         background-color: #ffffff; /* White background */
         color: #333; /* Dark text for contrast */
-        padding: 50px 0;
+        padding: 50px 20px; /* Add horizontal padding for smaller screens */
         position: relative;
-        text-align: center; /* Center text */
+        text-align: center;
     }
-    
+
+    /* Promo Quote */
     .promo-quote {
-        font-size: 2.5rem; /* Increased font size */
+        font-size: 2.5rem; /* Large font size for desktops */
         font-weight: 700;
         margin-bottom: 10px;
         color: #0b0b0b; /* Bright coral color for the quote */
         text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         animation: fadeIn 1s ease-in-out; /* Animation */
     }
-    
+
     @keyframes fadeIn {
         from {
             opacity: 0;
@@ -27,37 +29,42 @@
             transform: translateY(0);
         }
     }
-    
+
+    /* Promo Description */
     .promo-description {
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Default font size for desktops */
         color: #555; /* Dark gray for contrast */
         max-width: 700px;
         margin: 0 auto;
         line-height: 1.5; /* Improved line height for readability */
         animation: fadeIn 1.2s ease-in-out; /* Animation for description */
     }
-    
+
+    /* Button Styling */
     .button-2 {
-        margin-left: 450px;
+        display: inline-block;
+        margin: 20px auto; /* Center the button on all screens */
         padding: 4px;
         width: 200px;
         height: 40px;
         color: #fff;
         border: 3px solid red;
-        background-image: -webkit-linear-gradient(30deg, #e20e0e 50%, transparent 50%);
         background-image: linear-gradient(30deg, #e90d61 50%, transparent 50%);
         background-size: 451px;
         background-repeat: no-repeat;
         background-position: 0%;
-        -webkit-transition: background 300ms ease-in-out;
         transition: background 300ms ease-in-out;
         border-radius: 20px;
-      }
-      .button-2:hover {
+        text-align: center;
+        line-height: 40px; /* Vertically center text in the button */
+    }
+
+    .button-2:hover {
         background-position: 100%;
         color: #000000;
-      }
-    
+    }
+
+    /* Shake Animation */
     @keyframes shake {
         0% {
             transform: translateX(0);
@@ -75,14 +82,50 @@
             transform: translateX(0);
         }
     }
-</style>
 
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+        .promo-quote {
+            font-size: 2rem; /* Smaller font size for tablets */
+        }
+
+        .promo-description {
+            font-size: 1rem; /* Reduce text size for better fit */
+            max-width: 500px; /* Reduce maximum width for smaller screens */
+        }
+
+        .button-2 {
+            width: 180px; /* Adjust button width */
+            height: 38px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .promo-quote {
+            font-size: 1.5rem; /* Smaller font size for mobile */
+        }
+
+        .promo-description {
+            font-size: 0.9rem; /* Reduce text size further for smaller screens */
+            max-width: 300px; /* Reduce maximum width for mobile */
+        }
+
+        .button-2 {
+            width: 160px; /* Adjust button size for mobile */
+            height: 36px;
+            line-height: 36px; /* Adjust text vertical alignment */
+        }
+    }
+</style>
 
 <div class="promo-section py-5 mt-5">
     <div class="container text-center">
         <h2 class="promo-quote">"Step into the future of fashion with our exclusive collection!"</h2>
-        <p class="promo-description mt-3">Discover the latest trends and find your perfect style. Don't miss out on our special offers!</p>
-        <a href="{% url "registration" %}">
-        <div class="button button-2 mt-3">Register to shop now</div></a>
+        <p class="promo-description mt-3">
+            Discover the latest trends and find your perfect style. Don't miss out on our special offers!
+        </p>
+        <a href="{% url 'registration' %}">
+            <div class="button button-2 mt-3">Register to shop now</div>
+        </a>
     </div>
 </div>

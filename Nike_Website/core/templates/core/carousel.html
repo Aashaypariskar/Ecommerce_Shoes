@@ -1,40 +1,95 @@
 {% load static %}
 
 <style>
-
-    /* Ensure carousel images are responsive */
+    /* General Carousel Styles */
     .carousel-image {
         width: 100%;
-        height: auto;
-        object-fit: cover;  /* Keeps aspect ratio and fills the container */
+        height: 100%; /* Ensures image fills the container */
+        object-fit: cover; /* Ensures aspect ratio and fills container */
     }
-    
-    /* Custom styles for carousel controls */
-    .carousel-control-prev, .carousel-control-next {
-        background-color: transparent;
-        border: none;
-        color: white;
-        z-index: 10; /* Ensure controls are on top of images */
-    }
-    
-    /* Ensure images don't overflow */
-    .carousel-inner {
-        height: 100vh; /* Take full viewport height */
-    }
-    
-    /* Responsive tweaks */
-    @media (max-width: 767px) {
-        /* For smaller screens, reduce height of the carousel */
-        .carousel-inner {
-            height: 300px;  /* Adjust height for mobile */
-        }
-        
-        .carousel-image {
-            object-fit: contain; /* Maintain aspect ratio for smaller devices */
-        }
-    }
-    
 
+    /* Ensure the carousel adapts to the viewport height */
+    .carousel-inner {
+        height: 100vh; /* Full viewport height for larger screens */
+    }
+
+    /* Carousel Controls */
+    .carousel-control-prev,
+    .carousel-control-next {
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+        .carousel-inner {
+            height: 80vh; /* Adjust height for medium screens */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .carousel-inner {
+            height: 60vh; /* Adjust height for tablets */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .carousel-inner {
+            height: 40vh; /* Reduce height for smaller mobile devices */
+        }
+
+        .carousel-image {
+            object-fit: contain; /* Ensure images maintain aspect ratio on small screens */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 0.75rem;
+            height: 0.75rem;
+        }
+    }
 </style>
 
 <div class="container-fluid p-0">

@@ -1,68 +1,79 @@
 {% load static %}
 
 <style>
-    /*index page cards */ 
+    /* Responsive Index Page Cards */
 
     .index-cards-container {
-        height: 700px;
         margin: 20px;
     }
-    
+
     .index-card {
         position: relative;
         overflow: hidden;
         width: 100%;
         transition: transform 0.3s ease;
-        border-radius: 5px; /* Professional, subtle rounded corners */
-        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1); /* Slightly stronger shadow for depth */
-        margin-bottom: 20px; /* Space between cards */
-        background-color: #f9f9f9; /* Lighter background for better contrast */
+        border-radius: 5px;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        background-color: #f9f9f9;
     }
-    
+
     .index-card:hover {
-        transform: scale(1.05); /* Slightly enlarge the card on hover */
+        transform: scale(1.05);
     }
-    
+
     .index-card-img {
         width: 100%;
+        height: auto;
         transition: opacity 0.3s ease;
-        object-fit: cover; /* Ensure images fill the space properly */
+        object-fit: cover;
     }
-    
+
     .index-card-body {
         position: absolute;
-        bottom: 0; /* Position the body at the bottom */
+        bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(255, 255, 255, 0.3); /* Adjusted transparency */
-        backdrop-filter: blur(8px); /* Add the blur effect */
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(8px);
         padding: 20px;
         transform: translateY(100%);
         transition: transform 0.3s ease, opacity 0.3s ease;
         opacity: 0;
-        display: flex; /* Use flexbox for alignment */
-        flex-direction: column; /* Arrange children vertically */
-        justify-content: space-between; /* Equal space between elements */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
-    
 
-    
     .index-card:hover .index-card-body {
         transform: translateY(0);
         opacity: 1;
     }
-    
+
     .index-card-title {
         margin: 0;
-        font-size: 1.6rem; /* Slightly larger font size */
-        font-weight: 600; /* Bold for a professional look */
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
         transition: color 0.3s ease, transform 0.3s ease;
-        color: #333; /* Dark color for the text */
     }
-    
+
+    .index-card-title:hover {
+        color: #007bff;
+        transform: translateY(-5px);
+    }
+
+    .index-card-body p {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        text-align: center;
+    }
+
     .index-card-button {
-        margin: 10px auto; /* Center the button with equal margin on top and bottom */
-        padding: 0; /* Remove padding to allow flex centering */
+        margin: 10px auto;
+        padding: 0;
         width: 200px;
         height: 40px;
         color: #fff;
@@ -73,20 +84,18 @@
         background-position: 0%;
         transition: background 300ms ease-in-out;
         border-radius: 20px;
-    
-        /* Center the text */
-        display: flex; /* Use flexbox to center text */
-        align-items: center; /* Center vertically */
-        justify-content: center; /* Center horizontally */
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-    
+
     .index-card-button:hover {
         background-position: 100%;
-        color: #000000; /* Change text color on hover */
-        animation: shake 0.5s; /* Add shake animation on hover */
+        color: #000000;
+        animation: shake 0.5s;
     }
-    
-    /* Keyframes for the shake animation */
+
+    /* Shake animation */
     @keyframes shake {
         0% {
             transform: translateX(0);
@@ -104,66 +113,80 @@
             transform: translateX(0);
         }
     }
-    
-    /* Keyframes for the slide-in effect */
-    @keyframes slideIn {
-        to {
-            opacity: 1; /* Fade in */
-            transform: translateY(0); /* Move to original position */
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 991px) {
+        .index-cards-container {
+            margin: 10px;
         }
     }
-    
-    .index-card-title {
-        justify-content: center;
-        align-items: center;
-        opacity: 0; /* Initially hidden */
-        transform: translateY(-20px); /* Start higher for the animation effect */
-        animation: slideIn 0.5s forwards; /* Animation on body reveal */
-    }
-    
-    .index-card:hover .index-card-title {
-        color: #007bff; /* Slightly more professional blue on hover */
-        transform: translateY(-5px); /* Slight lift effect */
+
+    @media (max-width: 767px) {
+        .index-card-body {
+            padding: 10px;
+        }
+
+        .index-card-title {
+            font-size: 1.4rem;
+        }
+
+        .index-card-body p {
+            font-size: 0.9rem;
+        }
+
+        .index-card-button {
+            width: 150px;
+            height: 35px;
+            font-size: 0.9rem;
+        }
     }
 
-    .index-card-body p {
-        font-size: 1rem;
-        color: #555; /* Softer text color */
-        line-height: 1.6; /* Improve readability */
+    @media (max-width: 575px) {
+        .index-card-title {
+            font-size: 1.2rem;
+        }
+
+        .index-card-body p {
+            font-size: 0.8rem;
+        }
+
+        .index-card-button {
+            width: 130px;
+            height: 30px;
+            font-size: 0.8rem;
+        }
     }
-    
-    /*index page cards */
 </style>
 
-<div class="index-cards-container" style="height: 700px; margin: 20px;">
+<div class="index-cards-container">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="index-card">
                 <img class="index-card-img" src="{% static 'core/images/index category1.jpg' %}" alt="Card image cap">
                 <div class="index-card-body">
-                    <h5 class="index-card-title" style="text-align: center;">Sneakers</h5>
-                    <p style="text-align: center;">Discover the latest sneaker trends and styles.</p>
-                    <a href="{% url "sneakers" %}" class="index-card-button">Explore More</a> <!-- Updated button class -->
+                    <h5 class="index-card-title">Sneakers</h5>
+                    <p>Discover the latest sneaker trends and styles.</p>
+                    <a href="{% url 'sneakers' %}" class="index-card-button">Explore More</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4" style="height: 700px;">
-            <div class="index-card" style="height: 600px;">
-                <img class="index-card-img" src="{% static 'core/images/index category2.jpg' %}" alt="Card image cap" style="height: 610px;">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="index-card">
+                <img class="index-card-img" src="{% static 'core/images/index category2.jpg' %}" alt="Card image cap">
                 <div class="index-card-body">
-                    <h5 class="index-card-title" style="text-align: center;">Football Shoes</h5>
-                    <p style="text-align: center;">Top-quality football shoes for every player.</p>
-                    <a href="{% url "football_shoes" %}" class="index-card-button">Explore More</a> <!-- Updated button class -->
+                    <h5 class="index-card-title">Football Shoes</h5>
+                    <p>Top-quality football shoes for every player.</p>
+                    <a href="{% url 'football_shoes' %}" class="index-card-button">Explore More</a>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="index-card">
                 <img class="index-card-img" src="{% static 'core/images/index category3.jpg' %}" alt="Card image cap">
                 <div class="index-card-body">
-                    <h5 class="index-card-title" style="text-align: center;">Running Shoes</h5>
-                    <p style="text-align: center;">Achieve peak performance with our running shoes.</p>
-                    <a href="{% url "running_shoes" %}" class="index-card-button">Explore More</a> <!-- Updated button class -->
+                    <h5 class="index-card-title">Running Shoes</h5>
+                    <p>Achieve peak performance with our running shoes.</p>
+                    <a href="{% url 'running_shoes' %}" class="index-card-button">Explore More</a>
                 </div>
             </div>
         </div>
