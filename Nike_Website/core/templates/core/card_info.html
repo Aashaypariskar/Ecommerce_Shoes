@@ -9,22 +9,24 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
+  box-sizing: border-box;
 }
 
 /* Container */
 .container {
-  padding: 50px 20px;
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   max-width: 1400px;
-  margin: auto;
-  background-color: transperent;
+  margin: 0 auto; /* Center the container */
+  background-color: transparent;
 }
 
 /* Product Container */
 .product-container {
   display: flex;
+  flex-direction: row;
   gap: 100px;
   width: 100%;
 }
@@ -78,7 +80,7 @@ body {
 .product-price s {
   font-size: 18px;
   margin-left: 10px;
-  color:rgb(20, 19, 19);
+  color: rgb(20, 19, 19);
 }
 
 /* Size Options */
@@ -135,7 +137,7 @@ body {
 .buy-now {
   flex: 1;
   padding: 15px;
-  background-color:rgb(13, 13, 13);
+  background-color: rgb(13, 13, 13);
   color: #fff;
   font-size: 16px;
   font-weight: bold;
@@ -146,7 +148,7 @@ body {
 }
 
 .buy-now:hover {
-  background-color:rgb(48, 45, 44);
+  background-color: rgb(48, 45, 44);
 }
 
 /* About Product */
@@ -183,6 +185,73 @@ body {
   font-weight: bold;
   margin-right: 10px;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px;
+  }
+
+  .image-gallery, .product-details {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .product-title {
+    font-size: 24px;
+  }
+
+  .product-price {
+    font-size: 20px;
+  }
+
+  .size-option {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .add-to-bag, .buy-now {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .size-options {
+    gap: 5px;
+    flex-wrap: wrap; /* Allow buttons to wrap */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px; /* Reduce padding for small screens */
+  }
+
+  .product-title {
+    font-size: 20px;
+  }
+
+  .product-price {
+    font-size: 18px;
+  }
+
+  .size-option {
+    padding: 6px 8px;
+    font-size: 10px;
+  }
+
+  .add-to-bag, .buy-now {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+}
 </style>
 
 <div class="container">
@@ -209,7 +278,6 @@ body {
         <button class="size-option">11</button>
       </div>
 
-      <!-- Buttons -->
       <div class="button-section">
         <a href="{% url 'add_to_cart' fs.id %}">
           <button class="add-to-bag">Add to Bag</button>
@@ -224,7 +292,6 @@ body {
         Inspired by the original that debuted in 1985, the Air Jordan 1 Low offers a classic look designed with premium materials like leather and suede, creating a look curated for the City of Light.
       </p>
 
-      <!-- Additional Product Details -->
       <ul class="product-details-list">
         <li>Colour Shown: Barely Green/Crimson Pulse/Metallic Gold Coin</li>
         <li>Style: FZ1380-300</li>
