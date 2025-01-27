@@ -4,33 +4,102 @@
 {% block content %}
 
 <style>
+    /* Flexbox for row */
     .row {
-        display: flex; /* Flexbox ensures items align */
-        flex-wrap: wrap; /* Allows wrapping to the next row */
+        display: flex;
+        flex-wrap: wrap;
     }
 
+    /* Flexbox for individual columns */
     .col-md-3 {
-        display: flex; /* Ensure consistent height adjustment for cards */
-        flex-direction: column; /* Align items vertically */
+        display: flex;
+        flex-direction: column;
     }
 
+    /* Product card styling */
     .product-card {
         display: flex;
-        flex-direction: column; /* Align card content vertically */
-        justify-content: space-between; /* Space out card content evenly */
-        height: 100%; /* Ensure cards stretch to fill available space */
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
     }
 
     .card {
-        flex-grow: 1; /* Makes the card stretch dynamically to match the tallest card */
+        flex-grow: 1;
     }
 
     .card-body {
-        margin-top: auto; /* Pushes the content to the bottom if there's extra space */
+        margin-top: auto;
+    }
+
+    /* Top Container Styling */
+    .top-container {
+        width: 100%;
+        height: 500px; /* Set height for the top container */
+        background-image: url('{% static "core/images/expensive-sneakers.webp" %}');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    /* Heading Container Styling */
+    .heading-container {
+        text-align: center;
+        background-color: #f8f9fa; /* Light grey background */
+        padding: 40px 20px;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better separation */
+    }
+
+    .section-heading {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+    }
+
+    .section-subheading {
+        font-size: 1.2rem;
+        color: #666;
+        margin-top: 10px;
+    }
+
+    /* Product title styling */
+    .product-title {
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Product price styling */
+    .product-price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    /* Buy Now button */
+    .btn-outline-dark {
+        font-weight: bold;
     }
 </style>
 
+<!-- Top Container -->
+<div class="top-container">
+</div>
 
+<!-- Heading Container -->
+<div class="heading-container mt-5">
+    <h2 class="section-heading">Check Out Our New Arrivals</h2>
+<p class="section-subheading">Discover the latest products in our collection, specially curated for you. Don’t miss out on these fresh additions!</p>
+
+</div>
+
+<!-- Product Cards Section -->
 <div class="container mt-5">
     <div class="row g-0 justify-content-start">
         {% for n in na %}
@@ -40,7 +109,7 @@
                     <img src="{{ n.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
                 </a>
                 <div class="card-body product-info">
-                    <p class="product-title">{{ r.small_description }}</p>
+                    <p class="product-title">{{ n.small_description }}</p>
                     <p class="product-price">INR &#8377; {{ n.discounted_price }} <s style="color:red;">{{ n.original_price }}</s></p>
                     <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
                 </div>
@@ -50,6 +119,4 @@
     </div>
 </div>
 
-
 {% endblock content %}
-
