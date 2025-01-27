@@ -130,6 +130,8 @@ def limited_edition(request):
 
 
 
+
+
 def add_to_cart(request,id):
    fs = Shoes.objects.get(pk=id)
    user=request.user

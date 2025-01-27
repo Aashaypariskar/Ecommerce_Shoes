@@ -42,7 +42,7 @@
     /* Top Container Styling with background image */
     .top-container {
         width: 100%;
-        height: 600px; /* Set height for the image section */
+        height: 60vh; /* Set height for the image section */
         background-image: url('{% static "core/images/WPD-Article-Body-Images-22-1024x427.webp" %}');
         background-size: cover;
         background-position: center;
@@ -66,7 +66,7 @@
 
     /* Heading Styling */
     .section-heading {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: 700;
         color: #333;
         margin-bottom: 10px;
@@ -76,7 +76,7 @@
 
     /* Subheading Text Styling */
     .section-subheading {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         color: #666;
         font-weight: 400;
     }
@@ -111,6 +111,73 @@
         background-color: #333;
         border-color: #333;
         color: white;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+        .section-heading {
+            font-size: 2rem;
+        }
+
+        .section-subheading {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .col-md-3 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .top-container {
+            height: 50vh; /* Adjust for smaller screens */
+        }
+
+        .section-heading {
+            font-size: 1.8rem;
+        }
+
+        .section-subheading {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .col-md-3 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .top-container {
+            height: 40vh; /* Adjust for smaller screens */
+        }
+
+        .section-heading {
+            font-size: 1.6rem;
+        }
+
+        .section-subheading {
+            font-size: 1rem;
+        }
+
+        .product-price {
+            font-size: 1rem;
+        }
+
+        .btn-outline-dark {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .top-container {
+            height: 35vh; /* Further adjust for small screens */
+        }
     }
 </style>
 
