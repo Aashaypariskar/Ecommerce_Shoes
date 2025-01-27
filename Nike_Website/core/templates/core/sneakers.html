@@ -2,42 +2,149 @@
 {% load static %}
 {% block content %}
 
-
 <style>
+    /* Styles for the heading */
+    .heading-container {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .heading-container h1 {
+        font-size: 3.5rem; /* Increased font size for emphasis */
+        font-weight: 800; /* Bold and strong font weight */
+        text-transform: uppercase; /* Capitalized for impact */
+        letter-spacing: 3px; /* Adds spacing between letters for a sleek design */
+        background: linear-gradient(90deg, #4b6cb7, #182848); /* Gradient effect: vibrant blue to deep purple */
+        -webkit-background-clip: text; /* Clips gradient to the text */
+        -webkit-text-fill-color: transparent; /* Makes background visible on text */
+        text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #ddd; /* Underline effect for separation */
+        transition: all 0.3s ease; /* Smooth transition for hover effects */
+    }
+
+    /* Styles for the video container */
+    .video-container {
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        margin-bottom: 20px;
+    }
+
+    .video-container video {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        background-color: #000;
+    }
+
+    .video-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3));
+        pointer-events: none;
+    }
+
+    /* Card container styles */
     .row {
-      display: flex; /* Flexbox ensures alignment of items */
-      flex-wrap: wrap; /* Allows wrapping of cards to the next row */
+        display: flex;
+        flex-wrap: wrap; /* Allows wrapping of cards to the next row */
     }
-  
-    .product-card {
-      display: flex;
-      flex-direction: column; /* Ensure consistent structure inside the card */
-      justify-content: space-between; /* Space out the card content */
-    }
-  
-    /* Dynamically set all cards to the height of the tallest card in the row */
+
     .col-md-3 {
-      display: flex; /* Flexbox ensures equal height for all cards */
+        display: flex; /* Flexbox ensures equal height for all cards */
     }
-  
+
     .card {
-      flex-grow: 1; /* Allows the card to grow uniformly to match the tallest one */
+        flex-grow: 1; /* Allows the card to grow uniformly to match the tallest one */
+        display: flex;
+        flex-direction: column; /* Ensure consistent structure inside the card */
+        justify-content: space-between; /* Space out the card content */
+        margin-bottom: 20px;
     }
-  </style>
-  
 
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
 
+    /* Styles for the "Buy Now" button */
+    .btn-outline-dark {
+        margin-top: auto;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .btn-outline-dark:hover {
+        background-color: #4b6cb7;
+        color: white;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+        .heading-container h1 {
+            font-size: 2.5rem; /* Smaller font size on mobile */
+        }
+
+        .col-md-3 {
+            flex: 0 0 50%; /* Two cards per row on medium screens */
+        }
+    }
+
+    @media (max-width: 576px) {
+        .heading-container h1 {
+            font-size: 2rem; /* Smaller font size on small screens */
+        }
+
+        .col-md-3 {
+            flex: 0 0 100%; /* One card per row on small screens */
+        }
+
+        .video-container video {
+            height: 300px; /* Smaller video size on small screens */
+        }
+    }
+</style>
+
+<!-- Video Section -->
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="video-container">
+                <video autoplay muted loop>
+                    <source src="{% static 'core/images/NIKE VAPORMAX.mp4' %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-overlay"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Heading Section -->
 <div class="container mt-5">
+    <div class="heading-container">
+        <h1>Explore the Finest Sneakers Collection</h1>
+    </div>
+
+    <!-- Product Cards Section -->
     <div class="row g-0 justify-content-start">
         {% for c in cs %}
         <div class="col-md-3 mb-4" style="padding-left: 20px;">
-            <div class="card product-card equal-height">
+            <div class="card product-card">
                 <a href="{% url 'card_info' c.id %}">
                     <img src="{{ c.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
                 </a>
-                <div class="card-body product-info">
+                <div class="card-body">
                     <p class="product-title">{{ c.small_description }}</p>
-                    <p class="product-price">INR &#8377; {{ c.discounted_price }} <s style="color:red;">{{ c.original_price }}</s></p>
+                    <p class="product-price">INR &#8377; {{ c.discounted_price }} 
+                        <s style="color:red;">{{ c.original_price }}</s>
+                    </p>
                     <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
                 </div>
             </div>

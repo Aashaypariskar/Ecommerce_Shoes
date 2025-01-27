@@ -3,6 +3,51 @@
 {% block content %}
 
 <style>
+    /* Default styles for larger screens */
+    .football_container {
+        background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYFKmvT_7t3cAMQSSa_mCpl3Pq4u3yj5df7c1Ss3pI0bhy6sU4');
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* For smaller screens, switch to background image with centered content */
+    @media (max-width: 768px) {
+        .football_container {
+            background-image: url('{% static "core/images/WPD-Article-Body-Images-22-1024x427.webp" %}'); /* Use a different background image if needed */
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll; /* Changes for mobile, non-fixed background */
+            height: auto;
+            display: block;
+            padding: 20px;
+        }
+
+        /* Adjust content for mobile */
+        .banner {
+            display: block;
+            text-align: center;
+        }
+
+        .list {
+            display: block;
+        }
+
+        .item {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .item img {
+            height: 250px; /* Adjust image size for mobile */
+            object-fit: cover;
+        }
+    }
+
     /* Football Front Effects */
     .item {
         transition: transform 0.5s ease, filter 0.5s ease;
@@ -33,17 +78,6 @@
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
         z-index: -1;
         transition: box-shadow 0.5s ease;
-    }
-
-    .football_container {
-        background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYFKmvT_7t3cAMQSSa_mCpl3Pq4u3yj5df7c1Ss3pI0bhy6sU4');
-        height: 100vh;
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .gallery-container {
@@ -131,21 +165,6 @@
         grid-row: span 1;
     }
 
-    /* Ensuring all product cards are of the same height */
-    .product-card {
-        height: 100%; /* Ensures the card takes full height */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* Distributes content evenly */
-    }
-
-    .card-body {
-        flex-grow: 1; /* Allows the card body to stretch */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
 </style>
 
 <div class="container-fluid football_container">
@@ -199,65 +218,12 @@
         </picture>
         <div class="gallery-overlay">
             <div>
-
             </div>
         </div>
     </div>
 
-    <!-- Second Image -->
-    <!-- Add images here if needed -->
+    <!-- Additional images here -->
 
-    <!-- Third Image -->
-    <div class="gallery-item small">
-        <picture>
-            <source srcset="{% static 'core/images/gallery3.jpg' %}" type="image/webp">
-            <img src="{% static 'core/images/city-lights.jpg' %}" alt="City Lights" style="height: 250px; object-fit: cover;">
-        </picture>
-        <div class="gallery-overlay">
-            <div>
-               
-            </div>
-        </div>
-    </div>
-
-    <!-- Fourth Image -->
-    <div class="gallery-item small">
-        <picture>
-            <source srcset="{% static 'core/images/gallery5.jpg' %}" type="image/webp">
-            <img src="{% static 'core/images/snow-mountains.jpg' %}" alt="Snowy Mountains" style="height: 250px; object-fit: cover;">
-        </picture>
-        <div class="gallery-overlay">
-            <div>
-                
-            </div>
-        </div>
-    </div>
-
-    <!-- Fifth Image -->
-    <div class="gallery-item large">
-        <picture>
-            <source srcset="{% static 'core/images/image.jpg' %}" type="image/webp">
-            <img src="{% static 'core/images/mercurial-vapor-1-rgn-1.webp' %}" alt="Desert Landscape" style="height: 400px; object-fit: cover;">
-        </picture>
-        <div class="gallery-overlay">
-            <div>
-                
-            </div>
-        </div>
-    </div>
-
-    <!-- Sixth Image -->
-    <div class="gallery-item medium">
-        <picture>
-            <source srcset="{% static 'core/images/mercurial-vapor-1-rgn-1.webp' %}" type="image/webp">
-            <img src="{% static 'core/images/peaceful-lakeside.jpg' %}" alt="Peaceful Lakeside" style="height: 300px; object-fit: cover;">
-        </picture>
-        <div class="gallery-overlay">
-            <div>
-                
-            </div>
-        </div>
-    </div>
 </div>
 
 {% endblock content %}
