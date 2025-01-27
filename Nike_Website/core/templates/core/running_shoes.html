@@ -3,74 +3,114 @@
 
 {% block content %}
 
-
 <style>
-    .running-shoes-container {
-      width: 75%;
-      max-width: 2000px; /* Increased max width */
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    /* Product card container */
+    .card.product-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
     }
-  
+
+    /* Ensure all product cards have the same height */
+    .card-body.product-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .card-img-top {
+        height: 280px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .product-title, .product-price {
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .product-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .product-info .btn {
+        margin-top: auto;
+    }
+
+    .running-shoes-container {
+        width: 75%;
+        max-width: 2000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
     /* Large Image */
     .running-shoes-large-image {
-      position: relative;
-      width: 100%;
+        position: relative;
+        width: 100%;
     }
-  
+
     .running-shoes-large-image img {
-      width: 100%;
-      height: 550px;
-      display: block;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* No border radius */
+        width: 100%;
+        height: 550px;
+        display: block;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-  
+
     /* Trending Button */
     .running-shoes-trending-button {
-      position: absolute;
-      bottom: 10px; /* Positioned at the bottom-left corner */
-      left: 10px;
-      background: linear-gradient(90deg, #0078FF, #00C6FF); /* Professional gradient */
-      color: #fff;
-      padding: 12px 24px;
-      border: none;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      text-transform: uppercase;
-      text-decoration: none; /* Remove underline for anchor tag */
-      display: flex;
-      align-items: center; /* Align icon and text */
-      gap: 10px; /* Add space between icon and text */
-      border-radius: 4px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: linear-gradient(90deg, #0078FF, #00C6FF);
+        color: #fff;
+        padding: 12px 24px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
     }
-  
+
     .running-shoes-trending-button:hover {
-      background: linear-gradient(90deg, #005BBB, #0078FF); /* Darker gradient on hover */
-      transform: translateY(-2px); /* Slight lift on hover */
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(90deg, #005BBB, #0078FF);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
     }
-  
+
     /* Small Images */
     .running-shoes-small-images {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
     }
-  
+
     .running-shoes-small-images img {
-      width: calc(50% - 5px); /* Divide available space equally with a small gap */
-      height: 400px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* No border radius */
+        width: calc(50% - 5px);
+        height: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-  </style>
+</style>
 
 <!-- Video section -->
-<div class="container-fluid  mt-4">
+<div class="container-fluid mt-4">
     <div class="row">
         <div class="col-12">
             <div style="position: relative; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);">
@@ -101,7 +141,7 @@
         <div class="col-md-3 mb-4" style="padding-left: 20px;">
             <div class="card product-card">
                 <a href="{% url 'card_info' r.id %}">
-                    <img src="{{ r.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
+                    <img src="{{ r.pets_image.url }}" alt="" class="card-img-top">
                 </a>
                 <div class="card-body product-info">
                     <p class="product-title">{{ r.small_description }}</p>
@@ -114,23 +154,22 @@
     </div>
 </div>
 
-
 <div class="running-shoes-container">
     <!-- Large Image -->
     <div class="running-shoes-large-image">
-      <img src="{% static 'core/images/running banner.jpg' %}" alt="Running Shoes Banner">
-      <!-- Trending Button -->
-      <a href="#" class="running-shoes-trending-button">
-        <i class="fas fa-fire"></i> Trending 
-        <i class="fas fa-arrow-right"></i>
-      </a>
+        <img src="{% static 'core/images/running banner.jpg' %}" alt="Running Shoes Banner">
+        <!-- Trending Button -->
+        <a href="#" class="running-shoes-trending-button">
+            <i class="fas fa-fire"></i> Trending 
+            <i class="fas fa-arrow-right"></i>
+        </a>
     </div>
-  
+
     <!-- Smaller Images -->
     <div class="running-shoes-small-images">
-      <img src="{% static 'core/images/collection.jpg' %}" alt="Running Shoes Collection">
-      <img src="{% static 'core/images/gallery 2.jpg' %}" alt="Running Shoes Gallery">
+        <img src="{% static 'core/images/collection.jpg' %}" alt="Running Shoes Collection">
+        <img src="{% static 'core/images/gallery 2.jpg' %}" alt="Running Shoes Gallery">
     </div>
-  </div>
+</div>
 
 {% endblock content %}

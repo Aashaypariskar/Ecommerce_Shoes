@@ -3,84 +3,134 @@
 {% block content %}
 
 <style>
-    .row {
-        display: flex; /* Flexbox ensures items align */
-        flex-wrap: wrap; /* Allows wrapping to the next row */
+    /* Styling for the new photo section */
+    .new-photo-section {
+        width: 100%;
+        height: 800px;
+        background-image: url('{% static "core/images/7783aaadfedf96b2da6895b6cce4f3e4.png" %}');
+        background-size: cover;
+        background-position: center;
+        position: relative;
     }
 
-    .col-md-3 {
-        display: flex; /* Ensure consistent height adjustment for cards */
-        flex-direction: column; /* Align items vertically */
-    }
-
-    .product-card {
+    .new-photo-section .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
         display: flex;
-        flex-direction: column; /* Align card content vertically */
-        justify-content: space-between; /* Space out card content evenly */
-        height: 100%; /* Ensure cards stretch to fill available space */
-    }
-
-    .card-body {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* Space out content and align button at the bottom */
-        height: 100%; /* Ensure consistent height for card body */
-    }
-
-    .product-info {
-        flex-grow: 1; /* Allow the content above the button to take up available space */
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between; /* Push button to the bottom */
-    }
-
-    .product-title,
-    .product-price {
-        margin-bottom: 10px; /* Add spacing between title and price */
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 2rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     /* Styling for the heading */
     .trending-heading {
-        font-size: 2.5rem; /* Larger font size for emphasis */
-        font-weight: 700; /* Bold font */
-        color: #1e3a8a; /* Attractive blue color */
-        margin-bottom: 1.5rem; /* Space below the heading */
-        display: flex; /* Flexbox for aligning icon and text */
-        align-items: center; /* Align icon vertically with text */
-        font-family: 'Poppins', sans-serif; /* Modern, clean font */
-        position: relative; /* For decorative lines */
-        text-transform: uppercase; /* Makes the text uppercase */
-        letter-spacing: 2px; /* Add letter spacing for a premium look */
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: #1e3a8a;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .trending-heading:hover {
+        color: #ff6f61;
     }
 
     .trending-heading i {
-        font-size: 2.5rem; /* Icon size slightly larger than text */
-        color: #ff6f61; /* Eye-catching contrasting color for the icon */
-        margin-right: 15px; /* Space between icon and text */
+        font-size: 3.5rem;
+        color: #ff6f61;
+        margin-right: 15px;
+    }
+
+    .trending-heading p {
+        font-size: 1.6rem;
+        color: #555;
+        margin-top: 15px;
+        font-weight: 600;
+        text-align: center;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .trending-heading p:hover {
+        color: #1e3a8a;
+        letter-spacing: 2px;
     }
 
     .trending-heading::after {
-        content: ''; /* Decorative line below the heading */
+        content: '';
         position: absolute;
-        bottom: -5px; /* Positioning below the heading */
+        bottom: -5px;
         left: 0;
-        width: 100px; /* Line width */
-        height: 4px; /* Line thickness */
-        background: linear-gradient(to right, #ff6f61, #1e3a8a); /* Gradient color */
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(to right, #ff6f61, #1e3a8a);
+    }
+
+    /* Ensure product cards have the same height */
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Ensure it takes full height */
+    }
+
+    /* Ensure the card body stretches and pushes content down */
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Distribute content evenly */
+        flex-grow: 1;
+        padding: 15px;
+    }
+
+    .product-info {
+        flex-grow: 1; /* Allow product info to take up available space */
+    }
+
+    /* Make sure the card image has consistent height */
+    .card-img-top {
+        height: 280px;
+        object-fit: cover;
+    }
+
+    /* Button styling */
+    .btn {
+        margin-top: auto; /* Push the button to the bottom */
     }
 </style>
 
+<!-- New Photo Section -->
+<div class="new-photo-section">
+    <div class="overlay">
+        <!-- Optional overlay content -->
+    </div>
+</div>
+
+<!-- Trending Section -->
 <div class="container mt-5">
-    <!-- Styled Heading with New Icon -->
     <h2 class="trending-heading">
         <i class="bi bi-fire"></i> Trending
     </h2>
+    <p>Explore Our Latest Collection</p>
     <div class="row g-0 justify-content-start">
         {% for t in ts %}
         <div class="col-md-3 mb-4" style="padding-left: 20px;">
             <div class="card product-card">
                 <a href="{% url 'card_info' t.id %}">
-                    <img src="{{ t.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
+                    <img src="{{ t.pets_image.url }}" alt="" class="card-img-top">
                 </a>
                 <div class="card-body">
                     <div class="product-info">
@@ -89,7 +139,7 @@
                     </div>
                     <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
                 </div>
-            </div>
+            </div> 
         </div>
         {% endfor %}
     </div>

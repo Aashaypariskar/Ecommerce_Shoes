@@ -131,6 +131,21 @@
         grid-row: span 1;
     }
 
+    /* Ensuring all product cards are of the same height */
+    .product-card {
+        height: 100%; /* Ensures the card takes full height */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Distributes content evenly */
+    }
+
+    .card-body {
+        flex-grow: 1; /* Allows the card body to stretch */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
 </style>
 
 <div class="container-fluid football_container">
@@ -190,7 +205,7 @@
     </div>
 
     <!-- Second Image -->
-    
+    <!-- Add images here if needed -->
 
     <!-- Third Image -->
     <div class="gallery-item small">
