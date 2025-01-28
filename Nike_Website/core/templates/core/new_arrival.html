@@ -25,6 +25,7 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%; /* Ensure uniform height for all cards */
     }
 
     .card:hover {
@@ -34,12 +35,15 @@
 
     .card-body {
         padding: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
     /* Top Container Styling */
     .top-container {
         width: 100%;
-        height: 400px; /* Adjusted for responsiveness */
+        height: 600px; /* Adjusted for responsiveness */
         background-image: url('{% static "core/images/expensive-sneakers.webp" %}');
         background-size: cover;
         background-position: center;
@@ -130,6 +134,7 @@
     /* Buy Now button */
     .btn-outline-dark {
         font-weight: bold;
+        margin-top: auto; /* Align button at the bottom of the card */
     }
 
     @media (max-width: 768px) {
@@ -137,11 +142,16 @@
             font-size: 0.9rem; /* Adjust button font size */
         }
     }
+
+    /* Add spacing between rows */
+    .row.g-3 {
+        row-gap: 30px; /* Increase the distance between rows */
+    }
+
 </style>
 
 <!-- Top Container -->
 <div class="top-container">
-    <p>Discover the Latest Trends</p>
 </div>
 
 <!-- Heading Container -->
