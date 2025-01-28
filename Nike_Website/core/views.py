@@ -3,6 +3,7 @@ from . forms import RegistrationForm,AuthenticateForm,UserProfileForm,AdminProfi
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib import messages
 from . models import Shoes,Shoes_cart,UserDetails,Order
+
 # Create your views here.
 
 
