@@ -286,6 +286,17 @@ body {
           <button class="buy-now">&#128722; Buy Now</button>
         </a>
       </div>
+      {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% else %}info{% endif %} alert-dismissible fade show custom-alert" role="alert">
+            <strong>{% if message.tags == 'error' %}❌{% elif message.tags == 'success' %}✅{% elif message.tags == 'warning' %}⚠️{% else %}ℹ️{% endif %}</strong> 
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+  
 
       <h3 class="about-product">About Product</h3>
       <p class="description">

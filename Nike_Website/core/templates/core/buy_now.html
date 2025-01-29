@@ -32,6 +32,7 @@
         background-color: #fff;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
     }
 
     .card:hover {
@@ -42,11 +43,12 @@
     .card-header {
         background-color: #000;
         color: #fff;
-        padding: 20px;
+        padding: 15px;
         text-align: center;
         font-size: 18px;
         font-weight: 600;
         text-transform: uppercase;
+        border-radius: 10px 10px 0 0;
     }
 
     .card-body {
@@ -94,6 +96,7 @@
         border: none;
         cursor: pointer;
         transition: background-color 0.3s ease;
+        border-radius: 5px;
     }
 
     .btn-success:hover {
@@ -113,10 +116,11 @@
     }
 
     .address-card {
-        padding: 20px;
+        padding: 15px;
         border: 1px solid #ddd;
         margin-bottom: 15px;
         display: flex;
+        align-items: center;
         gap: 15px;
         border-radius: 8px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -190,21 +194,18 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    {% for item in cart_items %}
+                   
                     <tr>
-                        <td>{{ item.product.name }}</td>
+                        <td> {{ Shoe.small_description }}</td>
+                        <td>qty: 1</td>
+                        <td></td>
                         <td>₹{{ Shoe.discounted_price }}</td>
-                        <td>{{ item.quantity }}</td>
-                        <td>₹{{ item.price_and_quantity_total }}</td>
                     </tr>
-                    {% endfor %}
+                   
                     <tr class="total-row">
                         <td colspan="3">Shipping</td>
                         <td>₹2000</td>

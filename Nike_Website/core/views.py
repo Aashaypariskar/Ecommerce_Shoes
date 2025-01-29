@@ -32,15 +32,25 @@ from django.http import HttpResponse
 
 def registration(request):
     if request.method == 'POST':
-            regf = RegistrationForm(request.POST)
-            if regf.is_valid():
-                regf.save()
-                messages.success(request,'Registration Successfull !!')
-                return redirect('registration')   
-             
+        regf = RegistrationForm(request.POST)
+        email = request.POST.get('email')  # Fixed: Added quotes around 'email'
+        print('hjbdch', email)
+
+        # if User.objects.filter(email=email).exists():
+        #     messages.error(request, 'Email already exists')
+        if regf.is_valid():
+            if not email:
+                messages.error(request, 'Email is required')
+            elif User.objects.filter(email=email).exists():
+                messages.error(request, 'Email already exists')
+            regf.save()
+            messages.success(request, 'Registration Successful!')
+            return redirect('registration')  
     else:
-        regf  = RegistrationForm()
-    return render(request,'core/register.html',{'regf':regf})
+        regf = RegistrationForm()
+    
+    return render(request, 'core/register.html', {'regf': regf})
+
 
 def log_in(request):
     if not request.user.is_authenticated:  # check whether user is not login ,if so it will show login option
@@ -130,15 +140,33 @@ def limited_edition(request):
     return render(request,'core/limited_edition.html',{'le':le})
 
 
+def search_result(request):
+    query = request.GET.get('q')
+    products = Shoes.objects.all()  # Default: Show all products
+
+    if query:
+        products = products.filter(name__icontains=query)  # Assuming 'name' is a field in Shoes
+
+    context = {
+        'products': products,  # Corrected variable name
+        'query': query,
+    }
+    return render(request, 'core/search_result.html', context)
 
 
 
-def add_to_cart(request,id):
-   fs = Shoes.objects.get(pk=id)
-   user=request.user
-   Shoes_cart  (user=user,product=fs).save()
-   messages.success(request,"Added to cart successfully")
-   return redirect('card_info',id)
+def add_to_cart(request, id):
+    fs = Shoes.objects.get(pk=id)
+    user = request.user
+
+    if Shoes_cart.objects.filter(user=user, product=fs).exists():
+        messages.error(request, "This item is already in your cart")
+    else:
+        Shoes_cart.objects.create(user=user, product=fs)
+        messages.success(request, "Added to cart successfully")
+
+    return redirect('card_info', id)
+
 
 
 def show_cart(request):
@@ -198,6 +226,9 @@ def address(request):
                 state= af.cleaned_data['state']
                 pincode= af.cleaned_data['pincode']  
                 UserDetails(user=user,name=name,address=address,city=city,state=state,pincode=pincode).save()
+                messages.success(request,"Address added successfully")
+            else:
+                messages.error(request,"Please fill out all fields")
                 return redirect('address')           
     else:
         af = CustomerForm()
@@ -213,6 +244,26 @@ def delete_address(request,id):
         de = UserDetails.objects.get(pk=id)
         de.delete()
     return redirect('show_address')
+
+
+
+def payment_address(request):
+    if request.method == 'POST':
+            af =CustomerForm(request.POST)
+            if af.is_valid():
+                user=request.user                # user variable store the current user i.e steveroger
+                name= af.cleaned_data['name']
+                address= af.cleaned_data['address']
+                city= af.cleaned_data['city']
+                state= af.cleaned_data['state']
+                pincode= af.cleaned_data['pincode']  
+                UserDetails(user=user,name=name,address=address,city=city,state=state,pincode=pincode).save()
+                return redirect('payment_address')           
+    else:
+        af = CustomerForm()
+        address = UserDetails.objects.filter(user=request.user)
+    return render(request,'core/payment_address.html',{'af':af,'address':address})
+
 
 
 def checkout(request):
@@ -315,7 +366,7 @@ def payment_success(request,selected_address_id):
     cart=Shoes_cart.objects.filter(user=request.user)
     for cart in cart:
         Order(user=user,customer=address_data,quantity=cart.quantity,pet=cart.product).save()
-        cart.delete()
+    cart.delete()
     return render(request,'core/payment_success.html')
 
 # ==================== Payment Failed Page =====================================

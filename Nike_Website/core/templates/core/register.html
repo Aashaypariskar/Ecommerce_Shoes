@@ -7,7 +7,15 @@
     
 </style>
 <!-- Display messages -->
-{% if messages %}
+
+
+<!-- Registration Section -->
+<div class="container register-container py-5">
+    <div class="register-heading text-center mb-4">
+        <h2 class="text-primary">Register Here</h2>
+        <p class="text-muted">Create an account to start your journey with us</p>
+    </div>
+    {% comment %} {% if messages %}
     <div class="container mt-4">
         {% for message in messages %}
             <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -16,17 +24,11 @@
             </div>
         {% endfor %}
     </div>
-{% endif %}
-
-<!-- Registration Section -->
-<div class="container register-container py-5">
-    <div class="register-heading text-center mb-4">
-        <h2 class="text-primary">Register Here</h2>
-        <p class="text-muted">Create an account to start your journey with us</p>
-    </div>
-    
+{% endif %} {% endcomment %}
     <div class="row justify-content-center">
+        
         <div class="col-md-6">
+     
             <form action="" method="POST" novalidate class="border p-4 rounded shadow-sm bg-light">
                 {% csrf_token %}
 
@@ -58,6 +60,16 @@
                     <p class="text-muted">Already a user? <a href="{% url 'login' %}" class="text-primary">Login</a></p>
                 </div>
             </form>
+            {% if messages %}
+            <div class="container mt-4">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        <strong style="align-items: center;">{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         </div>
     </div>
 </div>
