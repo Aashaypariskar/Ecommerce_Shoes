@@ -3,9 +3,9 @@
 {% block content %}
 
 <style>
-    /* Default styles for larger screens */
+    /* Background Container */
     .football_container {
-        background-image: url('https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTYFKmvT_7t3cAMQSSa_mCpl3Pq4u3yj5df7c1Ss3pI0bhy6sU4');
+        background-image: url('{% static "core/images/image.jpg" %}');
         height: 100vh;
         background-size: cover;
         background-position: center;
@@ -13,173 +13,106 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 20px;
     }
 
-    /* For smaller screens, switch to background image with centered content */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         .football_container {
-            background-image: url('{% static "core/images/WPD-Article-Body-Images-22-1024x427.webp" %}'); /* Use a different background image if needed */
-            background-size: cover;
-            background-position: center;
-            background-attachment: scroll; /* Changes for mobile, non-fixed background */
             height: auto;
-            display: block;
-            padding: 20px;
-        }
-
-        /* Adjust content for mobile */
-        .banner {
-            display: block;
-            text-align: center;
-        }
-
-        .list {
-            display: block;
-        }
-
-        .item {
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        .item img {
-            height: 250px; /* Adjust image size for mobile */
-            object-fit: cover;
+            background-attachment: scroll;
+            padding: 40px 20px;
         }
     }
 
-    /* Football Front Effects */
+    /* Grid layout for images */
+    .banner {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    @media (max-width: 1024px) {
+        .banner {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .banner {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .banner {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    /* Image Hover Effects */
     .item {
         transition: transform 0.5s ease, filter 0.5s ease;
-        z-index: 1;
         position: relative;
+        overflow: hidden;
+        height: 100%;
     }
 
-    .list:hover .item:not(:hover) {
-        filter: grayscale(1) blur(8px);
+    .banner:hover .item:not(:hover) {
+        filter: grayscale(1) blur(5px);
         transform: scale(0.9);
-        transition: transform 0.5s ease, filter 0.5s ease;
     }
 
     .item:hover {
-        transform: scale(1.3);
+        transform: scale(1.2);
         z-index: 2;
         filter: none;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     }
 
-    .item:hover::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
+    .item img {
         width: 100%;
         height: 100%;
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
-        z-index: -1;
-        transition: box-shadow 0.5s ease;
-    }
-
-    .gallery-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        grid-gap: 20px;
-        width: 90%;
-        max-width: 1200px;
-        margin: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 10px;
-    }
-
-    .gallery-item {
-        position: relative;
-        overflow: hidden;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .gallery-item img {
-        width: 100%;
-        height: auto;
         object-fit: cover;
-        transition: transform 0.3s ease;
+        border-radius: 10px;
     }
 
-    .gallery-item:hover img {
-        transform: scale(1.05);
-    }
-
-    .gallery-item:hover {
-        transform: scale(1.03);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .gallery-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.6);
-        color: #fff;
+    /* Ensuring product cards have the same height */
+    .product-card {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        padding: 10px;
-        text-align: center;
-        border-radius: 15px;
+        flex-direction: column;
+        height: 100%;
     }
 
-    .gallery-item:hover .gallery-overlay {
-        opacity: 1;
+    .product-card .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 
-    .gallery-overlay h3 {
-        font-size: 24px;
-        font-weight: bold;
-        margin: 0;
+    /* Buy Now button styles */
+    .buy-now-btn {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        transition: all 0.3s ease;
     }
 
-    .gallery-overlay p {
-        font-size: 14px;
-        margin-top: 10px;
-        font-weight: 300;
+    .buy-now-btn:hover {
+        background-color: black;
+        color: white;
     }
-
-    .gallery-item.large {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
-
-    .gallery-item.medium {
-        grid-column: span 2;
-        grid-row: span 1;
-    }
-
-    .gallery-item.small {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
-
 </style>
 
 <div class="container-fluid football_container">
-    <div class="row h-100">
-        <div class="col-md-12 d-flex justify-content-center align-items-center">
-            <div class="banner" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
-                <div class="list" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;">
-                    <div class="item"><img src="{% static 'core/images/De%20bruyne.jpg' %}" alt="De Bruyne" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/Neymar.jpg' %}" alt="Neymar" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="Young Ronaldo" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="Phil Foden" style="height: 400px; object-fit: cover;"></div>
-                    <div class="item"><img src="{% static 'core/images/Halland.jpg' %}" alt="Halland" style="height: 400px; object-fit: cover;"></div>
-                </div>
-            </div>
-        </div>
+    <div class="banner">
+        <div class="item"><img src="{% static 'core/images/De%20bruyne.jpg' %}" alt="De Bruyne"></div>
+        <div class="item"><img src="{% static 'core/images/Neymar.jpg' %}" alt="Neymar"></div>
+        <div class="item"><img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="Young Ronaldo"></div>
+        <div class="item"><img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="Phil Foden"></div>
+        <div class="item"><img src="{% static 'core/images/Halland.jpg' %}" alt="Halland"></div>
     </div>
 </div>
 
@@ -198,32 +131,15 @@
                 <a href="{% url 'card_info' f.id %}">
                     <img src="{{f.pets_image.url}}" alt="" class="card-img-top">
                 </a>
-                <div class="card-body product-info">
+                <div class="card-body">
                     <p class="product-title">{{f.small_description}}</p>
                     <p class="product-price">INR &#8377 {{f.discounted_price}} <s style="color:red;">{{f.original_price}}</s></p>
-                    <button class='btn btn-outline-dark w-100'>Buy Now <i class="bi bi-bag-fill"></i></button>
+                    <button class="btn buy-now-btn w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-</div>
-
-<div class="gallery-container">
-    <!-- First Image -->
-    <div class="gallery-item large">
-        <picture>
-            <source srcset="{% static 'core/images/gallery4.jpg' %}" type="image/webp">
-            <img src="{% static 'core/images/image.jpg' %}" alt="Mountain Adventure" style="width: 100%; height: 400px; object-fit: cover; border-radius: 15px;">
-        </picture>
-        <div class="gallery-overlay">
-            <div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Additional images here -->
-
 </div>
 
 {% endblock content %}

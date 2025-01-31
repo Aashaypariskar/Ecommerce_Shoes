@@ -6,7 +6,7 @@
     /* Styling for the new photo section */
     .new-photo-section {
         width: 100%;
-        height: 800px;
+        height: 470px; /* Reduced height */
         background-image: url('{% static "core/images/7783aaadfedf96b2da6895b6cce4f3e4.png" %}');
         background-size: cover;
         background-position: center;
@@ -84,7 +84,7 @@
     /* Responsive adjustments */
     @media (max-width: 1200px) {
         .new-photo-section {
-            height: 600px;
+            height: 500px; /* Adjusted height for larger screens */
         }
 
         .trending-heading {
@@ -98,7 +98,7 @@
 
     @media (max-width: 992px) {
         .new-photo-section {
-            height: 500px;
+            height: 450px; /* Adjusted height for medium screens */
         }
 
         .trending-heading {
@@ -108,7 +108,7 @@
 
     @media (max-width: 768px) {
         .new-photo-section {
-            height: 400px;
+            height: 350px; /* Adjusted height for small screens */
         }
 
         .trending-heading {
@@ -130,7 +130,7 @@
 <!-- New Photo Section -->
 <div class="new-photo-section">
     <div class="overlay">
-        Discover Our Exclusive New Arrivals
+        
     </div>
 </div>
 
@@ -139,10 +139,10 @@
     <h2 class="trending-heading">
         <i class="bi bi-fire"></i> Trending Products
     </h2>
-    <p class="text-center">Explore Our Latest Collection</p>
+    <h4 class="text-center">Explore Our Latest Collection</h4>
     <div class="row g-4">
         {% for t in ts %}
-        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-5"> <!-- Added mb-4 for spacing between rows -->
             <div class="card product-card">
                 <a href="{% url 'card_info' t.id %}">
                     <img src="{{ t.pets_image.url }}" alt="Product Image" class="card-img-top">
