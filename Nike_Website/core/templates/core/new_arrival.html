@@ -20,16 +20,16 @@
 
     .card {
         flex-grow: 1;
-        border: 1px solid #ddd; /* Add a subtle border */
-        border-radius: 8px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%; /* Ensure uniform height for all cards */
+        height: 100%;
     }
 
     .card:hover {
-        transform: scale(1.05); /* Zoom on hover */
+        transform: scale(1.05);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
     }
 
@@ -37,13 +37,25 @@
         padding: 15px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-end; /* Push button to bottom */
+        text-align: center;
+    }
+
+    /* Remove blue underline on hover */
+    .card a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .card a:hover {
+        text-decoration: none;
+        color: inherit;
     }
 
     /* Top Container Styling */
     .top-container {
         width: 100%;
-        height: 600px; /* Adjusted for responsiveness */
+        height: 600px;
         background-image: url('{% static "core/images/expensive-sneakers.webp" %}');
         background-size: cover;
         background-position: center;
@@ -58,15 +70,15 @@
 
     @media (max-width: 768px) {
         .top-container {
-            height: 300px; /* Reduce height for smaller screens */
-            font-size: 1.5rem; /* Adjust font size */
+            height: 300px;
+            font-size: 1.5rem;
         }
     }
 
     @media (max-width: 576px) {
         .top-container {
-            height: 250px; /* Further reduce height for mobile */
-            font-size: 1.2rem; /* Smaller font size */
+            height: 250px;
+            font-size: 1.2rem;
         }
     }
 
@@ -74,7 +86,7 @@
     .heading-container {
         text-align: center;
         background-color: #f8f9fa;
-        padding: 20px; /* Reduce padding for responsiveness */
+        padding: 20px;
         margin-bottom: 40px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
@@ -93,21 +105,21 @@
 
     @media (max-width: 768px) {
         .section-heading {
-            font-size: 2rem; /* Adjust heading size for tablets */
+            font-size: 2rem;
         }
 
         .section-subheading {
-            font-size: 1rem; /* Adjust subheading size for tablets */
+            font-size: 1rem;
         }
     }
 
     @media (max-width: 576px) {
         .section-heading {
-            font-size: 1.8rem; /* Adjust heading size for mobile */
+            font-size: 1.8rem;
         }
 
         .section-subheading {
-            font-size: 0.9rem; /* Adjust subheading size for mobile */
+            font-size: 0.9rem;
         }
     }
 
@@ -120,7 +132,7 @@
 
     @media (max-width: 576px) {
         .product-title {
-            font-size: 0.9rem; /* Adjust title size for mobile */
+            font-size: 0.9rem;
         }
     }
 
@@ -134,18 +146,19 @@
     /* Buy Now button */
     .btn-outline-dark {
         font-weight: bold;
-        margin-top: auto; /* Align button at the bottom of the card */
+        margin-top: auto; /* Align button at the bottom */
+        text-decoration: none;
     }
 
     @media (max-width: 768px) {
         .btn-outline-dark {
-            font-size: 0.9rem; /* Adjust button font size */
+            font-size: 0.9rem;
         }
     }
 
     /* Add spacing between rows */
     .row.g-3 {
-        row-gap: 30px; /* Increase the distance between rows */
+        row-gap: 30px;
     }
 
 </style>
@@ -177,9 +190,9 @@
                         INR &#8377; {{ n.discounted_price }}
                         <s style="color:red;">{{ n.original_price }}</s>
                     </p>
-                    <button class="btn btn-outline-dark w-100">
+                    <a href="{% url 'card_info' n.id %}" class="btn btn-outline-dark w-100">
                         Buy Now <i class="bi bi-bag-fill"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

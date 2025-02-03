@@ -72,6 +72,13 @@
         margin-bottom: 5px;
     }
 
+    /* Size Display */
+    .product-size {
+        font-size: 14px;
+        color: #444;
+        margin-top: 3px;
+    }
+
     .price-info {
         font-size: 14px;
         color: #555;
@@ -239,9 +246,12 @@
                             <img src="{{ f.product.pets_image.url }}" alt="Product" class="product-image">
                             <div class="product-info">
                                 <p class="product-name">{{ f.product.small_description }}</p>
+                                
+                                <!-- Display Selected Size -->
+                                <p class="product-size">Size: <strong>{{ f.size }}</strong></p>
+
                                 <div class="price-info">
                                     <span class="discounted-price">₹{{ f.price_and_quantity_total }}</span>
-                                    <span class="original-price">₹{{ f.product.price }}</span>
                                 </div>
                                 <div class="quantity-control">
                                     <a href="{% url 'delete_quantity' f.id %}"><i class="bi bi-dash-lg"></i></a>
@@ -271,18 +281,22 @@
                             <td>{{ item.product.category }}</td>
                             <td>₹{{ item.price_and_quantity_total }}</td>
                         </tr>
-                        {% endfor %}
                         <tr>
                             <td>Shipping</td>
-                            <td>₹2000</td>
+                            <td>₹200</td>
                         </tr>
                         <tr class="total-row">
                             <td>Total</td>
                             <td>₹{{ final_price }}</td>
                         </tr>
+                        {% endfor %}
                     </table>
+                    {% if cart_items %}
                     <a href="{% url 'checkout' %}" class="btn-checkout">Proceed to Checkout</a>
-                    <a href="#" class="continue-shopping">Continue Shopping</a>
+                    {% else %}
+                    <h2>Your Cart is Empty</h2>
+                    <a href="{% url "index" %}" class="continue-shopping">Continue Shopping</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

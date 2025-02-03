@@ -1,0 +1,175 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Product card container */
+    .card.product-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    /* Ensure all product cards have the same height */
+    .card-body.product-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .card-img-top {
+        height: 280px;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .product-title, .product-price {
+        margin-bottom: 10px;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .product-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+    }
+
+    .product-info .btn {
+        margin-top: auto;
+    }
+
+    .running-shoes-container {
+        width: 75%;
+        max-width: 2000px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Large Image */
+    .running-shoes-large-image {
+        position: relative;
+        width: 100%;
+    }
+
+    .running-shoes-large-image img {
+        width: 100%;
+        height: 550px;
+        display: block;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Trending Button */
+    .running-shoes-trending-button {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        background: linear-gradient(90deg, #0078FF, #00C6FF);
+        color: #fff;
+        padding: 12px 24px;
+        border: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        text-transform: uppercase;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    .running-shoes-trending-button:hover {
+        background: linear-gradient(90deg, #005BBB, #0078FF);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Small Images */
+    .running-shoes-small-images {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .running-shoes-small-images img {
+        width: calc(50% - 5px);
+        height: 400px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
+
+<!-- Video section -->
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div style="position: relative; overflow: hidden; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);">
+                <video autoplay muted loop style="width: 100%; height: 600px; object-fit: cover; background-color: #000;">
+                    <source src="{% static 'core/images/Untitled video - Made with Clipchamp.mp4' %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)); pointer-events: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Title section -->
+<div class="container text-center mt-4">
+    <h1 style="font-size: 2.5rem; font-weight: 700; color: #333; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);">
+        Running Shoes
+    </h1>
+    <p style="font-size: 1.1rem; color: #555; margin-bottom: 2rem;">
+        Experience unmatched comfort and performance with our premium running shoes collection.
+    </p>
+</div>
+
+<!-- Product cards section -->
+<div class="container mt-5">
+    <div class="row g-0 justify-content-start">
+        {% for r in rs %}
+        <div class="col-md-3 mb-4" style="padding-left: 20px;">
+            <div class="card product-card">
+                <a href="{% url 'card_info' r.id %}">
+                    <img src="{{ r.pets_image.url }}" alt="" class="card-img-top">
+                </a>
+                <div class="card-body product-info">
+                    <p class="product-title">{{ r.small_description }}</p>
+                    <p class="product-price">INR &#8377; {{ r.discounted_price }} <s style="color:red;">{{ r.original_price }}</s></p>
+                    <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="running-shoes-container">
+    <!-- Large Image -->
+    <div class="running-shoes-large-image">
+        <img src="{% static 'core/images/running banner.jpg' %}" alt="Running Shoes Banner">
+        <!-- Trending Button -->
+        <a href="#" class="running-shoes-trending-button">
+            <i class="fas fa-fire"></i> Trending 
+            <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+
+    <!-- Smaller Images -->
+    <div class="running-shoes-small-images">
+        <img src="{% static 'core/images/collection.jpg' %}" alt="Running Shoes Collection">
+        <img src="{% static 'core/images/gallery 2.jpg' %}" alt="Running Shoes Gallery">
+    </div>
+</div>
+
+{% endblock content %}

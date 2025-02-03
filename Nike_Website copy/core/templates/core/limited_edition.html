@@ -1,0 +1,214 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    /* Flexbox for row */
+    .row {
+        display: flex; /* Flexbox ensures items align */
+        flex-wrap: wrap; /* Allows wrapping to the next row */
+    }
+
+    /* Flexbox for individual columns */
+    .col-md-3 {
+        display: flex; /* Ensure consistent height adjustment for cards */
+        flex-direction: column; /* Align items vertically */
+    }
+
+    /* Product card styling to make them of equal height */
+    .product-card {
+        display: flex;
+        flex-direction: column; /* Align card content vertically */
+        justify-content: space-between; /* Space out card content evenly */
+        height: 100%; /* Ensure cards stretch to fill available space */
+    }
+
+    .card {
+        flex-grow: 1; /* Makes the card stretch dynamically to match the tallest card */
+        display: flex;
+        flex-direction: column; /* Ensures content is vertically aligned */
+    }
+
+    /* Adjusts card body to make content stretch */
+    .card-body {
+        flex-grow: 1; /* Ensures content is pushed to the bottom */
+        display: flex;
+        flex-direction: column; /* Align the content vertically */
+        justify-content: flex-end; /* Push the "Buy Now" button to the bottom */
+        padding-bottom: 20px; /* Add space below content */
+    }
+
+    /* Top Container Styling with background image */
+    .top-container {
+        width: 100%;
+        height: 60vh; /* Set height for the image section */
+        background-image: url('{% static "core/images/WPD-Article-Body-Images-22-1024x427.webp" %}');
+        background-size: cover;
+        background-position: center;
+        text-align: center;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    /* Heading Container Styling */
+    .heading-container {
+        padding: 50px 0;
+        text-align: center;
+        background-color: #f1f1f1;
+        margin-bottom: 40px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Softer shadow for a modern look */
+    }
+
+    /* Heading Styling */
+    .section-heading {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+        text-transform: uppercase; /* Emphasize title */
+    }
+
+    /* Subheading Text Styling */
+    .section-subheading {
+        font-size: 1.2rem;
+        color: #666;
+        font-weight: 400;
+    }
+
+    /* Hover effect for section heading */
+    .section-heading:hover {
+        color: #ff6f61; /* Accent color on hover */
+        cursor: pointer; /* Change cursor on hover */
+    }
+
+    /* Additional Product Card Styling */
+    .product-title {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .product-price {
+        color: #2c3e50;
+        font-size: 1.2rem;
+        font-weight: 700;
+    }
+
+    /* Restored Buy Now Button Color */
+    .btn-outline-dark {
+        font-weight: 600;
+        background-color: #ffffff;
+        border-color: #333;
+        color: #333;
+    }
+
+    .btn-outline-dark:hover {
+        background-color: #333;
+        border-color: #333;
+        color: white;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+        .section-heading {
+            font-size: 2rem;
+        }
+
+        .section-subheading {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .col-md-3 {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .top-container {
+            height: 50vh; /* Adjust for smaller screens */
+        }
+
+        .section-heading {
+            font-size: 1.8rem;
+        }
+
+        .section-subheading {
+            font-size: 1.1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .col-md-3 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .top-container {
+            height: 40vh; /* Adjust for smaller screens */
+        }
+
+        .section-heading {
+            font-size: 1.6rem;
+        }
+
+        .section-subheading {
+            font-size: 1rem;
+        }
+
+        .product-price {
+            font-size: 1rem;
+        }
+
+        .btn-outline-dark {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .top-container {
+            height: 35vh; /* Further adjust for small screens */
+        }
+    }
+</style>
+
+<!-- Top Container (Image as background) -->
+<div class="top-container">
+</div>
+
+<!-- Heading Container Below Top -->
+<div class="heading-container mt-5">
+    <h2 class="section-heading">Limited Edition Products</h2>
+    <p class="section-subheading">Exclusive items available for a limited time only. Get them before they’re gone!</p>
+</div>
+
+<!-- Product Cards Section -->
+<div class="container mt-5">
+    <div class="row g-0 justify-content-start">
+        {% for l in le %}
+        <div class="col-md-3 mb-4" style="padding-left: 20px;">
+            <div class="card product-card">
+                <a href="{% url 'card_info' l.id %}">
+                    <img src="{{ l.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
+                </a>
+                <div class="card-body product-info">
+                    <p class="product-title">{{ l.small_description }}</p>
+                    <p class="product-price">INR &#8377; {{ l.discounted_price }} <s style="color:red;">{{ l.original_price }}</s></p>
+                    <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

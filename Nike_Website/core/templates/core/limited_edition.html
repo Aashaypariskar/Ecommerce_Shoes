@@ -12,31 +12,46 @@
 
     /* Flexbox for individual columns */
     .col-md-3 {
-        display: flex; /* Ensure consistent height adjustment for cards */
+        display: flex;
         flex-direction: column; /* Align items vertically */
     }
 
     /* Product card styling to make them of equal height */
     .product-card {
         display: flex;
-        flex-direction: column; /* Align card content vertically */
+        flex-direction: column;
         justify-content: space-between; /* Space out card content evenly */
         height: 100%; /* Ensure cards stretch to fill available space */
     }
 
     .card {
-        flex-grow: 1; /* Makes the card stretch dynamically to match the tallest card */
+        flex-grow: 1; /* Ensures equal height cards */
         display: flex;
-        flex-direction: column; /* Ensures content is vertically aligned */
+        flex-direction: column;
     }
 
-    /* Adjusts card body to make content stretch */
+    /* Ensure card body stretches properly */
     .card-body {
-        flex-grow: 1; /* Ensures content is pushed to the bottom */
+        flex-grow: 1;
         display: flex;
-        flex-direction: column; /* Align the content vertically */
-        justify-content: flex-end; /* Push the "Buy Now" button to the bottom */
+        flex-direction: column;
+        justify-content: flex-end; /* Push the button to the bottom */
         padding-bottom: 20px; /* Add space below content */
+    }
+
+    /* Ensure buttons align at the same level */
+    .btn {
+        margin-top: auto; /* Ensures consistent button positioning */
+    }
+
+    /* Remove blue underline on hover */
+    a {
+        text-decoration: none !important;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+        color: inherit;
     }
 
     /* Top Container Styling with background image */
@@ -61,7 +76,7 @@
         text-align: center;
         background-color: #f1f1f1;
         margin-bottom: 40px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Softer shadow for a modern look */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     }
 
     /* Heading Styling */
@@ -71,7 +86,7 @@
         color: #333;
         margin-bottom: 10px;
         letter-spacing: 1px;
-        text-transform: uppercase; /* Emphasize title */
+        text-transform: uppercase;
     }
 
     /* Subheading Text Styling */
@@ -83,8 +98,8 @@
 
     /* Hover effect for section heading */
     .section-heading:hover {
-        color: #ff6f61; /* Accent color on hover */
-        cursor: pointer; /* Change cursor on hover */
+        color: #ff6f61;
+        cursor: pointer;
     }
 
     /* Additional Product Card Styling */
@@ -99,7 +114,7 @@
         font-weight: 700;
     }
 
-    /* Restored Buy Now Button Color */
+    /* Button Styling */
     .btn-outline-dark {
         font-weight: 600;
         background-color: #ffffff;
@@ -133,7 +148,7 @@
         }
 
         .top-container {
-            height: 50vh; /* Adjust for smaller screens */
+            height: 50vh;
         }
 
         .section-heading {
@@ -154,7 +169,7 @@
         }
 
         .top-container {
-            height: 40vh; /* Adjust for smaller screens */
+            height: 40vh;
         }
 
         .section-heading {
@@ -176,7 +191,7 @@
 
     @media (max-width: 576px) {
         .top-container {
-            height: 35vh; /* Further adjust for small screens */
+            height: 35vh;
         }
     }
 </style>
@@ -199,11 +214,11 @@
             <div class="card product-card">
                 <a href="{% url 'card_info' l.id %}">
                     <img src="{{ l.pets_image.url }}" alt="" class="card-img-top" style="height: 280px; object-fit: cover;">
-                </a>
-                <div class="card-body product-info">
-                    <p class="product-title">{{ l.small_description }}</p>
-                    <p class="product-price">INR &#8377; {{ l.discounted_price }} <s style="color:red;">{{ l.original_price }}</s></p>
-                    <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
+                    <div class="card-body product-info">
+                        <p class="product-title">{{ l.small_description }}</p>
+                        <p class="product-price">INR &#8377; {{ l.discounted_price }} <s style="color:red;">{{ l.original_price }}</s></p>
+                        <button class="btn btn-outline-dark w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
+                    </a>
                 </div>
             </div>
         </div>

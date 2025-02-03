@@ -1,0 +1,143 @@
+{% load static %}
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f5f7; /* Light gray for a clean look */
+        color: #333;
+    }
+
+    .custom-container {
+        display: flex;
+        flex-wrap: nowrap;
+        margin: 0 auto;
+        padding: 0;
+        height: 90vh;
+        max-width: 1200px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-top: 20px;
+        background-color: #ffffff;
+        text-decoration: none; /* Remove underline for the clickable container */
+    }
+
+    .custom-container:hover {
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Ensure the link behaves like a block and covers the container */
+    .custom-container-link {
+        display: block;
+        text-decoration: none; /* Remove underline for the link */
+    }
+
+    /* Left Section (Video + Heading) */
+    .custom-left-section {
+        flex: 1.5;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        text-align: left;
+        padding: 30px;
+        background: #1d3557; /* Professional navy blue */
+        color: #ffffff;
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .custom-left-section h1 {
+        font-size: 42px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 20px;
+        color: #f1faee; /* Slightly muted white */
+    }
+
+    .custom-left-section h1::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 4px;
+        background-color: #e63946; /* Sharp red accent for contrast */
+        margin: 12px 0;
+    }
+
+    .custom-video-container {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        margin-top: 20px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Right Section (Images Only) */
+    .custom-right-section {
+        flex: 2;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+        padding: 20px;
+        align-content: flex-start;
+        background-color: #f8f9fa; /* Subtle off-white for contrast */
+    }
+
+    /* Image Styling */
+    .custom-image {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    .custom-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        filter: brightness(1.15);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .custom-container {
+            flex-direction: column;
+            height: auto;
+        }
+
+        .custom-left-section {
+            align-items: center;
+            text-align: center;
+        }
+
+        .custom-left-section h1 {
+            font-size: 36px;
+        }
+
+        .custom-right-section {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+    }
+</style>
+
+<a href="{% url "new_arrival" %}" class="custom-container-link">
+    <div class="custom-container">
+        <!-- Left Section (Video and Heading) -->
+        <div class="custom-left-section">
+            <h1>New Arrivals</h1>
+            <video class="custom-video-container" autoplay muted loop>
+                <source src="{% static 'core/images/video.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Right Section (Images Only) -->
+        <div class="custom-right-section">
+            <img class="custom-image" src="{% static 'core/images/snkrs-showcase.webp' %}" alt="Image 1">
+            <img class="custom-image" src="{% static 'core/images/air-jordan-v-el-grito-1.webp' %}" alt="Image 2">
+            <img class="custom-image" src="{% static 'core/images/nike-swift-and-stride.webp' %}" alt="Image 3">
+            <img class="custom-image" src="{% static 'core/images/isamaya-ffrench-x-nike-air-max-dn.webp' %}" alt="Image 4">
+        </div>
+    </div>
+</a>

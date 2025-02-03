@@ -57,7 +57,7 @@
         background: #6520ff;
     }
 </style>
-
+{% if ord %}
 <section class="vh-100" style="background-color: #8c9eff;">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -88,5 +88,8 @@
         </div>
     </div>
 </section>
+{% else %}
+<h1>You don't have orders</h1>
+{% endif %}
 
 {% endblock content %}

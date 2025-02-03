@@ -1,0 +1,71 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+<!--================================= Payment Start Here==============================================-->
+<br><br><br><br>    
+
+<div class="container text-center">
+    <div class="row justify-content-center">
+        <!-- Add some styling to the PayPal section -->
+        <div class="col-12 col-md-6">
+            <div class="payment-box p-4 border rounded shadow-lg">
+                <h3 class="payment-title mb-4">Complete Your Payment</h3>
+                <p class="payment-description mb-4">Please review your details and proceed with the payment.</p>
+
+                <!-- PayPal Render -->
+                {{paypal.render}}
+
+                <div class="mt-4">
+                    <p>Need help? <a href="#" class="text-primary">Contact Support</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<style>
+    .payment-box {
+        background-color: #f9f9f9; /* Light background for the payment box */
+        border: 1px solid #ddd; /* Border to define the box */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a floating effect */
+        padding: 30px;
+    }
+
+    .payment-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .payment-description {
+        font-size: 16px;
+        color: #777;
+    }
+
+    .payment-box a {
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .payment-box a:hover {
+        color: #0056b3;
+    }
+
+    /* Responsive styling for smaller screens */
+    @media (max-width: 768px) {
+        .payment-box {
+            padding: 20px;
+        }
+
+        .payment-title {
+            font-size: 20px;
+        }
+
+        .payment-description {
+            font-size: 14px;
+        }
+    }
+</style>

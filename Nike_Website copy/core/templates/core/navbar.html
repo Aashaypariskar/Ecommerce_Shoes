@@ -1,0 +1,177 @@
+{% load static %}
+
+<style>
+    /* Search Bar Container - Centering with Flexbox */
+    .search-bar-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Full viewport height to center the bar */
+        margin: 0 auto; /* Ensures the search bar is horizontally centered */
+        padding: 20px; /* Add padding around the container */
+    }
+    
+    /* Centered and Wider Search Bar */
+    .search-bar-form {
+        width: 60%; /* Increase the width for a larger search bar */
+        max-width: 900px; /* Limit the maximum width */
+        border-radius: 50px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+    }
+    
+    /* Input Field Styling */
+    .search-bar-input {
+        flex-grow: 2; /* Occupies more space in the search bar */
+        padding: 0.75rem 1.5rem;
+        font-size: 1.2rem; /* Slightly larger font size */
+        border: none;
+        outline: none;
+        background-color: #f9f9f9;
+        transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    
+    .search-bar-input:focus {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Button Styling */
+    .search-bar-button {
+        background-color: #000;
+        color: #fff;
+        font-size: 1.2rem;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease-in-out, transform 0.2s ease;
+        cursor: pointer;
+    }
+    
+    .search-bar-button:hover {
+        background-color: #333;
+        transform: scale(1.05);
+    }
+    
+    .search-bar-button i {
+        font-size: 1.4rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .search-bar-form {
+            width: 90%; /* Take most of the screen width on mobile */
+        }
+    
+        .search-bar-input {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+        }
+    
+        .search-bar-button {
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+        }
+    }
+    
+
+
+
+</style>
+
+    <marquee behavior="repeat" direction="" class=' bg-dark text-white'><strong>Welcome {{request.user}}!!!!!</strong></marquee>
+<div class="row">
+    <div class="col-md-12">
+        <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm">
+            <div class="container-fluid">
+                <!-- Logo -->
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'core/images/Nike logo.png' %}" alt="Nike Logo" style="height: 50px; width: 100px; object-fit: contain;">
+                </a>
+
+                <h3></h3>
+
+                <!-- Centered Search Bar -->
+                <div class="d-flex justify-content-center flex-grow-1">
+                    <form class="d-flex search-bar-form" action="{% url "search_result" %}">
+                        <input 
+                            class="form-control search-bar-input" 
+                            type="search" 
+                            placeholder="Search for products" 
+                            aria-label="Search" 
+                            name="q" value="{{ query }}"
+                        >
+                        <button 
+                            class="btn search-bar-button" 
+                            type="submit"
+                        >
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Side Icons -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars" style="color: black;"></i></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <!-- Trending, Bestseller, New Arrival -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'trending' %}">Trending</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'limited_edition' %}">Limited Edition</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'new_arrival' %}">New Arrival</a>
+                        </li>
+
+                        <!-- User Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#navbarNav" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-user" style="font-size: 1.5rem; color: black;"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {% if request.user.is_authenticated %}
+                                    <li><a class="dropdown-item" href="{% url 'profile' %}">My profile</a></li>
+
+                                    <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                                {% else %}
+                                    <li><a class="dropdown-item" href="{% url 'registration' %}">Register</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+
+                        <!-- Categories Dropdown -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-list" style="font-size: 1.5rem; color: black;"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{% url 'sneakers' %}">Sneakers</a></li>
+                                <li><a class="dropdown-item" href="{% url 'running_shoes' %}">Running Shoes</a></li>
+                                <li><a class="dropdown-item" href="{% url 'football_shoes' %}">Football Shoes</a></li>
+                            </ul>
+                        </li>
+
+
+                        <!-- Cart Icon -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'show_cart' %}">
+                                <i class="fas fa-shopping-cart" style="font-size: 1.5rem; color: black;"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+

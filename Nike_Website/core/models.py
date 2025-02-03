@@ -81,6 +81,7 @@ class Shoes_cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Shoes, on_delete=models.CASCADE)
     quantity= models.PositiveBigIntegerField(default=1)
+    size = models.CharField(default=9, max_length=50)
     
     
     @property

@@ -1,0 +1,141 @@
+{% load static %}
+
+<style>
+    /* General Carousel Styles */
+    body {
+        overflow-x: hidden;
+    }
+
+    .carousel-image {
+        width: 100%;
+        height: 100%; /* Ensures image fills the container */
+        object-fit: cover; /* Ensures aspect ratio and fills container */
+        margin-bottom: 0; /* Reduce or remove bottom margin for images */
+    }
+
+    /* Adjust top and bottom margins for the entire carousel */
+    .carousel-inner {
+        margin-top: 2rem; /* Increase the margin from the top */
+        margin-bottom: 1rem; /* Reduce the margin for the whole carousel */
+        height: calc(100vh - 3rem); /* Adjust height based on margins */
+    }
+
+    /* Carousel Controls */
+    .carousel-control-prev,
+    .carousel-control-next {
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1200px) {
+        .carousel-inner {
+            height: calc(80vh - 3rem); /* Adjust height for medium screens */
+            margin-top: 1.5rem; /* Smaller top margin */
+            margin-bottom: 0.5rem; /* Smaller bottom margin */
+        }
+
+        .carousel-image {
+            margin-bottom: 0; /* Ensure no bottom margin for smaller screens */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 2.5rem;
+            height: 2.5rem;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .carousel-inner {
+            height: calc(60vh - 2.5rem); /* Adjust height for tablets */
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .carousel-image {
+            margin-bottom: 0; /* Consistent no-margin for images */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 1rem;
+            height: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .carousel-inner {
+            height: calc(40vh - 2rem); /* Reduce height for smaller devices */
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .carousel-image {
+            object-fit: contain; /* Maintain aspect ratio on small screens */
+            margin-bottom: 0; /* No bottom margin for images */
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            width: 0.75rem;
+            height: 0.75rem;
+        }
+    }
+</style>
+ 
+
+
+<div class="container-fluid p-0">
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'core/images/nike_3d_banner.jpeg' %}" class="d-block w-100 carousel-image" alt="Nike Banner">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'core/images/965d6df2-4d00-471f-9f1f-e30252b2a625 - Copy.avif' %}" class="d-block w-100 carousel-image" alt="Nike Shoes">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'core/images/NIKE_DUNK-LOW-RETRO_2.webp' %}" class="d-block w-100 carousel-image" alt="Nike Dunk Low">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>

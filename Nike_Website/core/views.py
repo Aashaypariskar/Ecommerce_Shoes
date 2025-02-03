@@ -8,6 +8,9 @@ from . models import Shoes,Shoes_cart,UserDetails,Order
 
 
 def index(request):
+    print(request.session.get('ref', None))
+    if request.session.get('ref', None):
+        del request.session['ref']
     return render(request, 'core/index.html')
 # =======================================================================================
 
@@ -141,28 +144,30 @@ def limited_edition(request):
 
 
 def search_result(request):
-    query = request.GET.get('q')
-    products = Shoes.objects.all()  # Default: Show all products
-
-    if query:
-        products = products.filter(name__icontains=query)  # Assuming 'name' is a field in Shoes
+    query = request.GET.get('q', '')  # Default to empty string if query is None
+    products = Shoes.objects.filter(category__icontains=query)|Shoes.objects.filter(small_description__icontains=query) if query else Shoes.objects.all()
 
     context = {
-        'products': products,  # Corrected variable name
+        'products': products,
         'query': query,
     }
     return render(request, 'core/search_result.html', context)
 
 
 
+
+
 def add_to_cart(request, id):
     fs = Shoes.objects.get(pk=id)
+    size = request.POST
+    size = size.get('size')
+    print('size', size)
     user = request.user
 
-    if Shoes_cart.objects.filter(user=user, product=fs).exists():
+    if Shoes_cart.objects.filter(user=user, product=fs, size=size).exists():
         messages.error(request, "This item is already in your cart")
     else:
-        Shoes_cart.objects.create(user=user, product=fs)
+        Shoes_cart.objects.create(user=user, product=fs, size=size)
         messages.success(request, "Added to cart successfully")
 
     return redirect('card_info', id)
@@ -174,7 +179,7 @@ def show_cart(request):
     cart_items= Shoes_cart.objects.filter(user=request.user)
     cart_items = Shoes_cart.objects.filter(user=request.user)      # cart_items will fetch product of current user, and show product available in the cart of the current user.
     total =0
-    delhivery_charge =2000
+    delhivery_charge =200
     for item in cart_items:
         # item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
         total += item.price_and_quantity_total
@@ -227,10 +232,21 @@ def address(request):
                 pincode= af.cleaned_data['pincode']  
                 UserDetails(user=user,name=name,address=address,city=city,state=state,pincode=pincode).save()
                 messages.success(request,"Address added successfully")
+                # print(" request.session['ref']",  request.session['ref'])
+                print("request.META.get('HTTP_REFERER')", request.META.get('HTTP_REFERER'))
+                if 'buynow' in request.session['ref']:
+                    print('got ref')
+                    return redirect(request.session['ref'])
+                else:
+                    print("didn't got ref")
+                    return redirect('address')
             else:
                 messages.error(request,"Please fill out all fields")
                 return redirect('address')           
     else:
+        print(request.META.get('HTTP_REFERER'))
+        if 'buynow' in request.META.get('HTTP_REFERER'):
+            request.session['ref'] = request.META.get('HTTP_REFERER')
         af = CustomerForm()
         address = UserDetails.objects.filter(user=request.user)
     return render(request,'core/address.html',{'af':af,'address':address})
@@ -269,7 +285,7 @@ def payment_address(request):
 def checkout(request):
     cart_items = Shoes_cart.objects.filter(user=request.user)      # cart_items will fetch product of current user, and show product available in the cart of the current user.
     total =0
-    delhivery_charge =2000
+    delhivery_charge =200
     for item in cart_items:
         item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
         total += item.product.price_and_quantity_total
@@ -286,7 +302,7 @@ def payment(request):
 
     cart_items =Shoes_cart.objects.filter(user=request.user)      # cart_items will fetch product of current user, and show product available in the cart of the current user.
     total =0
-    delhivery_charge =2000
+    delhivery_charge =200
     for item in cart_items:
     #     item.product.price_and_quantity_total = item.product.discounted_price * item.quantity
         total += item.price_and_quantity_total
@@ -315,8 +331,11 @@ def payment(request):
 
 #========================================== Buy Now ========================================================
 def buynow(request,id):
+    ref = request.session.get('ref', None)
+    if ref and 'address' in ref:
+        del request.session['ref']
     Shoe = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
-    delhivery_charge =2000
+    delhivery_charge =200
     print(Shoes.discounted_price)
     final_price= delhivery_charge + Shoe.discounted_price
     
@@ -326,13 +345,20 @@ def buynow(request,id):
 
 
 def buynow_payment(request,id):
-
+    
+    print(request.session.get('ref', None))
     if request.method == 'POST':
-        selected_address_id = request.POST.get('buynow_selected_address')
+        selected_address_id = request.POST.get('buynow_selected_address', None)
+        if not selected_address_id:
+            return redirect('address')
+        
+    ref = request.META.get('HTTP_REFERER', None)
+    print(ref)
+    
 
     Shoe = Shoes.objects.get(pk=id)     # cart_items will fetch product of current user, and show product available in the cart of the current user.
     print('cvgcgcjgj' ,Shoes)
-    delhivery_charge =2000
+    delhivery_charge =200
     final_price= delhivery_charge + Shoe.discounted_price
     
     address = UserDetails.objects.filter(user=request.user)
@@ -348,7 +374,7 @@ def buynow_payment(request,id):
         'invoice': uuid.uuid4(),  #A unique identifier for the invoice. It uses uuid.uuid4() to generate a random UUID.
         'currency_code': 'USD',
         'notify_url': f"http://{host}{reverse('paypal-ipn')}",         #The URL where PayPal will send Instant Payment Notifications (IPN) to notify the merchant about payment-related events
-        'return_url': f"http://{host}{reverse('paymentsuccess' ,args=[selected_address_id])}",     #The URL where the customer will be redirected after a successful payment. 
+        'return_url': f"http://{host}{reverse('buynowpaymentsuccess' ,args=[selected_address_id, Shoe.id])}",     #The URL where the customer will be redirected after a successful payment. 
         'cancel_url': f"http://{host}{reverse('paymentfailed')}",      #The URL where the customer will be redirected if they choose to cancel the payment. 
     }
 
@@ -388,7 +414,7 @@ def order(request):
 def forgot_password(request):          
     if request.method == 'POST':
         email = request.POST['email']
-        user = User.objects.filter().first()
+        user = User.objects.filter(email=email).first()
         if user:
             token = default_token_generator.make_token(user)
             uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
@@ -411,14 +437,18 @@ def reset_password(request, uidb64, token):
     if request.method == 'POST':
         password = request.POST['password']
         password2 = request.POST['password2']
+        print('jhvd0', password, password2)
         if password == password2:
             try:
                 uid = force_str(urlsafe_base64_decode(uidb64))
+                print('uid', uid)
                 user = User.objects.get(pk=uid)
+                print('user', user.email)
                 if default_token_generator.check_token(user, token):
                     user.set_password(password)
                     user.save()
-                    return redirect('passwordresetdone')
+                    print('done')
+                    return redirect('login')
                 else:
                     return HttpResponse('Token is invalid', status=400)
             except (TypeError, ValueError, OverflowError, User.DoesNotExist):
@@ -436,7 +466,7 @@ def buynow_payment_success(request,selected_address_id,id):
     user =request.user
     customer_data = UserDetails.objects.get(pk=selected_address_id,)
     
-    Shoes = Shoes.objects.get(pk=id)
-    Order(user=user,customer=customer_data,pet=Shoes,quantity=1).save()
+    shoes = Shoes.objects.get(pk=id)
+    Order(user=user,customer=customer_data,pet=shoes,quantity=1).save()
    
     return render(request,'core/buynow_payment_success.html')
