@@ -1,0 +1,36 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+{% if query %}
+<h3>Search results for "{{ query }}"</h3>
+{% endif %}
+
+<div class="container mt-5">
+    <div class="row g-0 justify-content-start">
+        {% for product in products %}
+        <div class="col-md-3 mb-4" style="padding-left: 20px;">
+            <div class="card product-card h-100 d-flex flex-column">
+                <a href="{% url 'card_info' product.id %}">
+                    <img src="{{ product.pets_image.url }}" alt="{{ product.name }}" class="card-img-top">
+                </a>
+                <div class="card-body product-info d-flex flex-column">
+                    <p class="product-title">{{ product.small_description }}</p>
+                    <p class="product-price">
+                        INR &#8377; {{ product.discounted_price }} 
+                        <s style="color:red;">{{ product.original_price }}</s>
+                    </p>
+                    <div class="mt-auto">  <!-- Pushes the button to the bottom -->
+                        <button class="btn btn-outline-dark w-100">
+                            Buy Now <i class="bi bi-bag-fill"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No products found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

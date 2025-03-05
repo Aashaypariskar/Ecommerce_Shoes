@@ -1,0 +1,245 @@
+    {% extends "core/base.html" %}
+    {% load static %}
+
+    {% block content %}
+    <style>
+        /* Global Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-image: url("{% static 'core/images/basketball2.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Card Styling */
+        .card {
+            flex: 1 1 calc(48% - 20px);
+            border: none;
+            background-color: #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        /* Table Styling */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .table th {
+            text-align: left;
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 500;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .table td {
+            font-size: 14px;
+            color: #333;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .total-row td {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* Button Styling */
+        .btn-success {
+            width: 100%;
+            padding: 12px;
+            background-color: #111;
+            color: #fff;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .btn-success:hover {
+            background-color: #333;
+        }
+
+        /* Address Section */
+        .address-container {
+            flex: 1 1 calc(48% - 20px);
+        }
+
+        .address-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .address-card {
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-radius: 9px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            background: rgba(250, 242, 242, 0.93); /* Semi-transparent white */
+            backdrop-filter: blur(9px); /* Increased blur effect */
+        }
+        
+
+        .address-card input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #000;
+        }
+
+        .address-details h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin: 0 0 5px;
+        }
+
+        .address-details p {
+            font-size: 12px;
+            margin: 3px 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .card,
+            .address-container {
+                width: 100%;
+            }
+
+            .card-body {
+                padding: 15px;
+            }
+
+            .table th, .table td {
+                font-size: 12px;
+            }
+
+            .btn-success {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .address-card {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .address-card input[type="radio"] {
+                margin-bottom: 10px;
+            }
+
+            .address-details h3 {
+                font-size: 12px;
+            }
+
+            .address-details p {
+                font-size: 10px;
+            }
+        }
+    </style>
+
+    <div class="main-container">
+        <!-- Order Summary -->
+        <div class="card">
+            <div class="card-header">Order Summary</div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    
+                        <tr>
+                            <td> {{ Shoe.small_description }}</td>
+                            <td>qty: 1</td>
+                            <td></td>
+                            <td>₹{{ Shoe.discounted_price }}</td>
+                        </tr>
+                    
+                        <tr class="total-row">
+                            <td colspan="3">Shipping</td>
+                            <td>₹200</td>
+                        </tr>
+                        <tr class="total-row">
+                            <td colspan="3">Total</td>
+                            <td>₹{{ final_price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Address Section -->
+        <div class="address-container">
+            <div class="address-title">Select Address</div>
+            <form action="{% url 'buynowpayment' Shoe.id %}" method="POST">
+                {% csrf_token %}
+                {% for add in address %}
+                <label class="address-card">
+                    <input type="radio" name="buynow_selected_address" value="{{ add.id }}" checked>
+                    <div class="address-details">
+                        <h3>{{ add.name }}</h3>
+                        <p>{{ add.address }}</p>
+                        <p>{{ add.city }}, {{ add.state }} - {{ add.pincode }}</p>
+                    </div>
+                </label>
+                {% endfor %}
+                <input type="submit" class="btn btn-success" value="Proceed To Pay">
+            </form>
+        </div>
+    </div>
+
+    {% endblock content %}

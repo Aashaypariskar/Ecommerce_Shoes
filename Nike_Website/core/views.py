@@ -8,9 +8,9 @@ from . models import Shoes,Shoes_cart,UserDetails,Order
 
 
 def index(request):
-    print(request.session.get('ref', None))
-    if request.session.get('ref', None):
-        del request.session['ref']
+    # print(request.session.get('ref', None))
+    # if request.session.get('ref', None):
+    #     del request.session['ref']
     return render(request, 'core/index.html')
 # =======================================================================================
 
@@ -234,15 +234,13 @@ def address(request):
                 messages.success(request,"Address added successfully")
                 # print(" request.session['ref']",  request.session['ref'])
                 print("request.META.get('HTTP_REFERER')", request.META.get('HTTP_REFERER'))
-                if 'buynow' in request.session['ref']:
-                    print('got ref')
-                    return redirect(request.session['ref'])
-                else:
-                    print("didn't got ref")
-                    return redirect('address')
-            else:
-                messages.error(request,"Please fill out all fields")
-                return redirect('address')           
+            #     if 'buynow' in request.session['ref']:
+            #         return redirect(request.session['ref'])
+            #     else:
+            #         return redirect('address')
+            # else:
+            #     messages.error(request,"Please fill out all fields")
+            #     return redirect('address')           
     else:
         print(request.META.get('HTTP_REFERER'))
         if 'buynow' in request.META.get('HTTP_REFERER'):

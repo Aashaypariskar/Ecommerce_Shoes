@@ -1,0 +1,244 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+/* Global Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  box-sizing: border-box;
+}
+
+/* Container */
+.container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: transparent;
+}
+
+/* Product Display */
+.product-container {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  width: 100%;
+}
+
+/* Image Gallery */
+.image-gallery {
+  width: 50%;
+}
+
+.image-gallery img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Product Details */
+.product-details {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-title {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.product-subtitle {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: bold;
+  color: #111;
+}
+
+.product-price s {
+  font-size: 18px;
+  margin-left: 10px;
+  color: red;
+}
+
+/* Size Selection */
+.size-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.size-options {
+  display: flex;
+  gap: 10px;
+}
+
+/* Hide radio buttons */
+.size-options input[type="radio"] {
+  display: none;
+}
+
+/* Custom size buttons */
+.size-options label {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Selected size effect */
+.size-options input[type="radio"]:checked + label {
+  background-color: #111;
+  color: #fff;
+}
+
+/* Buttons */
+.button-section {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Add to Bag & Buy Now Buttons */
+.btn-dark, .btn-success {
+  flex: 1;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid #111; /* Added border */
+  cursor: pointer;
+  background-color: white;
+  color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover effect */
+.btn-dark:hover, .btn-success:hover {
+  background-color: #111;
+  color: white;
+  border-color: #000; /* Darker border on hover */
+}
+
+.btn-success:hover {
+  background-color: rgb(48, 45, 44);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .image-gallery, .product-details {
+    width: 100%;
+  }
+
+  .size-options {
+    flex-wrap: wrap;
+  }
+}
+</style>
+
+<div class="container">
+  <div class="product-container">
+    <!-- Left Side: Product Image -->
+    <div class="image-gallery">
+      <img src="{{ fs.pets_image.url }}" alt="Product Image">
+    </div>
+
+    <!-- Right Side: Product Details -->
+    <div class="product-details">
+      <h1 class="product-title">{{ fs.small_description }}</h1>
+      <p class="product-subtitle">WHITE/SKY GREY-FOOTBALL GREY</p>
+      <p class="product-price">
+          INR &#8377;{{ fs.discounted_price }} <s>{{ fs.original_price }}</s>
+      </p>
+
+      <!-- Form to select shoe size -->
+      <form action="{% url 'add_to_cart' fs.id %}" method="POST">
+          {% csrf_token %}
+
+          <label class="size-label"><i class="bi bi-rulers"></i> Shoe Size (UK)</label>
+          <div class="size-options">
+              <input type="radio" name="size" value="7" id="size7" required>
+              <label for="size7">7</label>
+
+              <input type="radio" name="size" value="8" id="size8">
+              <label for="size8">8</label>
+
+              <input type="radio" name="size" value="9" id="size9">
+              <label for="size9">9</label>
+
+              <input type="radio" name="size" value="10" id="size10">
+              <label for="size10">10</label>
+
+              <input type="radio" name="size" value="11" id="size11">
+              <label for="size11">11</label>
+          </div>
+
+          <div class="button-section">
+              <button type="submit" class="btn btn-dark"><i class="bi bi-cart"></i> Add to Bag</button>
+              <a href="{% url 'buynow' fs.id %}" class="btn btn-success"><i class="bi bi-bag-check"></i> Buy Now</a>
+          </div>
+      </form>
+
+      <!-- Flash Messages -->
+      {% if messages %}
+          {% for message in messages %}
+              <div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% elif message.tags == 'warning' %}warning{% else %}info{% endif %} alert-dismissible fade show mt-3" role="alert">
+                  <strong>
+                      {% if message.tags == 'error' %}❌{% elif message.tags == 'success' %}✅{% elif message.tags == 'warning' %}⚠️{% else %}ℹ️{% endif %}
+                  </strong> 
+                  {{ message }}
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+          {% endfor %}
+      {% endif %}
+
+      <!-- About Product Section -->
+      <h3 class="about-product mt-4"><i class="bi bi-box-seam"></i> About Product</h3>
+      <p class="description">
+          Inspired by the original that debuted in 1985, the Air Jordan 1 Low offers a classic look designed with premium materials like leather and suede, creating a look curated for the City of Light.
+      </p>
+
+      <ul class="product-details-list">
+          <li><i class="bi bi-palette"></i> Colour Shown: Barely Green/Crimson Pulse/Metallic Gold Coin</li>
+          <li><i class="bi bi-tag"></i> Style: FZ1380-300</li>
+          <li><i class="bi bi-globe"></i> Country/Region of Origin: China</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

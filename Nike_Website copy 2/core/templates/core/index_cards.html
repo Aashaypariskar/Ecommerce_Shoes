@@ -1,0 +1,194 @@
+{% load static %}
+
+<style>
+    /* Responsive Index Page Cards */
+
+    .index-cards-container {
+        margin: 20px;
+    }
+
+    .index-card {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        transition: transform 0.3s ease;
+        border-radius: 5px;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px; 
+        background-color: #f9f9f9;
+    }
+
+    .index-card:hover {
+        transform: scale(1.05);
+    }
+
+    .index-card-img {
+        width: 100%;
+        height: 600px;
+        transition: opacity 0.3s ease;
+        object-fit: cover;
+    }
+
+    .index-card-body {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(8px);
+        padding: 20px;
+        transform: translateY(100%);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        opacity: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .index-card:hover .index-card-body {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .index-card-title {
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #333;
+        text-align: center;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .index-card-title:hover {
+        color: #007bff;
+        transform: translateY(-5px);
+    }
+
+    .index-card-body p {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        text-align: center;
+    }
+
+    .index-card-button {
+        margin: 10px auto;
+        padding: 0;
+        width: 200px;
+        height: 40px;
+        color: #fff;
+        border: 3px solid red;
+        background-image: linear-gradient(30deg, #e90d61 50%, transparent 50%);
+        background-size: 451px;
+        background-repeat: no-repeat;
+        background-position: 0%;
+        transition: background 300ms ease-in-out;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .index-card-button:hover {
+        background-position: 100%;
+        color: #000000;
+        animation: shake 0.5s;
+    }
+
+    /* Shake animation */
+    @keyframes shake {
+        0% {
+            transform: translateX(0);
+        }
+        25% {
+            transform: translateX(-3px);
+        }
+        50% {
+            transform: translateX(3px);
+        }
+        75% {
+            transform: translateX(-3px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 991px) {
+        .index-cards-container {
+            margin: 10px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .index-card-body {
+            padding: 10px;
+        }
+
+        .index-card-title {
+            font-size: 1.4rem;
+        }
+
+        .index-card-body p {
+            font-size: 0.9rem;
+        }
+
+        .index-card-button {
+            width: 150px;
+            height: 35px;
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 575px) {
+        .index-card-title {
+            font-size: 1.2rem;
+        }
+
+        .index-card-body p {
+            font-size: 0.8rem;
+        }
+
+        .index-card-button {
+            width: 130px;
+            height: 30px;
+            font-size: 0.8rem;
+        }
+    }
+</style>
+
+<div class="index-cards-container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="index-card">
+                <img class="index-card-img" src="{% static 'core/images/index category1.jpg' %}" alt="Card image cap">
+                <div class="index-card-body">
+                    <h5 class="index-card-title">Sneakers</h5>
+                    <p>Discover the latest sneaker trends and styles.</p>
+                    <a href="{% url 'sneakers' %}" class="index-card-button">Explore More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="index-card">
+                <img class="index-card-img" src="{% static 'core/images/index category2.jpg' %}" alt="Card image cap">
+                <div class="index-card-body">
+                    <h5 class="index-card-title">Football Shoes</h5>
+                    <p>Top-quality football shoes for every player.</p>
+                    <a href="{% url 'football_shoes' %}" class="index-card-button">Explore More</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="index-card">
+                <img class="index-card-img" src="{% static 'core/images/index category3.jpg' %}" alt="Card image cap">
+                <div class="index-card-body">
+                    <h5 class="index-card-title">Running Shoes</h5>
+                    <p>Achieve peak performance with our running shoes.</p>
+                    <a href="{% url 'running_shoes' %}" class="index-card-button">Explore More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

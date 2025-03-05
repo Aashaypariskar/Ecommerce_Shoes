@@ -1,0 +1,145 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    /* Background Container */
+    .football_container {
+        background-image: url('{% static "core/images/image.jpg" %}');
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    @media (max-width: 1024px) {
+        .football_container {
+            height: auto;
+            background-attachment: scroll;
+            padding: 40px 20px;
+        }
+    }
+
+    /* Grid layout for images */
+    .banner {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+        width: 100%;
+        max-width: 1200px;
+    }
+
+    @media (max-width: 1024px) {
+        .banner {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .banner {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 480px) {
+        .banner {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+
+    /* Image Hover Effects */
+    .item {
+        transition: transform 0.5s ease, filter 0.5s ease;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .banner:hover .item:not(:hover) {
+        filter: grayscale(1) blur(5px);
+        transform: scale(0.9);
+    }
+
+    .item:hover {
+        transform: scale(1.2);
+        z-index: 2;
+        filter: none;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+    /* Ensuring product cards have the same height */
+    .product-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .product-card .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Buy Now button styles */
+    .buy-now-btn {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+        transition: all 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+        background-color: black;
+        color: white;
+    }
+</style>
+
+<div class="container-fluid football_container">
+    <div class="banner">
+        <div class="item"><img src="{% static 'core/images/De%20bruyne.jpg' %}" alt="De Bruyne"></div>
+        <div class="item"><img src="{% static 'core/images/Neymar.jpg' %}" alt="Neymar"></div>
+        <div class="item"><img src="{% static 'core/images/Young%20ronaldo.jpg' %}" alt="Young Ronaldo"></div>
+        <div class="item"><img src="{% static 'core/images/England%20Nike%20Campaign%20Phil%20Foden.jpeg' %}" alt="Phil Foden"></div>
+        <div class="item"><img src="{% static 'core/images/Halland.jpg' %}" alt="Halland"></div>
+    </div>
+</div>
+
+<div style="background-color: #222; margin-top: 20px; height: 200px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    <h1 style="color: #fff; font-family: 'Impact', sans-serif; text-align: center; font-size: 36px; letter-spacing: 2px; padding-bottom: 20px;"> 
+        JUST DO IT THEN DO IT AGAIN
+    </h1>
+    <button class="btn btn-lg btn-nike rounded-pill px-5 py-2">Explore Now</button>
+</div>
+
+<div class="container mt-5">
+    <div class="row g-0 justify-content-start">
+        {% for f in fs %}
+        <div class="col-md-3 mb-4">
+            <div class="card product-card">
+                <a href="{% url 'card_info' f.id %}">
+                    <img src="{{f.pets_image.url}}" alt="" class="card-img-top">
+                </a>
+                <div class="card-body">
+                    <p class="product-title">{{f.small_description}}</p>
+                    <p class="product-price">INR &#8377 {{f.discounted_price}} <s style="color:red;">{{f.original_price}}</s></p>
+                    <button class="btn buy-now-btn w-100">Buy Now <i class="bi bi-bag-fill"></i></button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock content %}

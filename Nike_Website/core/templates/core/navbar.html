@@ -83,7 +83,7 @@
 
 </style>
 
-    <marquee behavior="repeat" direction="" class=' bg-dark text-white'><strong>Welcome {{request.user}}!!!!!</strong></marquee>
+    <marquee behavior="repeat" direction="" class=' bg-dark text-white'><strong>{% if request.user.is_authenticated %} Welcome {{request.user}}!!!!!{% else %}Please Login {% endif %}</strong></marquee>
 <div class="row">
     <div class="col-md-12">
         <nav class="navbar navbar-expand-lg navbar-light bg-transparent shadow-sm">

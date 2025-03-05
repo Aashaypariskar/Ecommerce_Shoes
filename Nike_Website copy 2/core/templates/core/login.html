@@ -1,0 +1,261 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    /* General Styles */
+    body {
+        background: url("{% static 'core/images/pegasus.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Centered Form Container */
+    .container.register {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+    }
+
+    /* Card Style with Backdrop Blur */
+    .card {
+        backdrop-filter: blur(5px); /* Blur effect */
+        background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 10px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 450px;
+    }
+
+    /* Heading Styling */
+    .register-heading h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #007bff;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .register-heading p {
+        font-size: 1rem;
+        color: #6c757d;
+        margin-bottom: 2rem;
+    }
+
+    /* Form Input Styles */
+    input[type="text"], input[type="password"] {
+        border: 1px solid #ced4da;
+        padding: 12px;
+        width: 100%;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        color: #495057;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 5px;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Form Label */
+    label {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #495057;
+    }
+
+    /* Button Styling */
+    input[type="submit"] {
+        font-size: 1.1rem;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-radius: 5px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+        transform: scale(1.02);
+    }
+
+    input[type="submit"]:active {
+        background-color: #004085;
+    }
+
+    /* Forgot Password Link */
+    a {
+        text-decoration: none;
+        font-size: 1rem;
+        color: #007bff;
+    }
+
+    a:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }
+
+    /* Error and Message Alerts */
+    .alert-danger, .alert {
+        font-size: 0.9rem;
+        padding: 15px;
+        margin-top: 1rem;
+        border-left: 5px solid;
+        border-radius: 0;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-info {
+        background-color: #cce5ff;
+        border-color: #b8daff;
+        color: #004085;
+    }
+
+    .alert-warning {
+        background-color: #fff3cd;
+        border-color: #ffeeba;
+        color: #856404;
+    }
+
+    /* Smooth Transitions */
+    input[type="submit"], input[type="text"], input[type="password"] {
+        transition: all 0.3s ease;
+    }
+
+    /* Spacing Adjustments */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    /* Text Centering */
+    .text-center {
+        text-align: center;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .card {
+            padding: 1.5rem;
+            width: 90%;
+        }
+
+        .register-heading h2 {
+            font-size: 1.8rem;
+        }
+
+        .register-heading p {
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], input[type="password"], input[type="submit"] {
+            font-size: 0.9rem;
+        }
+
+        label {
+            font-size: 0.9rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .card {
+            padding: 1rem;
+        }
+
+        .register-heading h2 {
+            font-size: 1.5rem;
+        }
+
+        .register-heading p {
+            font-size: 0.8rem;
+        }
+
+        input[type="text"], input[type="password"], input[type="submit"] {
+            font-size: 0.8rem;
+        }
+
+        label {
+            font-size: 0.8rem;
+        }
+    }
+</style>
+
+
+
+
+<div class="container register">
+    <div class="card shadow-lg">
+        <div class="register-heading text-center">
+            <h2>Login</h2>
+            <p>Please enter your credentials to access your account.</p>
+        </div>
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+
+            {% if mf.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in mf.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            {% for m in mf %}
+                <div class="form-group">
+                    <label for="{{ m.id_for_label }}">{{ m.label }}</label>
+                    {{ m }}
+                    {% if m.errors %}
+                        <div class="text-danger">
+                            {{ m.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary">
+            </div>
+
+            <div class="text-center">
+                <a href="{% url 'forgotpassword' %}">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% if messages %}
+    <div class="container mt-4">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+{% endblock content %}
+    
