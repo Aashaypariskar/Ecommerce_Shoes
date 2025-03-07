@@ -382,7 +382,7 @@ def buynow_payment(request,id):
 
     return render(request,'core/payment.html',{'paypal':paypal_payment}) 
 
-# ==================== Payment Success Page =====================================
+# ==================== Payment Success Page ========================================
 def payment_success(request,selected_address_id):
 
     user= request.user
@@ -393,7 +393,7 @@ def payment_success(request,selected_address_id):
     cart.delete()
     return render(request,'core/payment_success.html')
 
-# ==================== Payment Failed Page =====================================
+# ==================== Payment Failed Page ========================================
 
 def payment_failed(request):
     return render(request,'core/payment_failed.html')
